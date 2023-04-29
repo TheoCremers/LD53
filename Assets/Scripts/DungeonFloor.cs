@@ -7,6 +7,12 @@ using UnityEngine.UI;
 
 public class DungeonFloor : MonoBehaviour
 {
+    #region EventChannels
+
+    public ShiftEventChannel RoomShiftEventChannel;
+
+    #endregion
+
     private Dictionary<Vector2Int, DungeonRoom> _rooms = new Dictionary<Vector2Int, DungeonRoom>();
 
     public DungeonRoom DungeonRoomPrefab;
@@ -20,6 +26,13 @@ public class DungeonFloor : MonoBehaviour
         ConstructLayout();
         GenerateShiftButtons();
         PopulateDungeon();
+
+        RoomShiftEventChannel.OnEventRaised += ShiftRooms;
+    }
+
+    private void OnDestroy()
+    {
+        RoomShiftEventChannel.OnEventRaised -= ShiftRooms;
     }
 
     private void ConstructLayout()
@@ -72,9 +85,27 @@ public class DungeonFloor : MonoBehaviour
 
     }
 
+    public void ShiftRooms(Orientation shiftDirection, int lineIndex)
+    {
+        switch(shiftDirection)
+        {
+            case Orientation.TopLeft:
+                ShiftRoomsAlongX(lineIndex, false);
+                break;
+            case Orientation.TopRight:
+                ShiftRoomsAlongY(lineIndex, false);
+                break;
+            case Orientation.DownRight:
+                ShiftRoomsAlongX(lineIndex, true);
+                break;
+            case Orientation.DownLeft:
+                ShiftRoomsAlongY(lineIndex, true);
+                break;
+        }
+    }
+
     public async void ShiftRoomsAlongX(int rowIndex, bool backwards)
     {
-        // Loop over rooms to move, get transforms
         List<Transform> roomsToMove = new List<Transform>();
 
         for (int i = 0; i < Size.x; i++)
@@ -84,6 +115,21 @@ public class DungeonFloor : MonoBehaviour
         }
 
         Vector3 roomOffset = PositionHelper.GridToWorldPosition(new Vector2Int(backwards ? -1 : 1, 0)) ;
+
+        await TweenRooms(roomsToMove, roomOffset);
+    }
+
+    public async void ShiftRoomsAlongY(int rowIndex, bool backwards)
+    {
+        List<Transform> roomsToMove = new List<Transform>();
+
+        for (int i = 0; i < Size.y; i++)
+        {
+            int j = backwards ? i : Size.y - (1 + i);
+            roomsToMove.Add(_rooms[new Vector2Int(rowIndex, j)].transform);
+        }
+
+        Vector3 roomOffset = PositionHelper.GridToWorldPosition(new Vector2Int(0, backwards ? -1 : 1));
 
         await TweenRooms(roomsToMove, roomOffset);
     }
