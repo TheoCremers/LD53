@@ -49,7 +49,7 @@ public class DungeonFloor : MonoBehaviour
             } 
         }
 
-        UpdateDebugTextForRooms();
+        //UpdateDebugTextForRooms();
     }
 
     private void GenerateShiftButtons()
@@ -109,7 +109,7 @@ public class DungeonFloor : MonoBehaviour
                 break;
         }
 
-        UpdateDebugTextForRooms();
+        //UpdateDebugTextForRooms();
 
         RoomManipulation.ActivateShiftButtons();
     }
