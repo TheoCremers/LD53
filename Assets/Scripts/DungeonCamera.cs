@@ -17,9 +17,20 @@ public class DungeonCamera : MonoBehaviour
 
     private bool _freeCam;
 
+    private Vector2 _lastPos;
+    private Vector3 _dragPos;
+
+    private bool _cameraDrag;
+
+    private InputManager _input;
+
+    private Bounds _camWorldBounds = new Bounds(Vector3.zero, new Vector3(10, 10, 0));
+
     // Start is called before the first frame update
     void Start()
     {
+        _input = InputManager.i;
+
         // Example zoom in at start
         //CameraRef.orthographicSize = 3;
         //InitiateMimicTurn();
@@ -40,7 +51,28 @@ public class DungeonCamera : MonoBehaviour
     {
         if (_freeCam) 
         {
-
+            var mousePos = _input.MousePosition.ReadValue<Vector2>();
+            if (_input.RightClickAction.triggered)
+            {
+                _dragPos = CameraRef.ScreenToWorldPoint(mousePos);
+                _cameraDrag = true;
+            }
+            if (_input.RightClickAction.IsPressed() && _cameraDrag)
+            {   
+                if (_lastPos != mousePos)
+                {
+                    var diff = _dragPos - CameraRef.ScreenToWorldPoint(mousePos);
+                    var newPos = CameraRef.transform.position + diff;        
+                    newPos.x = Mathf.Clamp(newPos.x, _camWorldBounds.min.x, _camWorldBounds.max.x);
+                    newPos.y = Mathf.Clamp(newPos.y, _camWorldBounds.min.y, _camWorldBounds.max.y);
+                    CameraRef.transform.position = newPos;        
+                    _lastPos = mousePos;
+                }
+            } 
+            else
+            {
+                _cameraDrag = false;
+            }  
         }
     }
 
