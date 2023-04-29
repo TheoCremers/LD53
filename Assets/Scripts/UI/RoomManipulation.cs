@@ -11,7 +11,10 @@ public class RoomManipulation : MonoBehaviour
     private void Awake()
     {
         _canvas = GetComponent<Canvas>();
-        _canvas.worldCamera = Camera.main;
+        if (_canvas.worldCamera == null)
+        {
+            _canvas.worldCamera = Camera.main;
+        }
     }
 
     public void CreateShiftButton(Vector3 position, Orientation facingDirection, int lineIndex)

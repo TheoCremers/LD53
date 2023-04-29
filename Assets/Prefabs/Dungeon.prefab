@@ -196,6 +196,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b82e866a3e450cb4fa018fce250a7cc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Floor: {fileID: 0}
+  MimicGuy: {fileID: 0}
 --- !u!1001 &3977418834390618678
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -326,6 +328,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4304583483892934699, guid: c1160880029b5d0468ead1bff2402236, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 2116900459}
     - target: {fileID: 8891769938085704683, guid: c1160880029b5d0468ead1bff2402236, type: 3}
       propertyPath: m_Name
       value: DungeonFloor
