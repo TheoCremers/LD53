@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4304583483892934699}
   - component: {fileID: 3367613653955796261}
   - component: {fileID: 8985913707505434021}
+  - component: {fileID: 627539963205276882}
   m_Layer: 0
   m_Name: WorldCanvas
   m_TagString: Untagged
@@ -28,7 +29,7 @@ RectTransform:
   m_GameObject: {fileID: 738179870864928652}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3579761342492318036}
@@ -100,6 +101,19 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &627539963205276882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 738179870864928652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 773d094eec5e2e846a2d9e870cd8e257, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShiftButtonPrefab: {fileID: 1494851497389452237, guid: e764d090f43157e4db8cfcbd1a8656dd, type: 3}
 --- !u!1 &8891769938085704683
 GameObject:
   m_ObjectHideFlags: 0
@@ -146,6 +160,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DungeonRoomPrefab: {fileID: 3442427670383652863, guid: 33ddc69d62d8bcb4b88703eb1c8e92e2, type: 3}
-  WorldSpaceCanvas: {fileID: 4304583483892934699}
-  ShiftButtonPrefab: {fileID: 4589535796949248349, guid: e764d090f43157e4db8cfcbd1a8656dd, type: 3}
+  RoomManipulation: {fileID: 627539963205276882}
   Size: {x: 5, y: 5}

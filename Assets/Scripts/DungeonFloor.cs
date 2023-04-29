@@ -17,8 +17,9 @@ public class DungeonFloor : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ConstructLayout(); 
-        PopulateDungeon();    
+        ConstructLayout();
+        GenerateShiftButtons();
+        PopulateDungeon();
     }
 
     private void ConstructLayout()
@@ -29,6 +30,27 @@ public class DungeonFloor : MonoBehaviour
             {
                 var dungeonRoom = GenerateRoom(new Vector2Int(xIndex, yIndex));
             } 
+        }
+    }
+
+    private void GenerateShiftButtons()
+    {
+        for (int i = 0; i < Size.x; i++)
+        {
+            Vector3 topLeftFacingButtonPosition = PositionHelper.GridToWorldPosition(new Vector2Int(i, -1));
+            RoomManipulation.CreateShiftButton(topLeftFacingButtonPosition, Orientation.TopLeft, i);
+
+            Vector3 bottomRightFacingButtonPosition = PositionHelper.GridToWorldPosition(new Vector2Int(i, Size.y));
+            RoomManipulation.CreateShiftButton(bottomRightFacingButtonPosition, Orientation.DownRight, i);
+        }
+
+        for (int i = 0; i < Size.y; i++)
+        {
+            Vector3 topRightFacingButtonPosition = PositionHelper.GridToWorldPosition(new Vector2Int(-1, i));
+            RoomManipulation.CreateShiftButton(topRightFacingButtonPosition, Orientation.TopRight, i);
+
+            Vector3 bottomLeftFacingButtonPosition = PositionHelper.GridToWorldPosition(new Vector2Int(Size.x, i));
+            RoomManipulation.CreateShiftButton(bottomLeftFacingButtonPosition, Orientation.DownLeft, i);
         }
     }
 
