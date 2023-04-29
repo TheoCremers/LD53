@@ -24,6 +24,10 @@ public class DungeonCamera : MonoBehaviour
 
     private InputManager _input;
 
+    private bool _followTarget;
+
+    public MimicGuy MimicGuy;
+
     private Bounds _camWorldBounds = new Bounds(Vector3.zero, new Vector3(10, 10, 0));
 
     // Start is called before the first frame update
@@ -49,7 +53,11 @@ public class DungeonCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_freeCam) 
+        if (_followTarget) 
+        {
+            CameraRef.transform.position = new Vector3(MimicGuy.transform.position.x, MimicGuy.transform.position.y, CameraRef.transform.position.z);
+        }
+        else if (_freeCam) 
         {
             var mousePos = _input.MousePosition.ReadValue<Vector2>();
             if (_input.RightClickAction.triggered)
@@ -85,6 +93,7 @@ public class DungeonCamera : MonoBehaviour
         StartCoroutine(ZoomCoroutine(1.5f, 1));
 
         // Follow Mimic around
+        _followTarget = true;
     }
 
     private void InitiateOverlordTurn()
@@ -94,6 +103,7 @@ public class DungeonCamera : MonoBehaviour
 
         // Allow camera movement within bounds
         _freeCam = true;
+        _followTarget = false;
     }
 
     private IEnumerator ZoomCoroutine(float duration, float targetSize)

@@ -13,7 +13,7 @@ public class DungeonFloor : MonoBehaviour
 
     #endregion
 
-    private DungeonRoom[,] _rooms;
+    public DungeonRoom[,] Rooms;
 
     public DungeonRoom DungeonRoomPrefab;
     public RoomManipulation RoomManipulation;
@@ -22,14 +22,13 @@ public class DungeonFloor : MonoBehaviour
 
     private Vector3 _roomFadeOffset = new Vector3(0, 0.5f, 0.5f);
 
-    // Start is called before the first frame update
-    void Start()
+    public void Generate(MimicGuy mimicGuy)
     {
-        _rooms = new DungeonRoom[Size.x, Size.y];
+        Rooms = new DungeonRoom[Size.x, Size.y];
 
         ConstructLayout();
         GenerateShiftButtons();
-        PopulateDungeon();
+        PopulateDungeon(mimicGuy);
 
         RoomShiftEventChannel.OnEventRaised += ShiftRooms;
     }
@@ -45,11 +44,30 @@ public class DungeonFloor : MonoBehaviour
         {
             for (int yIndex = 0; yIndex < Size.y; yIndex++)
             {
-                _rooms[xIndex, yIndex] = GenerateRoom(new Vector2Int(xIndex, yIndex));
+                Rooms[xIndex, yIndex] = GenerateRoom(new Vector2Int(xIndex, yIndex));
             } 
         }
 
         UpdateDebugTextForRooms();
+    }
+
+    public bool IsPassagePossible(Vector2Int currentPos, Orientation direction)
+    {
+        var currentRoom = Rooms[currentPos.x, currentPos.y];
+
+        switch (direction)
+        {
+            case Orientation.TopLeft:
+                return currentRoom.DoorTopLeft && (currentPos.y < Size.y-1) && Rooms[currentPos.x, currentPos.y+1].DoorBottomRight;
+            case Orientation.TopRight:
+                return currentRoom.DoorTopRight && (currentPos.x < Size.x-1) && Rooms[currentPos.x+1, currentPos.y].DoorBottomLeft;
+            case Orientation.DownLeft:
+                return currentRoom.DoorBottomLeft && (currentPos.x > 0) && Rooms[currentPos.x-1, currentPos.y].DoorTopRight;
+            case Orientation.DownRight:
+                return currentRoom.DoorBottomRight && (currentPos.y > 0) && Rooms[currentPos.x, currentPos.y-1].DoorTopLeft;
+            default:
+                return false;
+        }
     }
 
     private void GenerateShiftButtons()
@@ -84,11 +102,39 @@ public class DungeonFloor : MonoBehaviour
         dungeonRoom.DoorTopRight = (Random.value < 0.7f);
         dungeonRoom.UpdateDoorVisibility();
         return dungeonRoom;
+    }    
+
+    private void PopulateDungeon(MimicGuy mimicGuy)
+    {
+        var startingRoom = PickRandomEdgeRoom();
+        // Set Mimic to starting room
+        mimicGuy.transform.SetParent(Rooms[startingRoom.x, startingRoom.y].transform, false);
+        mimicGuy.GridPosition = startingRoom;
     }
 
-    private void PopulateDungeon()
+    private Vector2Int PickRandomEdgeRoom()
     {
+        // Pick a random edge room to drop the player in
+        var xPos = Random.Range(0, Size.x);
+        var yPos = Random.Range(0, Size.y);
 
+        var side = Random.value;
+        if (side < 0.25f) 
+        {
+            return new Vector2Int(0, yPos);
+        } 
+        else if (side < 0.5f)
+        {
+            return new Vector2Int(Size.x-1, yPos);
+        } 
+        else if (side < 0.75f)
+        {
+            return new Vector2Int(xPos, 0);
+        } 
+        else 
+        {
+            return new Vector2Int(xPos, Size.y-1);
+        }        
     }
 
     public async void ShiftRooms(Orientation shiftDirection, int lineIndex)
@@ -121,20 +167,20 @@ public class DungeonFloor : MonoBehaviour
         for (int i = 0; i < Size.x; i++)
         {
             int j = backwards ? Size.x - (1 + i) : i;
-            roomsToMove.Add(_rooms[j, lineIndex].transform);
+            roomsToMove.Add(Rooms[j, lineIndex].transform);
         }
 
         Vector3 roomOffset = PositionHelper.GridToWorldPosition(new Vector2Int(backwards ? -1 : 1, 0)) ;
 
         await TweenRooms(roomsToMove, roomOffset);
 
-        var teleportingRoom = _rooms[backwards ? 0 : Size.x - 1, lineIndex];
+        var teleportingRoom = Rooms[backwards ? 0 : Size.x - 1, lineIndex];
         for (int i = 0; i < Size.x - 1; i++)
         {
             int j = backwards ? i : Size.x - (1 + i);
-            _rooms[j, lineIndex] = _rooms[j + (backwards ? 1 : -1), lineIndex];
+            Rooms[j, lineIndex] = Rooms[j + (backwards ? 1 : -1), lineIndex];
         }
-        _rooms[backwards ? Size.x - 1 : 0, lineIndex] = teleportingRoom;
+        Rooms[backwards ? Size.x - 1 : 0, lineIndex] = teleportingRoom;
 
     }
 
@@ -145,20 +191,20 @@ public class DungeonFloor : MonoBehaviour
         for (int i = 0; i < Size.y; i++)
         {
             int j = backwards ? Size.y - (1 + i) : i;
-            roomsToMove.Add(_rooms[lineIndex, j].transform);
+            roomsToMove.Add(Rooms[lineIndex, j].transform);
         }
 
         Vector3 roomOffset = PositionHelper.GridToWorldPosition(new Vector2Int(0, backwards ? -1 : 1));
 
         await TweenRooms(roomsToMove, roomOffset);
 
-        var teleportingRoom = _rooms[lineIndex, backwards ? 0 : Size.y - 1];
+        var teleportingRoom = Rooms[lineIndex, backwards ? 0 : Size.y - 1];
         for (int i = 0; i < Size.y - 1; i++)
         {
             int j = backwards ? i : Size.y - (1 + i);
-            _rooms[lineIndex, j] = _rooms[lineIndex, j + (backwards ? 1 : -1)];
+            Rooms[lineIndex, j] = Rooms[lineIndex, j + (backwards ? 1 : -1)];
         }
-        _rooms[lineIndex, backwards ? Size.y - 1 : 0] = teleportingRoom;
+        Rooms[lineIndex, backwards ? Size.y - 1 : 0] = teleportingRoom;
     }
 
     private async Task TweenRooms(List<Transform> roomsToMove, Vector3 finalOffset, float tweenTime = 1f)
@@ -205,7 +251,7 @@ public class DungeonFloor : MonoBehaviour
         {
             for (int j = 0; j < Size.y; j++)
             {
-                _rooms[i, j].DebugText.text = $"({i}, {j})";
+                Rooms[i, j].DebugText.text = $"({i}, {j})";
             }
         }
     }

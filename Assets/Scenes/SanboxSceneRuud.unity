@@ -219,6 +219,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &802281551 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8557153826178277758, guid: 59f05cd330efa864c8aac6edd150f353, type: 3}
+  m_PrefabInstance: {fileID: 6251519726748817004}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54b5343552714dc4ca52fc9f8001c045, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &955496810 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2997353890416233225, guid: 59f05cd330efa864c8aac6edd150f353, type: 3}
+  m_PrefabInstance: {fileID: 6251519726748817004}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24f4d3640eadc664ab650cc67e351168, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1027647349
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -314,6 +336,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7599352000253121758, guid: af5299f0ed3df1945af95550ef261d08, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7599352000253121758, guid: af5299f0ed3df1945af95550ef261d08, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7599352000253121758, guid: af5299f0ed3df1945af95550ef261d08, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7599352000253121758, guid: af5299f0ed3df1945af95550ef261d08, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af5299f0ed3df1945af95550ef261d08, type: 3}
 --- !u!1 &1725614920
@@ -406,6 +444,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2116900463, guid: 59f05cd330efa864c8aac6edd150f353, type: 3}
+      propertyPath: MimicGuy
+      value: 
+      objectReference: {fileID: 802281551}
     - target: {fileID: 5074457417021464355, guid: 59f05cd330efa864c8aac6edd150f353, type: 3}
       propertyPath: m_Name
       value: Dungeon
@@ -458,5 +500,21 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 2116900459}
+    - target: {fileID: 9064617089323782892, guid: 59f05cd330efa864c8aac6edd150f353, type: 3}
+      propertyPath: Floor
+      value: 
+      objectReference: {fileID: 955496810}
+    - target: {fileID: 9064617089323782892, guid: 59f05cd330efa864c8aac6edd150f353, type: 3}
+      propertyPath: MimicGuy
+      value: 
+      objectReference: {fileID: 802281551}
+    - target: {fileID: 9064617089323782892, guid: 59f05cd330efa864c8aac6edd150f353, type: 3}
+      propertyPath: StartMimicTurnChannel
+      value: 
+      objectReference: {fileID: 11400000, guid: 4b49d1f1ac0c93c4a8a0d6cc0c61ba9e, type: 2}
+    - target: {fileID: 9064617089323782892, guid: 59f05cd330efa864c8aac6edd150f353, type: 3}
+      propertyPath: StartOverlordTurnChannel
+      value: 
+      objectReference: {fileID: 11400000, guid: 35aba1eb81a19af47a42aa10dae9ba96, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59f05cd330efa864c8aac6edd150f353, type: 3}

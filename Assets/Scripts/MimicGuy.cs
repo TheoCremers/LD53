@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MimicGuy : MonoBehaviour
 {
+    public Vector2Int GridPosition;
     // Start is called before the first frame update
     void Start()
     {
