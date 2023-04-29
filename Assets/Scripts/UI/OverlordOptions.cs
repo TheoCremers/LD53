@@ -1,6 +1,9 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 
-public class PreMoveOptions : BaseOptionsMenu
+public class OverlordOptions : BaseOptionsMenu
 {
     #region EventChannels
 
@@ -10,15 +13,15 @@ public class PreMoveOptions : BaseOptionsMenu
 
     #endregion
 
-    public Button ProceedButton;
-    public Button InterveneButton;
+    public Button StartShiftTilesButton;
+    public Button FinishInterventionButton;
 
     protected override void Start()
     {
         base.Start();
 
-        ProceedButton.onClick.AddListener(StartMimicTurnEvent.RaiseEvent);
-        InterveneButton.onClick.AddListener(StartOverlordTurnEvent.RaiseEvent);
+        StartShiftTilesButton.onClick.AddListener(StartMimicTurnEvent.RaiseEvent);
+        FinishInterventionButton.onClick.AddListener(StartOverlordTurnEvent.RaiseEvent);
 
         StartMimicTurnEvent.OnEventRaised += DisableAndFadeOut;
         StartOverlordTurnEvent.OnEventRaised += DisableAndFadeOut;
@@ -27,8 +30,8 @@ public class PreMoveOptions : BaseOptionsMenu
 
     private void OnDestroy()
     {
-        ProceedButton.onClick.RemoveListener(StartMimicTurnEvent.RaiseEvent);
-        InterveneButton.onClick.RemoveListener(StartOverlordTurnEvent.RaiseEvent);
+        StartShiftTilesButton.onClick.RemoveListener(StartMimicTurnEvent.RaiseEvent);
+        FinishInterventionButton.onClick.RemoveListener(StartOverlordTurnEvent.RaiseEvent);
 
         StartMimicTurnEvent.OnEventRaised -= DisableAndFadeOut;
         StartOverlordTurnEvent.OnEventRaised -= DisableAndFadeOut;
@@ -37,15 +40,15 @@ public class PreMoveOptions : BaseOptionsMenu
 
     public async void DisableAndFadeOut()
     {
-        ProceedButton.interactable = false;
-        InterveneButton.interactable = false;
+        StartShiftTilesButton.interactable = false;
+        FinishInterventionButton.interactable = false;
         await FadeOut();
     }
 
     public async void EnableAndFadeIn()
     {
         await FadeIn();
-        ProceedButton.interactable = true;
-        InterveneButton.interactable = true;
+        StartShiftTilesButton.interactable = true;
+        FinishInterventionButton.interactable = true;
     }
 }

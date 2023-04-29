@@ -149,6 +149,7 @@ MonoBehaviour:
   StartOverlordTurnChannel: {fileID: 11400000, guid: 35aba1eb81a19af47a42aa10dae9ba96, type: 2}
   StartMimicTurnChannel: {fileID: 11400000, guid: 4b49d1f1ac0c93c4a8a0d6cc0c61ba9e, type: 2}
   CameraRef: {fileID: 2116900459}
+  MimicGuy: {fileID: 8557153826178277758}
 --- !u!1 &5074457417021464355
 GameObject:
   m_ObjectHideFlags: 0
@@ -196,8 +197,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b82e866a3e450cb4fa018fce250a7cc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Floor: {fileID: 0}
-  MimicGuy: {fileID: 0}
+  StartMimicTurnChannel: {fileID: 11400000, guid: 4b49d1f1ac0c93c4a8a0d6cc0c61ba9e, type: 2}
+  StartOverlordTurnChannel: {fileID: 11400000, guid: 35aba1eb81a19af47a42aa10dae9ba96, type: 2}
+  StartIdleChannel: {fileID: 11400000, guid: 965d2ae4fc2a6b34abd468157ad5e658, type: 2}
+  Floor: {fileID: 2997353890416233225}
+  MimicGuy: {fileID: 8557153826178277758}
+  TurnState: 0
 --- !u!1001 &3977418834390618678
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -272,6 +277,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54b5343552714dc4ca52fc9f8001c045, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GridPosition: {x: 0, y: 0}
 --- !u!4 &5128112120776668110 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8077231866941907448, guid: ac57bf9d8116c0c4b9ce720792aca085, type: 3}
@@ -338,6 +344,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c1160880029b5d0468ead1bff2402236, type: 3}
+--- !u!114 &2997353890416233225 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9176472825722223916, guid: c1160880029b5d0468ead1bff2402236, type: 3}
+  m_PrefabInstance: {fileID: 6251519727304685093}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24f4d3640eadc664ab650cc67e351168, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &7452333581813788529 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3579761342492318036, guid: c1160880029b5d0468ead1bff2402236, type: 3}

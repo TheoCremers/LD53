@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 485224890156082071}
   - component: {fileID: 9147812013556407358}
   - component: {fileID: 3529216476680568488}
+  - component: {fileID: 1218951395735990142}
   m_Layer: 5
   m_Name: PreMoveOptions
   m_TagString: Untagged
@@ -64,15 +65,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 205565e6fae9874409deaff576bb1b81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartMimicTurnEvent: {fileID: 11400000, guid: 4b49d1f1ac0c93c4a8a0d6cc0c61ba9e, type: 2}
-  StartOverlordTurnEvent: {fileID: 11400000, guid: 35aba1eb81a19af47a42aa10dae9ba96, type: 2}
-  MimicTurnFinishedEvent: {fileID: 11400000, guid: 5841e62b2b8ae0f42a698b334ccc548b, type: 2}
-  ProceedButton: {fileID: 4151396020518894751}
-  InterveneButton: {fileID: 8945496223125854846}
   DefaultAlpha: 0.8
   FadeTime: 0.5
-  DefaultButtonOffsetY: -128
-  FadeOffsetY: -256
+  FadeOffset: {x: 0, y: -128}
+  StartMimicTurnEvent: {fileID: 11400000, guid: 4b49d1f1ac0c93c4a8a0d6cc0c61ba9e, type: 2}
+  StartOverlordTurnEvent: {fileID: 11400000, guid: 35aba1eb81a19af47a42aa10dae9ba96, type: 2}
+  StartIdleEvent: {fileID: 11400000, guid: 965d2ae4fc2a6b34abd468157ad5e658, type: 2}
+  ProceedButton: {fileID: 4151396020518894751}
+  InterveneButton: {fileID: 8945496223125854846}
+--- !u!114 &1218951395735990142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1154758376700635374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 4
+  m_Spacing: 10
+  m_ChildForceExpandWidth: 0
+  m_ChildForceExpandHeight: 0
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
 --- !u!1 &1239132696488072655
 GameObject:
   m_ObjectHideFlags: 0
@@ -243,9 +269,9 @@ RectTransform:
   m_Father: {fileID: 485224890156082071}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 128, y: -128}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 240, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6770298807014670138
@@ -500,9 +526,9 @@ RectTransform:
   m_Father: {fileID: 485224890156082071}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -128, y: -128}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 240, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7727763088792478413
