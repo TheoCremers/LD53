@@ -57,9 +57,9 @@ public class RoomShiftButton : MonoBehaviour
         await _arrowImage.DOFade(0f, 0.5f).AsyncWaitForCompletion();
     }
 
-    public async void FadeInAndActivate()
+    public async void ActivateAndFadeIn()
     {
-        await _arrowImage.DOFade(1f, 0.5f).AsyncWaitForCompletion();
         _shiftButton.interactable = true;
+        await _arrowImage.DOFade(1f, 0.5f).AsyncWaitForCompletion();
     }
 }

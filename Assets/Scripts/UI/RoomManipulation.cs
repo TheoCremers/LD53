@@ -33,7 +33,7 @@ public class RoomManipulation : MonoBehaviour
     {
         foreach (RoomShiftButton button in _roomShiftButtons)
         {
-            button.FadeInAndActivate();
+            button.ActivateAndFadeIn();
         }
     }
 }
