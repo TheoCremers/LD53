@@ -16,7 +16,7 @@
                 },
                 {
                     "name": "Leftclick",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "21f86eed-295b-4ccc-b76a-368ae1e465ce",
                     "expectedControlType": "Button",
                     "processors": "",
@@ -25,7 +25,7 @@
                 },
                 {
                     "name": "Rightclick",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "d717dedd-d602-4ed3-ad5e-d75316d071eb",
                     "expectedControlType": "Button",
                     "processors": "",
