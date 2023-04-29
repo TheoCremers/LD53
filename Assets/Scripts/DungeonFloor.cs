@@ -71,6 +71,12 @@ public class DungeonFloor : MonoBehaviour
     {
         var dungeonRoom = Instantiate(DungeonRoomPrefab);
         dungeonRoom.transform.position = PositionHelper.GridToWorldPosition(gridPosition);
+        // All doors 70% chance for now
+        dungeonRoom.DoorBottomLeft = (Random.value < 0.7f);
+        dungeonRoom.DoorBottomRight = (Random.value < 0.7f);
+        dungeonRoom.DoorTopLeft = (Random.value < 0.7f);
+        dungeonRoom.DoorTopRight = (Random.value < 0.7f);
+        dungeonRoom.UpdateDoorVisibility();
         return dungeonRoom;
     }
 
