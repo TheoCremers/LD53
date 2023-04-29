@@ -1,10 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 [ExecuteInEditMode]
 public class DungeonRoom : MonoBehaviour
 {
+    [HideInInspector] public string roomIndex;
+
+    public TextMeshPro DebugText;
+
     public SpriteRenderer SpriteRenderer;
 
     public bool DoorTopLeft;
@@ -27,6 +32,8 @@ public class DungeonRoom : MonoBehaviour
 
     void Awake()
     {
+        DebugText.text = string.Empty;
+
         _doorTopLeft = this.transform.Find("DoorTopLeft").GetComponent<SpriteRenderer>();
         _doorTopRight = this.transform.Find("DoorTopRight").GetComponent<SpriteRenderer>();
         _doorBottomRight = this.transform.Find("DoorBottomRight").GetComponent<SpriteRenderer>();
