@@ -223,8 +223,9 @@ GameObject:
   - component: {fileID: 2116900459}
   - component: {fileID: 2116900461}
   - component: {fileID: 2116900462}
+  - component: {fileID: 2116900463}
   m_Layer: 0
-  m_Name: Pixel Perfect Camera
+  m_Name: DungeonCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -249,15 +250,15 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.20961888
-    y: 0.14980544
-    width: 0.58076227
-    height: 0.7003891
+    x: 0
+    y: 0
+    width: 1
+    height: 1
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 1
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -328,7 +329,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2116900457}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c88f5cead0c0b2a4eb05b5900433f8d1, type: 3}
   m_Name: 
@@ -344,3 +345,18 @@ MonoBehaviour:
   m_CropFrameX: 0
   m_CropFrameY: 0
   m_StretchFill: 0
+--- !u!114 &2116900463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2116900457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6815c1300592bbd4597aa2217b6d4f7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartOverlordTurnChannel: {fileID: 11400000, guid: 35aba1eb81a19af47a42aa10dae9ba96, type: 2}
+  StartMimicTurnChannel: {fileID: 11400000, guid: 4b49d1f1ac0c93c4a8a0d6cc0c61ba9e, type: 2}
+  CameraRef: {fileID: 2116900459}
