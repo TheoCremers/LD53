@@ -10,6 +10,7 @@ public class Dungeon : MonoBehaviour
     #region EventChannels
     public VoidEventChannel StartMimicTurnChannel;
     public VoidEventChannel StartOverlordTurnChannel;
+    public VoidEventChannel StartIdleChannel;
 
 
     #endregion
@@ -21,18 +22,22 @@ public class Dungeon : MonoBehaviour
     public TurnState TurnState;
 
     // Start is called before the first frame update
+
     void Start()
     {
+        StartMimicTurnChannel.OnEventRaised += SetTurnStateMimicGuy;
         Floor.Generate(MimicGuy);
 
         // Populate the dungeon. 
 
-        SetTurnStateMimicGuy();
+        //SetTurnStateMimicGuy();
+        SetTurnStateIdle();
     }
 
     public void SetTurnStateIdle()
     {
         TurnState = TurnState.Idle;
+        StartIdleChannel.RaiseEvent();
         // Display buttons advance or intervene
     }
 
@@ -42,7 +47,7 @@ public class Dungeon : MonoBehaviour
         // Hide buttons
 
         // Invoke event
-        StartMimicTurnChannel.RaiseEvent();
+        //StartMimicTurnChannel.RaiseEvent();
 
         // ---- maybe in update
         // Move MimicGuy to next room
@@ -57,7 +62,11 @@ public class Dungeon : MonoBehaviour
         var nextRoom = Floor.Rooms[nextRoomPos.x, nextRoomPos.y];
         Debug.Log($"Moving to {nextRoomPos}");
 
+        MimicGuy.transform.SetParent(Floor.transform, true);
         TweenMimicGuy(MimicGuy.transform, PositionHelper.GridToWorldPosition(nextRoomPos));
+        MimicGuy.transform.SetParent(nextRoom.transform, true);
+        MimicGuy.GridPosition = nextRoomPos;
+        SetTurnStateIdle();
     }
 
     private void TweenMimicGuy(Transform mimicGuy, Vector3 destination, float tweenTime = 1f)
@@ -87,7 +96,10 @@ public class Dungeon : MonoBehaviour
         // TODO this logic.
 
         // Else pick a new random direction
-        var choice = possibleOptions[Random.Range(0, possibleOptions.Count-1)];
+        var pick = Random.Range(0, possibleOptions.Count);
+        Debug.Log($"options {possibleOptions.Count} choice {pick}");
+        var choice = possibleOptions[pick];
+        
         return new Vector2Int(currentGridPosition.x, currentGridPosition.y) + PositionHelper.ToVector(choice);
     }
 
