@@ -58,11 +58,14 @@ public class Dungeon : MonoBehaviour
 
     private void MovementStep()
     {
-        var nextRoomPos = DetermineNextRoom();
+        var nextRoomDirection = DetermineNextRoomDirection();        
+        var nextRoomPos = DetermineNextRoom(nextRoomDirection);
         var nextRoom = Floor.Rooms[nextRoomPos.x, nextRoomPos.y];
         Debug.Log($"Moving to {nextRoomPos}");
 
         MimicGuy.transform.SetParent(Floor.transform, true);
+        MimicGuy.FacingDirection = nextRoomDirection;
+        MimicGuy.UpdateSprite();
         TweenMimicGuy(MimicGuy.transform, PositionHelper.GridToWorldPosition(nextRoomPos));
         MimicGuy.transform.SetParent(nextRoom.transform, true);
         MimicGuy.GridPosition = nextRoomPos;
@@ -74,7 +77,7 @@ public class Dungeon : MonoBehaviour
         mimicGuy.DOMove(destination, tweenTime);
     }
 
-    private Vector2Int DetermineNextRoom()
+    private Orientation DetermineNextRoomDirection()
     {
         // Check which adjacent room the character will move to
         var currentGridPosition = MimicGuy.GridPosition;
@@ -93,14 +96,32 @@ public class Dungeon : MonoBehaviour
         }
 
         // Check if the current facing direction is available. If yes, follow through
-        // TODO this logic.
+        if (possibleOptions.Contains(MimicGuy.FacingDirection)) 
+        {
+            return MimicGuy.FacingDirection;
+            //return new Vector2Int(currentGridPosition.x, currentGridPosition.y) + PositionHelper.ToVector(MimicGuy.FacingDirection);
+        }
 
-        // Else pick a new random direction
-        var pick = Random.Range(0, possibleOptions.Count);
-        Debug.Log($"options {possibleOptions.Count} choice {pick}");
-        var choice = possibleOptions[pick];
-        
-        return new Vector2Int(currentGridPosition.x, currentGridPosition.y) + PositionHelper.ToVector(choice);
+        // Else pick randomly between left or right hand if available
+        var sideOptions = possibleOptions.Where(x => Vector2.Dot((PositionHelper.ToVector(x)), PositionHelper.ToVector(MimicGuy.FacingDirection)) == 0).ToList();
+        if (sideOptions.Any()) 
+        {
+            var choice = sideOptions[Random.Range(0, sideOptions.Count)];           
+            return choice; 
+            //return new Vector2Int(currentGridPosition.x, currentGridPosition.y) + PositionHelper.ToVector(choice);
+        } 
+        else 
+        {
+            // turn around, last option
+            return PositionHelper.ToOrientation(-PositionHelper.ToVector(MimicGuy.FacingDirection));
+            //return new Vector2Int(currentGridPosition.x, currentGridPosition.y) - PositionHelper.ToVector(MimicGuy.FacingDirection);            
+        };
+    }
+
+    private Vector2Int DetermineNextRoom(Orientation movementDirection)
+    {
+        var currentGridPosition = MimicGuy.GridPosition;
+        return new Vector2Int(currentGridPosition.x, currentGridPosition.y) + PositionHelper.ToVector(movementDirection); 
     }
 
 
