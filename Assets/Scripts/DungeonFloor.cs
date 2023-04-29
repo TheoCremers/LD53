@@ -20,6 +20,9 @@ public class DungeonFloor : MonoBehaviour
 
     public Vector2Int Size = new Vector2Int(5, 5);
 
+    private Vector3 _roomFadeOffset = new Vector3(0, 0.5f, 0.5f);
+
+    // Start is called before the first frame update
     void Start()
     {
         _rooms = new DungeonRoom[Size.x, Size.y];
@@ -175,10 +178,25 @@ public class DungeonFloor : MonoBehaviour
             }
             else
             {
-                await roomTransform.DOMove(roomTransform.position + finalOffset, tweenTime).AsyncWaitForCompletion(); //after move, teleport to other side
-                roomTransform.position = positionToTeleportFinalRoomTo;
+                await roomTransform.DOMove(roomTransform.position + finalOffset, tweenTime).AsyncWaitForCompletion();
+                await TeleportRoom(roomTransform, positionToTeleportFinalRoomTo);
             }
         }
+    }
+
+    private async Task TeleportRoom(Transform roomTransform, Vector3 positionToTeleportRoomTo)
+    {
+        foreach (var renderer in roomTransform.GetComponentsInChildren<SpriteRenderer>())
+        {
+            renderer.DOFade(0f, 0.2f);
+        }
+        await roomTransform.DOMove(roomTransform.position + _roomFadeOffset, 0.3f).AsyncWaitForCompletion();
+        roomTransform.position = positionToTeleportRoomTo + _roomFadeOffset;
+        foreach (var renderer in roomTransform.GetComponentsInChildren<SpriteRenderer>())
+        {
+            renderer.DOFade(1f, 0.2f);
+        }
+        await roomTransform.DOMove(roomTransform.position - _roomFadeOffset, 0.3f).AsyncWaitForCompletion();
     }
 
     private void UpdateDebugTextForRooms()
