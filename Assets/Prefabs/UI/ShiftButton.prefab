@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 1065485747094752479}
   - component: {fileID: 1455648712730272081}
   - component: {fileID: 8211834802721155496}
-  - component: {fileID: 4589535796949248349}
+  - component: {fileID: 7750011491773572927}
+  - component: {fileID: 1494851497389452237}
   m_Layer: 0
   m_Name: ShiftButton
   m_TagString: Untagged
@@ -77,7 +78,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 1
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4589535796949248349
+--- !u!114 &7750011491773572927
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -121,3 +122,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1494851497389452237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4797168643987500656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c92377d56feaa904ebcc6a526567cd9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RoomShiftEventChannel: {fileID: 11400000, guid: b37f6b385ad690346bcdce1e24ba1aee, type: 2}
