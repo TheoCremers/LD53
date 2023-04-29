@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
+using System.Threading.Tasks;
+using UnityEngine.UI;
 
 public class DungeonFloor : MonoBehaviour
 {
     private Dictionary<Vector2Int, DungeonRoom> _rooms = new Dictionary<Vector2Int, DungeonRoom>();
 
     public DungeonRoom DungeonRoomPrefab;
+    public RoomManipulation RoomManipulation;
 
     public Vector2Int Size = new Vector2Int(5, 5);
 
@@ -31,19 +35,8 @@ public class DungeonFloor : MonoBehaviour
     private DungeonRoom GenerateRoom(Vector2Int gridPosition)
     {
         var dungeonRoom = Instantiate(DungeonRoomPrefab);
-        dungeonRoom.transform.position = CalcWorldPosition(gridPosition);
+        dungeonRoom.transform.position = PositionHelper.GridToWorldPosition(gridPosition);
         return dungeonRoom;
-    }
-
-    private Vector3 CalcWorldPosition(Vector2Int gridPosition)
-    {
-        var spriteWidth = DungeonRoomPrefab.SpriteRenderer.bounds.size.x;
-        var spriteHeight = DungeonRoomPrefab.SpriteRenderer.bounds.size.y;
-
-        float isoX = (gridPosition.x - gridPosition.y);// - (spriteWidth * 0.5f);
-        float isoY = ((gridPosition.x + gridPosition.y) * 0.5f);// - (spriteHeight * 0.5f);
-
-        return new Vector3(isoX, isoY, isoY);
     }
 
     private void PopulateDungeon()
@@ -51,9 +44,42 @@ public class DungeonFloor : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
+    public async void ShiftRoomsAlongX(int rowIndex, bool backwards)
     {
-        
+        // Loop over rooms to move, get transforms
+        List<Transform> roomsToMove = new List<Transform>();
+
+        for (int i = 0; i < Size.x; i++)
+        {
+            int j = backwards ? i : Size.x - (1 + i);
+            roomsToMove.Add(_rooms[new Vector2Int(j, rowIndex)].transform);
+        }
+
+        Vector3 roomOffset = PositionHelper.GridToWorldPosition(new Vector2Int(backwards ? -1 : 1, 0)) ;
+
+        await TweenRooms(roomsToMove, roomOffset);
+    }
+
+    private async Task TweenRooms(List<Transform> roomsToMove, Vector3 finalOffset, float tweenTime = 1f)
+    {
+        Vector3 positionToTeleportFinalRoomTo = new Vector3();
+        for (int i = 0; i < roomsToMove.Count; i++)
+        {
+            var roomTransform = roomsToMove[i];
+            if (i == 0) 
+            {
+                positionToTeleportFinalRoomTo = new Vector3(roomTransform.position.x, roomTransform.position.y, roomTransform.position.z);
+            }
+
+            if (i < roomsToMove.Count - 1)
+            {
+                roomTransform.DOMove(roomTransform.position + finalOffset, tweenTime); //just move it
+            }
+            else
+            {
+                await roomTransform.DOMove(roomTransform.position + finalOffset, tweenTime).AsyncWaitForCompletion(); //after move, teleport to other side
+                roomTransform.position = positionToTeleportFinalRoomTo;
+            }
+        }
     }
 }
