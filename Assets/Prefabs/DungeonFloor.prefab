@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3579761342492318036}
-  - component: {fileID: 4427969937619501400}
+  - component: {fileID: 9176472825722223916}
   m_Layer: 0
   m_Name: DungeonFloor
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4427969937619501400
+--- !u!114 &9176472825722223916
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,6 +41,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 8891769938085704683}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f74c8f923f531df45845fe61f624ef3b, type: 3}
+  m_Script: {fileID: 11500000, guid: 24f4d3640eadc664ab650cc67e351168, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DungeonRoomPrefab: {fileID: 3442427670383652863, guid: 33ddc69d62d8bcb4b88703eb1c8e92e2, type: 3}
+  Size: {x: 5, y: 5}
