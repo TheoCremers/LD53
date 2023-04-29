@@ -48,7 +48,7 @@ public class DungeonFloor : MonoBehaviour
             } 
         }
 
-        UpdateDebugTextForRooms();
+        //UpdateDebugTextForRooms();
     }
 
     public bool IsPassagePossible(Vector2Int currentPos, Orientation direction)
@@ -155,7 +155,7 @@ public class DungeonFloor : MonoBehaviour
                 break;
         }
 
-        UpdateDebugTextForRooms();
+        //UpdateDebugTextForRooms();
 
         RoomManipulation.ActivateShiftButtons();
     }
