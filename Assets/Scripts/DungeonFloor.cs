@@ -13,7 +13,7 @@ public class DungeonFloor : MonoBehaviour
 
     #endregion
 
-    private Dictionary<Vector2Int, DungeonRoom> _rooms = new Dictionary<Vector2Int, DungeonRoom>();
+    private DungeonRoom[,] _rooms;
 
     public DungeonRoom DungeonRoomPrefab;
     public RoomManipulation RoomManipulation;
@@ -22,6 +22,8 @@ public class DungeonFloor : MonoBehaviour
 
     void Start()
     {
+        _rooms = new DungeonRoom[Size.x, Size.y];
+
         ConstructLayout();
         GenerateShiftButtons();
         PopulateDungeon();
@@ -40,9 +42,11 @@ public class DungeonFloor : MonoBehaviour
         {
             for (int yIndex = 0; yIndex < Size.y; yIndex++)
             {
-                var dungeonRoom = GenerateRoom(new Vector2Int(xIndex, yIndex));
+                _rooms[xIndex, yIndex] = GenerateRoom(new Vector2Int(xIndex, yIndex));
             } 
         }
+
+        UpdateDebugTextForRooms();
     }
 
     private void GenerateShiftButtons()
@@ -84,53 +88,74 @@ public class DungeonFloor : MonoBehaviour
 
     }
 
-    public void ShiftRooms(Orientation shiftDirection, int lineIndex)
+    public async void ShiftRooms(Orientation shiftDirection, int lineIndex)
     {
         switch(shiftDirection)
         {
             case Orientation.TopLeft:
-                ShiftRoomsAlongX(lineIndex, false);
+                await ShiftRoomsAlongY(lineIndex, false);
                 break;
             case Orientation.TopRight:
-                ShiftRoomsAlongY(lineIndex, false);
+                await ShiftRoomsAlongX(lineIndex, false);
                 break;
             case Orientation.DownRight:
-                ShiftRoomsAlongX(lineIndex, true);
+                await ShiftRoomsAlongY(lineIndex, true);
                 break;
             case Orientation.DownLeft:
-                ShiftRoomsAlongY(lineIndex, true);
+                await ShiftRoomsAlongX(lineIndex, true);
                 break;
         }
+
+        UpdateDebugTextForRooms();
+
+        RoomManipulation.ActivateShiftButtons();
     }
 
-    public async void ShiftRoomsAlongX(int rowIndex, bool backwards)
+    public async Task ShiftRoomsAlongX(int lineIndex, bool backwards)
     {
         List<Transform> roomsToMove = new List<Transform>();
 
         for (int i = 0; i < Size.x; i++)
         {
-            int j = backwards ? i : Size.x - (1 + i);
-            roomsToMove.Add(_rooms[new Vector2Int(j, rowIndex)].transform);
+            int j = backwards ? Size.x - (1 + i) : i;
+            roomsToMove.Add(_rooms[j, lineIndex].transform);
         }
 
         Vector3 roomOffset = PositionHelper.GridToWorldPosition(new Vector2Int(backwards ? -1 : 1, 0)) ;
 
         await TweenRooms(roomsToMove, roomOffset);
+
+        var teleportingRoom = _rooms[backwards ? 0 : Size.x - 1, lineIndex];
+        for (int i = 0; i < Size.x - 1; i++)
+        {
+            int j = backwards ? i : Size.x - (1 + i);
+            _rooms[j, lineIndex] = _rooms[j + (backwards ? 1 : -1), lineIndex];
+        }
+        _rooms[backwards ? Size.x - 1 : 0, lineIndex] = teleportingRoom;
+
     }
 
-    public async void ShiftRoomsAlongY(int rowIndex, bool backwards)
+    public async Task ShiftRoomsAlongY(int lineIndex, bool backwards)
     {
         List<Transform> roomsToMove = new List<Transform>();
 
         for (int i = 0; i < Size.y; i++)
         {
-            int j = backwards ? i : Size.y - (1 + i);
-            roomsToMove.Add(_rooms[new Vector2Int(rowIndex, j)].transform);
+            int j = backwards ? Size.y - (1 + i) : i;
+            roomsToMove.Add(_rooms[lineIndex, j].transform);
         }
 
         Vector3 roomOffset = PositionHelper.GridToWorldPosition(new Vector2Int(0, backwards ? -1 : 1));
 
         await TweenRooms(roomsToMove, roomOffset);
+
+        var teleportingRoom = _rooms[lineIndex, backwards ? 0 : Size.y - 1];
+        for (int i = 0; i < Size.y - 1; i++)
+        {
+            int j = backwards ? i : Size.y - (1 + i);
+            _rooms[lineIndex, j] = _rooms[lineIndex, j + (backwards ? 1 : -1)];
+        }
+        _rooms[lineIndex, backwards ? Size.y - 1 : 0] = teleportingRoom;
     }
 
     private async Task TweenRooms(List<Transform> roomsToMove, Vector3 finalOffset, float tweenTime = 1f)
@@ -152,6 +177,17 @@ public class DungeonFloor : MonoBehaviour
             {
                 await roomTransform.DOMove(roomTransform.position + finalOffset, tweenTime).AsyncWaitForCompletion(); //after move, teleport to other side
                 roomTransform.position = positionToTeleportFinalRoomTo;
+            }
+        }
+    }
+
+    private void UpdateDebugTextForRooms()
+    {
+        for (int i = 0; i < Size.x; i++)
+        {
+            for (int j = 0; j < Size.y; j++)
+            {
+                _rooms[i, j].DebugText.text = $"({i}, {j})";
             }
         }
     }
