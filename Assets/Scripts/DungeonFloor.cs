@@ -32,16 +32,19 @@ public class DungeonFloor : MonoBehaviour
 
     [HideInInspector] public Dungeon Dungeon;
 
+    void Awake()
+    {
+        RoomShiftEventChannel.OnEventRaised += ShiftRooms;
+        ShowShiftButtonsEvent.OnEventRaised += RoomManipulation.ActivateShiftButtons;
+    }
+
     public void Generate(MimicGuy mimicGuy, DungeonLevelSO level)
     {
-        Rooms = new DungeonRoom[Size.x, Size.y];
+        Rooms = new DungeonRoom[level.LevelSize.x, level.LevelSize.y];
 
         ConstructLayout(level);
         GenerateShiftButtons();
         PopulateDungeon(mimicGuy, level);
-
-        RoomShiftEventChannel.OnEventRaised += ShiftRooms;
-        ShowShiftButtonsEvent.OnEventRaised += RoomManipulation.ActivateShiftButtons;
     }
 
     private void OnDestroy()

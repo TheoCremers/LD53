@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8db618cbf1264f0499c4089626d515bc, type: 3}
-  m_Name: Lv6Demon
+  m_Name: Lv23Demon
   m_EditorClassIdentifier: 
-  PowerLevel: 6
+  PowerLevel: 23
   HungerGain: 3
   AtkPowerGain: 1
   Sprite: {fileID: 21300000, guid: 929e645913d98d444a10c08e470d5477, type: 3}

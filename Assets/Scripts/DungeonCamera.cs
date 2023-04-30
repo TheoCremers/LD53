@@ -92,6 +92,7 @@ public class DungeonCamera : MonoBehaviour
         // Snap to Mimic
         // Zoom in
         StartCoroutine(ZoomCoroutine(1.5f, 0.75f));
+        StartCoroutine(MoveCoroutine(1.5f, new Vector3(MimicGuy.transform.position.x, MimicGuy.transform.position.y, transform.position.z)));
 
         // Follow Mimic around
         _followTarget = true;
@@ -115,6 +116,18 @@ public class DungeonCamera : MonoBehaviour
         {
             timer += Time.deltaTime;
             CameraRef.orthographicSize = Mathf.Lerp(initialSize, targetSize, Mathf.SmoothStep(0, 1.0f, timer / duration));
+            yield return null;
+        }
+    }
+
+    private IEnumerator MoveCoroutine(float duration, Vector3 target)
+    {
+        Vector3 startingPos = CameraRef.transform.position;
+        float timer = 0;
+        while (timer < duration)
+        {
+            timer += Time.deltaTime;
+            CameraRef.transform.position = Vector3.Lerp(startingPos, target, Mathf.SmoothStep(0, 1.0f, timer / duration));
             yield return null;
         }
     }

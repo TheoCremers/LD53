@@ -10,17 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c1724d0fd2df464ab9f733f65714db3, type: 3}
-  m_Name: Floor1
+  m_Name: Floor2
   m_EditorClassIdentifier: 
-  LevelSize: {x: 4, y: 4}
-  FourWays: 1
-  ThreeWays: 10
-  Hallways: 3
-  Bends: 2
-  DeadEnds: 0
-  Pizzas: 2
-  Gemstones: 0
+  LevelSize: {x: 5, y: 4}
+  FourWays: 2
+  ThreeWays: 12
+  Hallways: 4
+  Bends: 3
+  DeadEnds: 1
+  Pizzas: 1
+  Gemstones: 1
   Swords: 0
   Monsters:
   - {fileID: 11400000, guid: f0fe6959969dfad46a0ede415eac1f3c, type: 2}
-  - {fileID: 11400000, guid: f0fe6959969dfad46a0ede415eac1f3c, type: 2}
+  - {fileID: 11400000, guid: c757c68dfe61bcf4db1776e7caad94d8, type: 2}
+  - {fileID: 11400000, guid: c757c68dfe61bcf4db1776e7caad94d8, type: 2}
