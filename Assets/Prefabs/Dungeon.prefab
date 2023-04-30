@@ -62,7 +62,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 1
+  orthographic size: 3
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -147,6 +147,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StartOverlordTurnChannel: {fileID: 11400000, guid: 35aba1eb81a19af47a42aa10dae9ba96, type: 2}
+  StartIdleTurnChannel: {fileID: 11400000, guid: 965d2ae4fc2a6b34abd468157ad5e658, type: 2}
   StartMimicTurnChannel: {fileID: 11400000, guid: 4b49d1f1ac0c93c4a8a0d6cc0c61ba9e, type: 2}
   CameraRef: {fileID: 2116900459}
   MimicGuy: {fileID: 8557153826178277758}
@@ -210,6 +211,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5183643150201046949}
     m_Modifications:
+    - target: {fileID: -5825763673116198103, guid: ac57bf9d8116c0c4b9ce720792aca085, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -5825763673116198103, guid: ac57bf9d8116c0c4b9ce720792aca085, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -605247905
+      objectReference: {fileID: 0}
     - target: {fileID: 4463039270725666351, guid: ac57bf9d8116c0c4b9ce720792aca085, type: 3}
       propertyPath: m_Name
       value: MimicGuy
@@ -277,7 +286,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54b5343552714dc4ca52fc9f8001c045, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ForwardFacing: {fileID: 21300000, guid: a6c598a4cfcb72349b7a426084ff9d92, type: 3}
+  BackwardFacing: {fileID: 21300000, guid: 20ea16e244cfd0b4db45dcf7a68cb2d8, type: 3}
+  SpriteRenderer: {fileID: 1735042085293500703}
   GridPosition: {x: 0, y: 0}
+  FacingDirection: 0
+--- !u!212 &1735042085293500703 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: -5825763673116198103, guid: ac57bf9d8116c0c4b9ce720792aca085, type: 3}
+  m_PrefabInstance: {fileID: 3977418834390618678}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5128112120776668110 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8077231866941907448, guid: ac57bf9d8116c0c4b9ce720792aca085, type: 3}

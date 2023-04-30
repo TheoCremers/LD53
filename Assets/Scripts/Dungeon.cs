@@ -31,6 +31,7 @@ public class Dungeon : MonoBehaviour
         // Populate the dungeon. 
 
         //SetTurnStateMimicGuy();
+        EndMimicTurn(); // call this once to determine the start facing direction        
         SetTurnStateIdle();
     }
 
@@ -56,25 +57,30 @@ public class Dungeon : MonoBehaviour
         // Resolve room
     }
 
-    private void MovementStep()
+
+    private void EndMimicTurn()
     {
         var nextRoomDirection = DetermineNextRoomDirection();        
-        var nextRoomPos = DetermineNextRoom(nextRoomDirection);
-        var nextRoom = Floor.Rooms[nextRoomPos.x, nextRoomPos.y];
-        Debug.Log($"Moving to {nextRoomPos}");
-
-        MimicGuy.transform.SetParent(Floor.transform, true);
         MimicGuy.FacingDirection = nextRoomDirection;
         MimicGuy.UpdateSprite();
-        TweenMimicGuy(MimicGuy.transform, PositionHelper.GridToWorldPosition(nextRoomPos));
-        MimicGuy.transform.SetParent(nextRoom.transform, true);
-        MimicGuy.GridPosition = nextRoomPos;
         SetTurnStateIdle();
     }
 
-    private void TweenMimicGuy(Transform mimicGuy, Vector3 destination, float tweenTime = 1f)
+    private async void MovementStep()
     {
-        mimicGuy.DOMove(destination, tweenTime);
+        var nextRoomPos = DetermineNextRoom(MimicGuy.FacingDirection);
+        var nextRoom = Floor.Rooms[nextRoomPos.x, nextRoomPos.y];
+        Debug.Log($"Moving to {nextRoomPos}");
+        MimicGuy.transform.SetParent(Floor.transform, true);
+        await TweenMimicGuy(MimicGuy.transform, PositionHelper.GridToWorldPosition(nextRoomPos));
+        MimicGuy.transform.SetParent(nextRoom.transform, true);
+        MimicGuy.GridPosition = nextRoomPos;
+        EndMimicTurn();
+    }
+
+    private async Task TweenMimicGuy(Transform mimicGuy, Vector3 destination, float tweenTime = 1f)
+    {
+        await mimicGuy.DOMove(destination, tweenTime).AsyncWaitForCompletion();
     }
 
     private Orientation DetermineNextRoomDirection()

@@ -9,6 +9,7 @@ public class DungeonCamera : MonoBehaviour
     // for example: StartOverlordTurnChannel.RaiseEvent();
     public VoidEventChannel StartOverlordTurnChannel;
 
+    public VoidEventChannel StartIdleTurnChannel;
     public VoidEventChannel StartMimicTurnChannel;
 
     #endregion
@@ -40,14 +41,14 @@ public class DungeonCamera : MonoBehaviour
         //InitiateMimicTurn();
 
         // Example zoom out at start
-        CameraRef.orthographicSize = 1;
-        InitiateOverlordTurn();
+        CameraRef.orthographicSize = 3;
+        InitiateIdleTurn();
     }
 
     void Awake()
     {
         StartOverlordTurnChannel.OnEventRaised += InitiateOverlordTurn;
-        StartMimicTurnChannel.OnEventRaised += InitiateMimicTurn;
+        StartIdleTurnChannel.OnEventRaised += InitiateIdleTurn;
     }
 
     // Update is called once per frame
@@ -84,7 +85,7 @@ public class DungeonCamera : MonoBehaviour
         }
     }
 
-    private void InitiateMimicTurn()
+    private void InitiateIdleTurn()
     {
         // Lock camera movement
         _freeCam = false;
