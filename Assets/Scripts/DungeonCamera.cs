@@ -92,7 +92,7 @@ public class DungeonCamera : MonoBehaviour
         // Snap to Mimic
         // Zoom in
         StartCoroutine(ZoomCoroutine(1.5f, 0.75f));
-        StartCoroutine(MoveCoroutine(1.5f, new Vector3(MimicGuy.transform.position.x, MimicGuy.transform.position.y, transform.position.z)));
+        //StartCoroutine(MoveCoroutine(1.5f, new Vector3(MimicGuy.transform.position.x, MimicGuy.transform.position.y, transform.position.z)));
 
         // Follow Mimic around
         _followTarget = true;

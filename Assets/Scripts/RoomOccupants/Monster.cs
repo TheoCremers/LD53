@@ -24,6 +24,7 @@ public class Monster : MonoBehaviour, IRoomOccupant
         PowerLevel = monsterSO.PowerLevel;
         HungerGain = monsterSO.HungerGain;
         AtkPowerGain = monsterSO.AtkPowerGain;
+        SpriteRenderer.flipX = (Random.Range(0, 2) == 0);
     }
 
     public async Task<bool> OnPlayerEnterRoom(MimicGuy guy)
