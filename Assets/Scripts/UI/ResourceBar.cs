@@ -97,14 +97,17 @@ public class ResourceBar : MonoBehaviour
         {
             unit.DOColor(new Color(1, 0, 0, unit.color.a), fadeTime);
         }
-        await Task.Delay((int) (fadeTime * 1000));
+        System.Threading.Thread.Sleep((int) fadeTime * 1000);
+        //await Task.Delay((int) (fadeTime * 1000));
 
-        await Task.Delay(100);
+        //await Task.Delay(100);
+        System.Threading.Thread.Sleep(100);
 
         foreach (var unit in _resourceUnits)
         {
             unit.DOColor(new Color(1, 1, 1, unit.color.a), fadeTime);
         }
-        await Task.Delay((int) (fadeTime * 1000));
+        System.Threading.Thread.Sleep((int) fadeTime * 1000);
+        //await Task.Delay((int) (fadeTime * 1000));
     }
 }

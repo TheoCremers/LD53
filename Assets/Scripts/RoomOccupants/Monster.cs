@@ -27,6 +27,12 @@ public class Monster : MonoBehaviour, IRoomOccupant
         SpriteRenderer.flipX = (Random.Range(0, 2) == 0);
     }
 
+    public async Task<bool> Wait(int milliseconds)
+    {
+        await Task.Delay(milliseconds);
+        return true;
+    }
+
     public async Task<bool> OnPlayerEnterRoom(MimicGuy guy)
     {
         var gridForwardDirection = PositionHelper.ToVector(guy.FacingDirection);
@@ -36,7 +42,8 @@ public class Monster : MonoBehaviour, IRoomOccupant
         guy.transform.DOMove(guy.transform.position - forwardDirection * StandOffGridDistance, StandOffStepTime);
         await transform.DOMove(transform.position + forwardDirection * StandOffGridDistance, StandOffStepTime).AsyncWaitForCompletion();
 
-        await Task.Delay((int) (StandOffTime * 1000));
+        // 1000 ms sleep
+        await transform.DOMove(transform.position, 1f).AsyncWaitForCompletion();
 
         // sprites clash
         guy.transform.DOMove(guy.transform.position + forwardDirection * StandOffGridDistance, ClashMoveTime).SetEase(Ease.InBack);
@@ -49,6 +56,7 @@ public class Monster : MonoBehaviour, IRoomOccupant
             await SpriteRenderer.DOFade(0f, MonsterFadeTime).AsyncWaitForCompletion();
             ResourceManager.Instance.ChangeMimicFullness(HungerGain, guy.transform.position);
             await Task.Delay(300);
+            System.Threading.Thread.Sleep(300);
             ResourceManager.Instance.ChangeMimicPower(AtkPowerGain, guy.transform.position);
             Destroy(gameObject);
             return true;
