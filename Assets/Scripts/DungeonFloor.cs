@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using System.Threading.Tasks;
-using UnityEngine.UI;
+using System.Linq;
 
 public class DungeonFloor : MonoBehaviour
 {
@@ -41,6 +41,7 @@ public class DungeonFloor : MonoBehaviour
     public void Generate(MimicGuy mimicGuy, DungeonLevelSO level)
     {
         mimicGuy.transform.parent = transform;
+        mimicGuy.SpriteRenderer.DOFade(1f, 0.5f);
         ConstructLayout(level);
         GenerateShiftButtons();
         PopulateDungeon(mimicGuy, level);
@@ -431,6 +432,24 @@ public class DungeonFloor : MonoBehaviour
         }
 
         Dungeon.DetermineNextRoomDirectionIfPlayerIsStuck();
+    }
+
+    public async Task MoveRoomDown(DungeonRoom room, MimicGuy guy)
+    {
+        var roomOffset = PositionHelper.GridToWorldPosition(new Vector2(-1f, -1f));
+        roomOffset.z = 0f;
+        var roomTransform = room.transform;
+        guy.SpriteRenderer.sortingLayerID = SortingLayer.layers.FirstOrDefault(x => x.name.Equals("Default")).id;
+
+        roomTransform.DOMove(roomTransform.position + roomOffset, 1f).SetEase(Ease.InCubic);
+        await Task.Delay(500);
+        foreach (var renderer in roomTransform.GetComponentsInChildren<SpriteRenderer>())
+        {
+            renderer.DOFade(0f, 0.5f);
+        }
+        await Task.Delay(1000);
+
+        guy.SpriteRenderer.sortingLayerID = SortingLayer.layers.FirstOrDefault(x => x.name.Equals("Characters")).id;
     }
 
     public async Task ShiftRoomsAlongY(int lineIndex, bool backwards)

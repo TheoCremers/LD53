@@ -125,6 +125,9 @@ public class Dungeon : MonoBehaviour
 
     private async void FinishLevel(DungeonRoom exitRoom)
     {
+        //move room down for style points
+        await Floor.MoveRoomDown(exitRoom, MimicGuy);
+
         CurrentLevel++;
         Floor.Generate(MimicGuy, Levels[Mathf.Clamp(CurrentLevel, 0, Levels.Count - 1)]);
         await Task.Delay(100);
