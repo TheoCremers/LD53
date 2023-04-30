@@ -68,6 +68,11 @@ public class Dungeon : MonoBehaviour
 
     private void EndMimicTurn()
     {
+        if (ResourceManager.Instance.MimicFullness <= 0)
+        {
+            Debug.LogWarning("GAME OVER");
+        }
+
         UpdateMimicGuyFacingDirection();
         SetTurnStateIdle();
     }
@@ -109,6 +114,13 @@ public class Dungeon : MonoBehaviour
         nextRoom.Occupant = MimicGuy;
         MimicGuy.transform.SetParent(nextRoom.transform, true);
         MimicGuy.GridPosition = nextRoomPos;
+
+        if (nextRoom.HasExit)
+        {
+            //FinishLevel(nextRoom);
+            return;
+        }
+
         EndMimicTurn();
     }
 
