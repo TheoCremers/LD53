@@ -263,15 +263,23 @@ public class DungeonFloor : MonoBehaviour
         {
             AddOccupantToRandomVacantRoom(SwordPrefab.gameObject); 
         }
+
+        // Add mobs
+        foreach (var mob in level.Monsters)
+        {
+            var monsterObj = AddOccupantToRandomVacantRoom(MonsterPrefab.gameObject).GetComponent<Monster>();
+            monsterObj.ApplyMonsterSO(mob);
+        }
     }
 
-    private void AddOccupantToRandomVacantRoom(GameObject prefab)
+    private GameObject AddOccupantToRandomVacantRoom(GameObject prefab)
     {
         var vacantRoomCoords = GetRandomVacantRoom();
         var instance = Instantiate(prefab, transform);
         //pizza.transform.position = PositionHelper.GridToWorldPosition(vacantRoomCoords);
         instance.transform.SetParent(Rooms[vacantRoomCoords.x, vacantRoomCoords.y].transform, false);
         Rooms[vacantRoomCoords.x, vacantRoomCoords.y].Occupant = instance.GetComponent<IRoomOccupant>();
+        return instance;
     }
 
     private Vector2Int GetRandomVacantRoom(int iterations = 0)
