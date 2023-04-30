@@ -24,6 +24,7 @@ public class DungeonRoom : MonoBehaviour
     private SpriteRenderer _doorTopRight;
     private SpriteRenderer _doorBottomRight;
     private SpriteRenderer _doorBottomLeft;
+    private SpriteRenderer _exitIndicator;
 
     public Sprite DoorOpenSpriteTopRight;
     public Sprite DoorOpenSpriteTopLeft;
@@ -37,6 +38,8 @@ public class DungeonRoom : MonoBehaviour
 
     public IRoomOccupant Occupant;
 
+    public bool HasExit = false;
+
     void Awake()
     {
         DebugText.text = string.Empty;
@@ -45,6 +48,7 @@ public class DungeonRoom : MonoBehaviour
         _doorTopRight = this.transform.Find("DoorTopRight").GetComponent<SpriteRenderer>();
         _doorBottomRight = this.transform.Find("DoorBottomRight").GetComponent<SpriteRenderer>();
         _doorBottomLeft = this.transform.Find("DoorBottomLeft").GetComponent<SpriteRenderer>();
+        _exitIndicator = this.transform.Find("ExitIndicator").GetComponent<SpriteRenderer>();
         UpdateDoorVisibility();
     }
 
@@ -65,6 +69,12 @@ public class DungeonRoom : MonoBehaviour
         //_doorTopRight.gameObject.SetActive(DoorTopRight);
         //_doorBottomRight.gameObject.SetActive(DoorBottomRight);
         //_doorBottomLeft.gameObject.SetActive(DoorBottomLeft);
+    }
+
+    public void AddExit()
+    {
+        HasExit = true;
+        _exitIndicator.enabled = true;
     }
 
     // only used for editor debugging

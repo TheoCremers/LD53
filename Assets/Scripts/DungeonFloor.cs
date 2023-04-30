@@ -265,21 +265,33 @@ public class DungeonFloor : MonoBehaviour
         }
 
         // Add mobs
-        foreach (var mob in level.Monsters)
+        for (int i = 0; i < level.Monsters.Count; i++)
         {
-            var monsterObj = AddOccupantToRandomVacantRoom(MonsterPrefab.gameObject).GetComponent<Monster>();
-            monsterObj.ApplyMonsterSO(mob);
+            AddMonsterToRandomVacantRoom(MonsterPrefab, level.Monsters[i], (i == level.Monsters.Count - 1));
         }
     }
 
-    private GameObject AddOccupantToRandomVacantRoom(GameObject prefab)
+    private void AddOccupantToRandomVacantRoom(GameObject prefab)
     {
         var vacantRoomCoords = GetRandomVacantRoom();
         var instance = Instantiate(prefab, transform);
         //pizza.transform.position = PositionHelper.GridToWorldPosition(vacantRoomCoords);
         instance.transform.SetParent(Rooms[vacantRoomCoords.x, vacantRoomCoords.y].transform, false);
         Rooms[vacantRoomCoords.x, vacantRoomCoords.y].Occupant = instance.GetComponent<IRoomOccupant>();
-        return instance;
+    }
+
+    private void AddMonsterToRandomVacantRoom(Monster prefab, MonsterSO so, bool isFinalMonster = false)
+    {
+        var vacantRoomCoords = GetRandomVacantRoom();
+        var instance = Instantiate(prefab, transform);
+        var room = Rooms[vacantRoomCoords.x, vacantRoomCoords.y];
+        instance.transform.SetParent(room.transform, false);
+        room.Occupant = instance;
+        instance.ApplyMonsterSO(so);
+        if (isFinalMonster)
+        {
+            room.AddExit();
+        }
     }
 
     private Vector2Int GetRandomVacantRoom(int iterations = 0)
