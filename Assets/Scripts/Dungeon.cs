@@ -23,19 +23,18 @@ public class Dungeon : MonoBehaviour
 
     public List<DungeonLevelSO> Levels;
 
+    public int CurrentLevel = 0;
+
     private bool _playerIsStuck = false;
 
     void Start()
     {
         StartMimicTurnChannel.OnEventRaised += SetTurnStateMimicGuy;
-        Floor.Generate(MimicGuy, Levels.First());
+        Floor.Generate(MimicGuy, Levels[Mathf.Clamp(CurrentLevel, 0, Levels.Count - 1)]);
         Floor.Dungeon = this;
 
-        // Populate the dungeon. 
-
         //SetTurnStateMimicGuy();
-        EndMimicTurn(); // call this once to determine the start facing direction        
-        SetTurnStateIdle();
+        StartNewTurn(); // call this once to determine the start facing direction
     }
 
     public void SetTurnStateIdle()
@@ -61,12 +60,12 @@ public class Dungeon : MonoBehaviour
         }
         else
         {
-            EndMimicTurn();
+            StartNewTurn();
         }
     }
 
 
-    private void EndMimicTurn()
+    private void StartNewTurn()
     {
         if (ResourceManager.Instance.MimicFullness <= 0)
         {
@@ -106,7 +105,7 @@ public class Dungeon : MonoBehaviour
             {
                 previousRoom.Occupant = MimicGuy;
                 MimicGuy.transform.SetParent(previousRoom.transform, true);
-                EndMimicTurn();
+                StartNewTurn();
                 return;
             }
         }
@@ -117,11 +116,19 @@ public class Dungeon : MonoBehaviour
 
         if (nextRoom.HasExit)
         {
-            //FinishLevel(nextRoom);
+            FinishLevel(nextRoom);
             return;
         }
 
-        EndMimicTurn();
+        StartNewTurn();
+    }
+
+    private async void FinishLevel(DungeonRoom exitRoom)
+    {
+        CurrentLevel++;
+        Floor.Generate(MimicGuy, Levels[Mathf.Clamp(CurrentLevel, 0, Levels.Count - 1)]);
+        await Task.Delay(100);
+        StartNewTurn();
     }
 
     private async Task TweenMimicGuy(Transform mimicGuy, Vector3 destination, float tweenTime = 1f)

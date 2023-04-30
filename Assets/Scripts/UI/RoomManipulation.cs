@@ -17,6 +17,18 @@ public class RoomManipulation : MonoBehaviour
         }
     }
 
+    public void DestroyAllShiftButtons()
+    {
+        foreach (RoomShiftButton button in _roomShiftButtons)
+        {
+            if (button.gameObject != null)
+            {
+                Destroy(button.gameObject);
+            }
+        }
+        _roomShiftButtons.Clear();
+    }
+
     public void CreateShiftButton(Vector3 position, Orientation facingDirection, int lineIndex)
     {
         var newButton = Instantiate(ShiftButtonPrefab, position, new Quaternion(), transform);

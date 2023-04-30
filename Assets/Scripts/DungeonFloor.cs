@@ -40,8 +40,7 @@ public class DungeonFloor : MonoBehaviour
 
     public void Generate(MimicGuy mimicGuy, DungeonLevelSO level)
     {
-        Rooms = new DungeonRoom[level.LevelSize.x, level.LevelSize.y];
-
+        mimicGuy.transform.parent = transform;
         ConstructLayout(level);
         GenerateShiftButtons();
         PopulateDungeon(mimicGuy, level);
@@ -141,7 +140,9 @@ public class DungeonFloor : MonoBehaviour
 
     private void ConstructLayout(DungeonLevelSO level)
     {
+        DestroyAllRooms();
         Size = level.LevelSize;
+        Rooms = new DungeonRoom[level.LevelSize.x, level.LevelSize.y];
 
         // Create "tile" pool
         var tiles = new List<DungeonRoom>();
@@ -188,6 +189,19 @@ public class DungeonFloor : MonoBehaviour
         //UpdateDebugTextForRooms();
     }
 
+    public void DestroyAllRooms()
+    {
+        if (Rooms != null) { 
+            foreach (var room in Rooms)
+            {
+                if (room?.gameObject != null)
+                {
+                    Destroy(room.gameObject);
+                }
+            }
+        }
+    }
+
     public bool IsPassagePossible(Vector2Int currentPos, Orientation direction)
     {
         var currentRoom = Rooms[currentPos.x, currentPos.y];
@@ -209,6 +223,8 @@ public class DungeonFloor : MonoBehaviour
 
     private void GenerateShiftButtons()
     {
+        RoomManipulation.DestroyAllShiftButtons();
+
         for (int i = 0; i < Size.x; i++)
         {
             Vector3 topLeftFacingButtonPosition = PositionHelper.GridToWorldPosition(new Vector2Int(i, -1));
@@ -249,6 +265,7 @@ public class DungeonFloor : MonoBehaviour
         var startingRoomPosition = PickRandomEdgeRoom();
         var startingRoom = Rooms[startingRoomPosition.x, startingRoomPosition.y];
         // Set Mimic to starting room
+        mimicGuy.transform.position = Vector3.zero;
         mimicGuy.transform.SetParent(startingRoom.transform, false);
         mimicGuy.GridPosition = startingRoomPosition;
         startingRoom.Occupant = mimicGuy;
