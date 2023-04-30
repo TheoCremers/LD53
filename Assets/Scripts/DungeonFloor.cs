@@ -259,6 +259,11 @@ public class DungeonFloor : MonoBehaviour
 
     private Vector2Int GetRandomVacantRoom(int iterations = 0)
     {
+        if (iterations > 100)
+        {
+            throw new UnityException("too many objects in room");
+        }
+        
         // Pick a random room
         var xPos = Random.Range(0, Size.x);
         var yPos = Random.Range(0, Size.y);
