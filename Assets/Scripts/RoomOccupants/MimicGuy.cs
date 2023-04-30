@@ -14,17 +14,6 @@ public class MimicGuy : MonoBehaviour, IRoomOccupant
     public Vector2Int GridPosition;
 
     public Orientation FacingDirection;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void UpdateSprite()
     {
