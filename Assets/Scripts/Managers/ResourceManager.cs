@@ -8,6 +8,8 @@ public class ResourceManager : MonoBehaviour
     public ResourceBar MimicFullnessResource;
     public MimicStrengthIndicator MimicStrengthIndicator;
 
+    public ResourceChangeIndicator ResourceChangePrefab;
+
     public int ForsakenPower {
         get { return ForsakenPowerResource.CurrentValue; }
         set { ForsakenPowerResource.SetValue(value); }
@@ -21,6 +23,34 @@ public class ResourceManager : MonoBehaviour
     public int MimicStrength {
         get { return MimicStrengthIndicator.StrengthValue; }
         set { MimicStrengthIndicator.SetStrength(value); }
+    }
+
+    public void ChangeMimicFullness(int change, Vector3 changeLocation)
+    {
+        MimicFullnessResource.ChangeValue(change);
+        var newChangeIndicator = Instantiate(ResourceChangePrefab, changeLocation, Quaternion.identity);
+        newChangeIndicator.SetChangeAmount(change);
+        newChangeIndicator.SetImageSprite(MimicFullnessResource.SampleIcon);
+    }
+
+    public void ChangeMimicFullness(int change)
+    {
+        Vector3 changeLocation = Vector3.zero;
+        ChangeMimicFullness(change, changeLocation);
+    }
+
+    public void ChangeForsakenPower(int change, Vector3 changeLocation)
+    {
+        ForsakenPowerResource.ChangeValue(change);
+        var newChangeIndicator = Instantiate(ResourceChangePrefab, changeLocation, Quaternion.identity);
+        newChangeIndicator.SetChangeAmount(change);
+        newChangeIndicator.SetImageSprite(ForsakenPowerResource.SampleIcon);
+    }
+
+    public void ChangeForsakenPower(int change)
+    {
+        Vector3 changeLocation = Vector3.zero;
+        ChangeForsakenPower(change, changeLocation);
     }
 
     private void Start()
