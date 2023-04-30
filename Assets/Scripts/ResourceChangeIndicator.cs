@@ -12,7 +12,6 @@ public class ResourceChangeIndicator : MonoBehaviour
 
     private void Start()
     {
-        SetChangeAmount(ChangeAmount);
         FadeOutAndDestroy();
     }
 
@@ -27,6 +26,13 @@ public class ResourceChangeIndicator : MonoBehaviour
         {
             DeltaLabel.text = $"{ChangeAmount}";
         }
+    }
+
+    public void SetLabelText(string text, Color color, float fontSize)
+    {
+        DeltaLabel.text = text;
+        DeltaLabel.color = color;
+        DeltaLabel.fontSize = fontSize;
     }
 
     public void SetImageSprite(Sprite sprite)

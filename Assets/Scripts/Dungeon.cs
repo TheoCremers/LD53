@@ -23,7 +23,7 @@ public class Dungeon : MonoBehaviour
 
     public List<DungeonLevelSO> Levels;
 
-    // Start is called before the first frame update
+    private bool _playerIsStuck = false;
 
     void Start()
     {
@@ -55,9 +55,14 @@ public class Dungeon : MonoBehaviour
 
         // ---- maybe in update
         // Move MimicGuy to next room
-        MovementStep();
-
-        // Resolve room
+        if (!_playerIsStuck)
+        {
+            MovementStep();
+        }
+        else
+        {
+            EndMimicTurn();
+        }
     }
 
 
@@ -78,7 +83,10 @@ public class Dungeon : MonoBehaviour
     {
         // remove previous room occupation
         var previousRoom = Floor.Rooms[MimicGuy.GridPosition.x, MimicGuy.GridPosition.y];
-        if ((MimicGuy) previousRoom.Occupant == MimicGuy) { previousRoom.Occupant = null; }
+        if (previousRoom.Occupant == (IRoomOccupant) MimicGuy) 
+        { 
+            previousRoom.Occupant = null; 
+        }
 
         var nextRoomPos = DetermineNextRoom(MimicGuy.FacingDirection);
         var nextRoom = Floor.Rooms[nextRoomPos.x, nextRoomPos.y];
@@ -87,11 +95,14 @@ public class Dungeon : MonoBehaviour
         await TweenMimicGuy(MimicGuy.transform, PositionHelper.GridToWorldPosition(nextRoomPos));
 
         // handle room interaction
-        if (nextRoom.Occupant != null && nextRoom.Occupant != MimicGuy)
+        if (nextRoom.Occupant != null && nextRoom.Occupant != (IRoomOccupant) MimicGuy)
         {
             if (!await nextRoom.Occupant.OnPlayerEnterRoom(MimicGuy)) // if true, can enter room, otherwise turn around
             {
-                // TODO
+                previousRoom.Occupant = MimicGuy;
+                MimicGuy.transform.SetParent(previousRoom.transform, true);
+                EndMimicTurn();
+                return;
             }
         }
 
@@ -118,11 +129,12 @@ public class Dungeon : MonoBehaviour
         if (Floor.IsPassagePossible(currentGridPosition, Orientation.DownRight)) { possibleOptions.Add(Orientation.DownRight); }
 
         // If there are no options, do nothing (player has to intervene. if he can't, game over)
-        // TODO implement game over
         if (!possibleOptions.Any())
         {
-            throw new UnityException("Game over chief");
+            _playerIsStuck = true;
+            return MimicGuy.FacingDirection;
         }
+        _playerIsStuck = false;
 
         // Check if the current facing direction is available. If yes, follow through
         if (tryCurrentFacingDirectionFirst && possibleOptions.Contains(MimicGuy.FacingDirection)) 
@@ -153,7 +165,13 @@ public class Dungeon : MonoBehaviour
         return new Vector2Int(currentGridPosition.x, currentGridPosition.y) + PositionHelper.ToVector(movementDirection); 
     }
 
-
+    public void DetermineNextRoomDirectionIfPlayerIsStuck()
+    {
+        if (_playerIsStuck)
+        {
+            DetermineNextRoomDirection(true);
+        }
+    }
 
     public void SetTurnStateOverlord()
     {
@@ -161,11 +179,5 @@ public class Dungeon : MonoBehaviour
 
         // Invoke event
         StartOverlordTurnChannel.RaiseEvent();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

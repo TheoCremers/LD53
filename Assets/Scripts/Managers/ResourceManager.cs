@@ -61,6 +61,13 @@ public class ResourceManager : MonoBehaviour
         newChangeIndicator.SetImageSprite(MimicStrengthIndicator.SmallerIcon);
     }
 
+    public void TooWeak(Vector3 location)
+    {
+        var newChangeIndicator = Instantiate(ResourceChangePrefab, location, Quaternion.identity);
+        newChangeIndicator.SetLabelText("Too weak!", Color.red, 2f);
+        newChangeIndicator.SetImageSprite(MimicStrengthIndicator.SmallerIcon);
+    }
+
     private void Start()
     {
         if (Instance == null)

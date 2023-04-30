@@ -24,6 +24,8 @@ public class DungeonFloor : MonoBehaviour
     public FightItem SwordPrefab;
     public ForsakenPowerItem GemPrefab;
 
+    public Monster MonsterPrefab;
+
     public Vector2Int Size = new Vector2Int(5, 5);
 
     private Vector3 _roomFadeOffset = new Vector3(0, 0.5f, 0.5f);
@@ -387,6 +389,8 @@ public class DungeonFloor : MonoBehaviour
         {
             Rooms[i, lineIndex].Occupant?.OnRoomIdChange(i, lineIndex);
         }
+
+        Dungeon.DetermineNextRoomDirectionIfPlayerIsStuck();
     }
 
     public async Task ShiftRoomsAlongY(int lineIndex, bool backwards)
@@ -416,6 +420,8 @@ public class DungeonFloor : MonoBehaviour
         {
             Rooms[lineIndex, i].Occupant?.OnRoomIdChange(lineIndex, i);
         }
+
+        Dungeon.DetermineNextRoomDirectionIfPlayerIsStuck();
     }
 
     private async Task TweenRooms(List<Transform> roomsToMove, Vector3 finalOffset, float tweenTime = 1f)
