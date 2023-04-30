@@ -29,6 +29,7 @@ public class DungeonRoom : MonoBehaviour
 
     public Sprite DoorClosedSprite;
 
+    public IRoomOccupant Occupant;
 
     void Awake()
     {

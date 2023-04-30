@@ -27,6 +27,7 @@ public class Dungeon : MonoBehaviour
     {
         StartMimicTurnChannel.OnEventRaised += SetTurnStateMimicGuy;
         Floor.Generate(MimicGuy);
+        Floor.Dungeon = this;
 
         // Populate the dungeon. 
 
@@ -60,19 +61,36 @@ public class Dungeon : MonoBehaviour
 
     private void EndMimicTurn()
     {
-        var nextRoomDirection = DetermineNextRoomDirection();        
+        UpdateMimicGuyFacingDirection();
+        SetTurnStateIdle();
+    }
+
+    public void UpdateMimicGuyFacingDirection(bool tryCurrentFacingDirectionFirst = false)
+    {
+        var nextRoomDirection = DetermineNextRoomDirection(tryCurrentFacingDirectionFirst);
         MimicGuy.FacingDirection = nextRoomDirection;
         MimicGuy.UpdateSprite();
-        SetTurnStateIdle();
     }
 
     private async void MovementStep()
     {
+        // remove previous room occupation
+        var previousRoom = Floor.Rooms[MimicGuy.GridPosition.x, MimicGuy.GridPosition.y];
+        if ((MimicGuy) previousRoom.Occupant == MimicGuy) { previousRoom.Occupant = null; }
+
         var nextRoomPos = DetermineNextRoom(MimicGuy.FacingDirection);
         var nextRoom = Floor.Rooms[nextRoomPos.x, nextRoomPos.y];
         Debug.Log($"Moving to {nextRoomPos}");
         MimicGuy.transform.SetParent(Floor.transform, true);
         await TweenMimicGuy(MimicGuy.transform, PositionHelper.GridToWorldPosition(nextRoomPos));
+
+        // handle room interaction
+        if (nextRoom.Occupant != null && (MimicGuy)nextRoom.Occupant != MimicGuy)
+        {
+            nextRoom.Occupant.OnPlayerEnterRoom(MimicGuy); // possibly get kicked out?
+        }
+
+        nextRoom.Occupant = MimicGuy;
         MimicGuy.transform.SetParent(nextRoom.transform, true);
         MimicGuy.GridPosition = nextRoomPos;
         EndMimicTurn();
@@ -83,7 +101,7 @@ public class Dungeon : MonoBehaviour
         await mimicGuy.DOMove(destination, tweenTime).AsyncWaitForCompletion();
     }
 
-    private Orientation DetermineNextRoomDirection()
+    private Orientation DetermineNextRoomDirection(bool tryCurrentFacingDirectionFirst = false)
     {
         // Check which adjacent room the character will move to
         var currentGridPosition = MimicGuy.GridPosition;
@@ -102,14 +120,14 @@ public class Dungeon : MonoBehaviour
         }
 
         // Check if the current facing direction is available. If yes, follow through
-        if (possibleOptions.Contains(MimicGuy.FacingDirection)) 
+        if (tryCurrentFacingDirectionFirst && possibleOptions.Contains(MimicGuy.FacingDirection)) 
         {
             return MimicGuy.FacingDirection;
             //return new Vector2Int(currentGridPosition.x, currentGridPosition.y) + PositionHelper.ToVector(MimicGuy.FacingDirection);
         }
 
-        // Else pick randomly between left or right hand if available
-        var sideOptions = possibleOptions.Where(x => Vector2.Dot((PositionHelper.ToVector(x)), PositionHelper.ToVector(MimicGuy.FacingDirection)) == 0).ToList();
+        // Else pick randomly between forward, left or right hand if available
+        var sideOptions = possibleOptions.Where(x => Vector2.Dot(PositionHelper.ToVector(x), PositionHelper.ToVector(MimicGuy.FacingDirection)) >= 0).ToList();
         if (sideOptions.Any()) 
         {
             var choice = sideOptions[Random.Range(0, sideOptions.Count)];           

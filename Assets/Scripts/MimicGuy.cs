@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MimicGuy : MonoBehaviour
+public class MimicGuy : MonoBehaviour, IRoomOccupant
 {
     public Sprite ForwardFacing;
 
@@ -47,5 +47,15 @@ public class MimicGuy : MonoBehaviour
                 break;
         }
 
+    }
+
+    public void OnPlayerEnterRoom(MimicGuy guy)
+    {
+        Debug.LogWarning("Player entered their own room???");
+    }
+
+    public void OnRoomIdChange(int x, int y)
+    {
+        GridPosition = new Vector2Int(x, y);
     }
 }

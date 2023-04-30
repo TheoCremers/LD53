@@ -24,6 +24,8 @@ public class DungeonFloor : MonoBehaviour
 
     private Vector3 _roomFadeOffset = new Vector3(0, 0.5f, 0.5f);
 
+    [HideInInspector] public Dungeon Dungeon;
+
     public void Generate(MimicGuy mimicGuy)
     {
         Rooms = new DungeonRoom[Size.x, Size.y];
@@ -94,7 +96,7 @@ public class DungeonFloor : MonoBehaviour
             RoomManipulation.CreateShiftButton(bottomLeftFacingButtonPosition, Orientation.DownLeft, i);
         }
 
-        RoomManipulation.DeactivateShiftButtons();
+        RoomManipulation.DeactivateShiftButtonsNow();
     }
 
     private DungeonRoom GenerateRoom(Vector2Int gridPosition)
@@ -112,10 +114,12 @@ public class DungeonFloor : MonoBehaviour
 
     private void PopulateDungeon(MimicGuy mimicGuy)
     {
-        var startingRoom = PickRandomEdgeRoom();
+        var startingRoomPosition = PickRandomEdgeRoom();
+        var startingRoom = Rooms[startingRoomPosition.x, startingRoomPosition.y];
         // Set Mimic to starting room
-        mimicGuy.transform.SetParent(Rooms[startingRoom.x, startingRoom.y].transform, false);
-        mimicGuy.GridPosition = startingRoom;
+        mimicGuy.transform.SetParent(startingRoom.transform, false);
+        mimicGuy.GridPosition = startingRoomPosition;
+        startingRoom.Occupant = mimicGuy;
     }
 
     private Vector2Int PickRandomEdgeRoom()
@@ -161,6 +165,8 @@ public class DungeonFloor : MonoBehaviour
                 break;
         }
 
+        Dungeon?.UpdateMimicGuyFacingDirection(true);
+
         //UpdateDebugTextForRooms();
 
         //RoomManipulation.ActivateShiftButtons();
@@ -188,8 +194,13 @@ public class DungeonFloor : MonoBehaviour
             int j = backwards ? i : Size.x - (1 + i);
             Rooms[j, lineIndex] = Rooms[j + (backwards ? 1 : -1), lineIndex];
         }
-        Rooms[backwards ? Size.x - 1 : 0, lineIndex] = teleportingRoom;
+        int teleportingRoomNewIndex = backwards ? Size.x - 1 : 0;
+        Rooms[teleportingRoomNewIndex, lineIndex] = teleportingRoom;
 
+        for (int i = 0; i < Size.x; i++)
+        {
+            Rooms[i, lineIndex].Occupant?.OnRoomIdChange(i, lineIndex);
+        }
     }
 
     public async Task ShiftRoomsAlongY(int lineIndex, bool backwards)
@@ -212,7 +223,13 @@ public class DungeonFloor : MonoBehaviour
             int j = backwards ? i : Size.y - (1 + i);
             Rooms[lineIndex, j] = Rooms[lineIndex, j + (backwards ? 1 : -1)];
         }
-        Rooms[lineIndex, backwards ? Size.y - 1 : 0] = teleportingRoom;
+        int teleportingRoomNewIndex = backwards ? Size.y - 1 : 0;
+        Rooms[lineIndex, teleportingRoomNewIndex] = teleportingRoom;
+
+        for (int i = 0; i < Size.y; i++)
+        {
+            Rooms[lineIndex, i].Occupant?.OnRoomIdChange(lineIndex, i);
+        }
     }
 
     private async Task TweenRooms(List<Transform> roomsToMove, Vector3 finalOffset, float tweenTime = 1f)
