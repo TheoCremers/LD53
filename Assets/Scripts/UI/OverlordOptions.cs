@@ -7,40 +7,40 @@ public class OverlordOptions : BaseOptionsMenu
 {
     #region EventChannels
 
-    public VoidEventChannel StartMimicTurnEvent;
+    public VoidEventChannel ShowShiftButtonsEvent;
     public VoidEventChannel StartOverlordTurnEvent;
     public VoidEventChannel StartIdleEvent;
 
     #endregion
 
-    public Button StartShiftTilesButton;
+    public ButtonWithCost ShowShiftButton;
     public Button FinishInterventionButton;
 
-    protected override void Start()
+    protected override void Awake()
     {
-        base.Start();
+        base.Awake();
 
-        StartShiftTilesButton.onClick.AddListener(StartMimicTurnEvent.RaiseEvent);
-        FinishInterventionButton.onClick.AddListener(StartOverlordTurnEvent.RaiseEvent);
+        ShowShiftButton.onClick.AddListener(ShowShiftButtonsEvent.RaiseEvent);
+        FinishInterventionButton.onClick.AddListener(StartIdleEvent.RaiseEvent);
 
-        StartMimicTurnEvent.OnEventRaised += DisableAndFadeOut;
-        StartOverlordTurnEvent.OnEventRaised += DisableAndFadeOut;
-        StartIdleEvent.OnEventRaised += EnableAndFadeIn;
+        ShowShiftButtonsEvent.OnEventRaised += DisableAndFadeOut;
+        StartOverlordTurnEvent.OnEventRaised += EnableAndFadeIn;
+        StartIdleEvent.OnEventRaised += DisableAndFadeOut;
     }
 
     private void OnDestroy()
     {
-        StartShiftTilesButton.onClick.RemoveListener(StartMimicTurnEvent.RaiseEvent);
+        ShowShiftButton.onClick.RemoveListener(ShowShiftButtonsEvent.RaiseEvent);
         FinishInterventionButton.onClick.RemoveListener(StartOverlordTurnEvent.RaiseEvent);
 
-        StartMimicTurnEvent.OnEventRaised -= DisableAndFadeOut;
-        StartOverlordTurnEvent.OnEventRaised -= DisableAndFadeOut;
-        StartIdleEvent.OnEventRaised -= EnableAndFadeIn;
+        ShowShiftButtonsEvent.OnEventRaised -= DisableAndFadeOut;
+        StartOverlordTurnEvent.OnEventRaised -= EnableAndFadeIn;
+        StartIdleEvent.OnEventRaised -= DisableAndFadeOut;
     }
 
     public async void DisableAndFadeOut()
     {
-        StartShiftTilesButton.interactable = false;
+        ShowShiftButton.interactable = false;
         FinishInterventionButton.interactable = false;
         await FadeOut();
     }
@@ -48,7 +48,7 @@ public class OverlordOptions : BaseOptionsMenu
     public async void EnableAndFadeIn()
     {
         await FadeIn();
-        StartShiftTilesButton.interactable = true;
+        ShowShiftButton.interactable = true;
         FinishInterventionButton.interactable = true;
     }
 }

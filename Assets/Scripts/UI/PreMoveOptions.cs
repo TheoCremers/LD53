@@ -13,9 +13,9 @@ public class PreMoveOptions : BaseOptionsMenu
     public Button ProceedButton;
     public Button InterveneButton;
 
-    protected override void Start()
+    protected override void Awake()
     {
-        base.Start();
+        base.Awake();
 
         ProceedButton.onClick.AddListener(StartMimicTurnEvent.RaiseEvent);
         InterveneButton.onClick.AddListener(StartOverlordTurnEvent.RaiseEvent);

@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 using DG.Tweening;
+using System.Threading.Tasks;
 
 public class ResourceBar : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class ResourceBar : MonoBehaviour
 
     private List<Image> _resourceUnits = new List<Image>();
     private int _currentValue;
+    public int CurrentValue { get { return _currentValue; } }
 
     private void Start()
     {
@@ -47,7 +49,7 @@ public class ResourceBar : MonoBehaviour
 
         for (int i = 0; i < _resourceUnits.Count; i++)
         {
-            if (MaxValue - i < _currentValue)
+            if (i + 1 > _currentValue)
             {
                 _resourceUnits[i].DOFade(InactiveAlpha, TweenDuration);
             }
@@ -83,5 +85,22 @@ public class ResourceBar : MonoBehaviour
     public void SetLabelText(string text)
     {
         LabelReference.text = text;
+    }
+
+    public async void FlashRed(float fadeTime)
+    {
+        foreach(var unit in _resourceUnits)
+        {
+            unit.DOColor(new Color(1, 0, 0, unit.color.a), fadeTime);
+        }
+        await Task.Delay((int) (fadeTime * 1000));
+
+        await Task.Delay(100);
+
+        foreach (var unit in _resourceUnits)
+        {
+            unit.DOColor(new Color(1, 1, 1, unit.color.a), fadeTime);
+        }
+        await Task.Delay((int) (fadeTime * 1000));
     }
 }
