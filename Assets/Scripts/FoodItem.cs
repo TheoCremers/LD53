@@ -10,11 +10,11 @@ public class FoodItem : MonoBehaviour, IRoomOccupant
 
     public async Task<bool> OnPlayerEnterRoom(MimicGuy guy)
     {
-        ResourceManager.Instance.ChangeMimicFullness(FullnessGain);
+        ResourceManager.Instance.ChangeMimicFullness(FullnessGain, transform.position);
 
         await SpriteRenderer.DOFade(0f, FadeTime).AsyncWaitForCompletion();
 
-        Destroy(this);
+        Destroy(gameObject);
 
         return true;
     }

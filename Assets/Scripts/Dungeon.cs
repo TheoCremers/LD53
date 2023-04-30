@@ -87,7 +87,7 @@ public class Dungeon : MonoBehaviour
         await TweenMimicGuy(MimicGuy.transform, PositionHelper.GridToWorldPosition(nextRoomPos));
 
         // handle room interaction
-        if (nextRoom.Occupant != null && (MimicGuy)nextRoom.Occupant != MimicGuy)
+        if (nextRoom.Occupant != null && nextRoom.Occupant != MimicGuy)
         {
             if (!await nextRoom.Occupant.OnPlayerEnterRoom(MimicGuy)) // if true, can enter room, otherwise turn around
             {

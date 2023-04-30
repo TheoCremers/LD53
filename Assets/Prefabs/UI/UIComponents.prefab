@@ -121,6 +121,7 @@ MonoBehaviour:
   ForsakenPowerResource: {fileID: 3059577369168648802}
   MimicFullnessResource: {fileID: 6692051035690843577}
   MimicStrengthIndicator: {fileID: 1233944602456688150}
+  ResourceChangePrefab: {fileID: 7910601561940206416, guid: cf44ffa7b5e8c97479d9560e7d6ce584, type: 3}
 --- !u!1001 &1023967318433697731
 PrefabInstance:
   m_ObjectHideFlags: 0
