@@ -8,7 +8,7 @@ public class ResourceChangeIndicator : MonoBehaviour
     public TextMeshPro DeltaLabel;
     public int ChangeAmount = 1;
     public float FadeOutTime = 1f;
-    public Vector3 FadeOutOffset = Vector3.up * 50f;
+    public Vector3 FadeOutOffset = Vector3.up * 1f;
 
     private void Start()
     {
@@ -36,10 +36,9 @@ public class ResourceChangeIndicator : MonoBehaviour
 
     private async void FadeOutAndDestroy()
     {
-        transform.DOMove(transform.position + FadeOutOffset, FadeOutTime);
-        SpriteRenderer.DOFade(0f, FadeOutTime);
-        await DeltaLabel.DOFade(0f, FadeOutTime).AsyncWaitForCompletion();
-
-        Destroy(this);
+        transform.DOMove(transform.position + FadeOutOffset, FadeOutTime).SetEase(Ease.InOutCubic);
+        DeltaLabel.DOFade(0f, FadeOutTime).SetEase(Ease.InQuint);
+        await SpriteRenderer.DOFade(0f, FadeOutTime).SetEase(Ease.InQuint).AsyncWaitForCompletion();
+        Destroy(gameObject);
     }
 }
