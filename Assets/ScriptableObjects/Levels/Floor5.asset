@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c1724d0fd2df464ab9f733f65714db3, type: 3}
+  m_Name: Floor5
+  m_EditorClassIdentifier: 
+  LevelSize: {x: 6, y: 6}
+  FourWays: 6
+  ThreeWays: 0
+  Hallways: 15
+  Bends: 15
+  DeadEnds: 0
+  Pizzas: 3
+  Gemstones: 1
+  Swords: 2
+  Monsters:
+  - {fileID: 11400000, guid: f0fe6959969dfad46a0ede415eac1f3c, type: 2}
+  - {fileID: 11400000, guid: c757c68dfe61bcf4db1776e7caad94d8, type: 2}
+  - {fileID: 11400000, guid: fb23671e81bb13441a1b2de1603313e6, type: 2}
+  - {fileID: 11400000, guid: aa34842022508b54bad66baccfb1ab44, type: 2}
+  - {fileID: 11400000, guid: 91d4e06ff285c2b4c9dc5614e86840d1, type: 2}
+  - {fileID: 11400000, guid: fb23671e81bb13441a1b2de1603313e6, type: 2}
+  - {fileID: 11400000, guid: 91d4e06ff285c2b4c9dc5614e86840d1, type: 2}
