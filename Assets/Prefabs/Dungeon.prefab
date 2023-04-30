@@ -60,6 +60,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6903cec6959b3bb4796a521b0e93c280, type: 2}
   - {fileID: 11400000, guid: 2a7e20bbf256ef64285eff2e40640a07, type: 2}
   - {fileID: 11400000, guid: eef37a4e9030b364d9d80e5f6979d3e8, type: 2}
+  CurrentLevel: 0
 --- !u!1001 &3412594170056237340
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -169,6 +170,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 5183643150201046949}
     m_Modifications:
     - target: {fileID: -5825763673116198103, guid: ac57bf9d8116c0c4b9ce720792aca085, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b816f4e22060e1b43a6c14b678ad23fc, type: 3}
+    - target: {fileID: -5825763673116198103, guid: ac57bf9d8116c0c4b9ce720792aca085, type: 3}
       propertyPath: m_SortingLayer
       value: 1
       objectReference: {fileID: 0}
@@ -176,6 +181,14 @@ PrefabInstance:
       propertyPath: m_SortingLayerID
       value: -605247905
       objectReference: {fileID: 0}
+    - target: {fileID: 2978993866783082269, guid: ac57bf9d8116c0c4b9ce720792aca085, type: 3}
+      propertyPath: ForwardFacing
+      value: 
+      objectReference: {fileID: 21300000, guid: b816f4e22060e1b43a6c14b678ad23fc, type: 3}
+    - target: {fileID: 2978993866783082269, guid: ac57bf9d8116c0c4b9ce720792aca085, type: 3}
+      propertyPath: BackwardFacing
+      value: 
+      objectReference: {fileID: 21300000, guid: 8ee9e81345d3e7245b8273da0eb5bf9c, type: 3}
     - target: {fileID: 4463039270725666351, guid: ac57bf9d8116c0c4b9ce720792aca085, type: 3}
       propertyPath: m_Name
       value: MimicGuy
