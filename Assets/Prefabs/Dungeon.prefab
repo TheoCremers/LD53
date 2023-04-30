@@ -267,9 +267,17 @@ PrefabInstance:
       value: DungeonFloor
       objectReference: {fileID: 0}
     - target: {fileID: 9176472825722223916, guid: c1160880029b5d0468ead1bff2402236, type: 3}
+      propertyPath: GemPrefab
+      value: 
+      objectReference: {fileID: 2431459551338349622, guid: b6e9cd98efa5b3d42a667831f6eef2e0, type: 3}
+    - target: {fileID: 9176472825722223916, guid: c1160880029b5d0468ead1bff2402236, type: 3}
       propertyPath: PizzaPrefab
       value: 
       objectReference: {fileID: 1538036721402891559, guid: 98dffb5dbfce49648be6b838a5ff4dec, type: 3}
+    - target: {fileID: 9176472825722223916, guid: c1160880029b5d0468ead1bff2402236, type: 3}
+      propertyPath: SwordPrefab
+      value: 
+      objectReference: {fileID: 7139088486409385451, guid: b46ba4dd959600143929cffcebd2e69d, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c1160880029b5d0468ead1bff2402236, type: 3}
 --- !u!114 &2997353890416233225 stripped

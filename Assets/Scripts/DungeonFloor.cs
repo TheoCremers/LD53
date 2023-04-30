@@ -21,6 +21,8 @@ public class DungeonFloor : MonoBehaviour
     public RoomManipulation RoomManipulation;
 
     public FoodItem PizzaPrefab;
+    public FightItem SwordPrefab;
+    public ForsakenPowerItem GemPrefab;
 
     public Monster MonsterPrefab;
 
@@ -251,12 +253,25 @@ public class DungeonFloor : MonoBehaviour
         // Add objects
         for (int i = 0; i < level.Pizzas; i++)
         {
-            var vacantRoomCoords = GetRandomVacantRoom();
-            var pizza = Instantiate(PizzaPrefab, transform);
-            //pizza.transform.position = PositionHelper.GridToWorldPosition(vacantRoomCoords);
-            pizza.transform.SetParent(Rooms[vacantRoomCoords.x, vacantRoomCoords.y].transform, false);
-            Rooms[vacantRoomCoords.x, vacantRoomCoords.y].Occupant = pizza;
+            AddOccupantToRandomVacantRoom(PizzaPrefab.gameObject); 
         }
+        for (int i = 0; i < level.Gemstones; i++)
+        {
+            AddOccupantToRandomVacantRoom(GemPrefab.gameObject); 
+        }
+        for (int i = 0; i < level.Swords; i++)
+        {
+            AddOccupantToRandomVacantRoom(SwordPrefab.gameObject); 
+        }
+    }
+
+    private void AddOccupantToRandomVacantRoom(GameObject prefab)
+    {
+        var vacantRoomCoords = GetRandomVacantRoom();
+        var instance = Instantiate(prefab, transform);
+        //pizza.transform.position = PositionHelper.GridToWorldPosition(vacantRoomCoords);
+        instance.transform.SetParent(Rooms[vacantRoomCoords.x, vacantRoomCoords.y].transform, false);
+        Rooms[vacantRoomCoords.x, vacantRoomCoords.y].Occupant = instance.GetComponent<IRoomOccupant>();
     }
 
     private Vector2Int GetRandomVacantRoom(int iterations = 0)
@@ -265,7 +280,7 @@ public class DungeonFloor : MonoBehaviour
         {
             throw new UnityException("too many objects in room");
         }
-        
+
         // Pick a random room
         var xPos = Random.Range(0, Size.x);
         var yPos = Random.Range(0, Size.y);
