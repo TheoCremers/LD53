@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8db618cbf1264f0499c4089626d515bc, type: 3}
-  m_Name: Lv4Spider
+  m_Name: Lv3Snake
   m_EditorClassIdentifier: 
-  PowerLevel: 4
+  PowerLevel: 3
   HungerGain: 3
   AtkPowerGain: 1
-  Sprite: {fileID: 21300000, guid: a22d93c95c64ed54baededaa3752e3cc, type: 3}
+  Sprite: {fileID: 21300000, guid: 69f4ebe796e44f948a40eb7aeae6a1d5, type: 3}
