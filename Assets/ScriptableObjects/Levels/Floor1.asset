@@ -18,9 +18,9 @@ MonoBehaviour:
   Hallways: 3
   Bends: 2
   DeadEnds: 0
-  Pizzas: 2
-  Gemstones: 0
-  Swords: 0
+  Pizzas: 1
+  Gemstones: 1
+  Swords: 1
   Monsters:
   - {fileID: 11400000, guid: f0fe6959969dfad46a0ede415eac1f3c, type: 2}
   - {fileID: 11400000, guid: eec26cabc081d794db41af43872cb47c, type: 2}
