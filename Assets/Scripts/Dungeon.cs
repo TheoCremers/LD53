@@ -21,12 +21,14 @@ public class Dungeon : MonoBehaviour
 
     public TurnState TurnState;
 
+    public List<DungeonLevelSO> Levels;
+
     // Start is called before the first frame update
 
     void Start()
     {
         StartMimicTurnChannel.OnEventRaised += SetTurnStateMimicGuy;
-        Floor.Generate(MimicGuy);
+        Floor.Generate(MimicGuy, Levels.First());
         Floor.Dungeon = this;
 
         // Populate the dungeon. 
