@@ -68,7 +68,7 @@ public class ResourceManager : MonoBehaviour
         newChangeIndicator.SetImageSprite(MimicStrengthIndicator.SmallerIcon);
     }
 
-    private void Start()
+    private void Awake()
     {
         if (Instance == null)
         {
