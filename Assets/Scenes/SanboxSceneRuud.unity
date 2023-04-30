@@ -538,6 +538,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2997353890416233225, guid: 59f05cd330efa864c8aac6edd150f353, type: 3}
+      propertyPath: PizzaPrefab
+      value: 
+      objectReference: {fileID: 1538036721402891559, guid: 98dffb5dbfce49648be6b838a5ff4dec, type: 3}
     - target: {fileID: 5074457417021464355, guid: 59f05cd330efa864c8aac6edd150f353, type: 3}
       propertyPath: m_Name
       value: Dungeon

@@ -20,6 +20,8 @@ public class DungeonFloor : MonoBehaviour
     public DungeonRoom DungeonRoomPrefab;
     public RoomManipulation RoomManipulation;
 
+    public FoodItem PizzaPrefab;
+
     public Vector2Int Size = new Vector2Int(5, 5);
 
     private Vector3 _roomFadeOffset = new Vector3(0, 0.5f, 0.5f);
@@ -32,7 +34,7 @@ public class DungeonFloor : MonoBehaviour
 
         ConstructLayout(level);
         GenerateShiftButtons();
-        PopulateDungeon(mimicGuy);
+        PopulateDungeon(mimicGuy, level);
 
         RoomShiftEventChannel.OnEventRaised += ShiftRooms;
         ShowShiftButtonsEvent.OnEventRaised += RoomManipulation.ActivateShiftButtons;
@@ -235,7 +237,7 @@ public class DungeonFloor : MonoBehaviour
         return dungeonRoom;
     }    
 
-    private void PopulateDungeon(MimicGuy mimicGuy)
+    private void PopulateDungeon(MimicGuy mimicGuy, DungeonLevelSO level)
     {
         var startingRoomPosition = PickRandomEdgeRoom();
         var startingRoom = Rooms[startingRoomPosition.x, startingRoomPosition.y];
@@ -243,6 +245,47 @@ public class DungeonFloor : MonoBehaviour
         mimicGuy.transform.SetParent(startingRoom.transform, false);
         mimicGuy.GridPosition = startingRoomPosition;
         startingRoom.Occupant = mimicGuy;
+
+        // Add objects
+        for (int i = 0; i < level.Pizzas; i++)
+        {
+            var vacantRoomCoords = GetRandomVacantRoom();
+            var pizza = Instantiate(PizzaPrefab, transform);
+            //pizza.transform.position = PositionHelper.GridToWorldPosition(vacantRoomCoords);
+            pizza.transform.SetParent(Rooms[vacantRoomCoords.x, vacantRoomCoords.y].transform, false);
+            Rooms[vacantRoomCoords.x, vacantRoomCoords.y].Occupant = pizza;
+        }
+    }
+
+    private Vector2Int GetRandomVacantRoom(int iterations = 0)
+    {
+        // Pick a random room
+        var xPos = Random.Range(0, Size.x);
+        var yPos = Random.Range(0, Size.y);
+
+        // Check if it is free
+        if (Rooms[xPos, yPos].Occupant != null)
+        {
+            return GetRandomVacantRoom(iterations+1);
+        } 
+        // If we've tried too many times, just place it. Maybe there's too many objects in this floor.
+        else if (iterations > 10) 
+        {
+            return new Vector2Int(xPos, yPos);
+        }
+        // Check if adjacent rooms are free
+        else if ((xPos == 0 || Rooms[xPos-1, yPos] == null) &&
+                (xPos == Size.x-1 || Rooms[xPos+1, yPos] == null) &&
+                (yPos == 0 || Rooms[xPos, yPos-1] == null) &&
+                (yPos == Size.y-1 || Rooms[xPos, yPos+1] == null))
+        {
+            return new Vector2Int(xPos, yPos);
+        }
+        // Else try again
+        else
+        {
+            return GetRandomVacantRoom(iterations+1);
+        }        
     }
 
     private Vector2Int PickRandomEdgeRoom()

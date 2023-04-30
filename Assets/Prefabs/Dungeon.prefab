@@ -53,6 +53,8 @@ MonoBehaviour:
   Floor: {fileID: 2997353890416233225}
   MimicGuy: {fileID: 8557153826178277758}
   TurnState: 0
+  Levels:
+  - {fileID: 11400000, guid: 77c2d6d9713c8c44e9d1c12d0c06a508, type: 2}
 --- !u!1001 &3412594170056237340
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -280,6 +282,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DungeonFloor
       objectReference: {fileID: 0}
+    - target: {fileID: 9176472825722223916, guid: c1160880029b5d0468ead1bff2402236, type: 3}
+      propertyPath: PizzaPrefab
+      value: 
+      objectReference: {fileID: 1538036721402891559, guid: 98dffb5dbfce49648be6b838a5ff4dec, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c1160880029b5d0468ead1bff2402236, type: 3}
 --- !u!114 &2997353890416233225 stripped
