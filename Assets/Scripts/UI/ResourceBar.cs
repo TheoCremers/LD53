@@ -27,7 +27,7 @@ public class ResourceBar : MonoBehaviour
     private int _currentValue;
     public int CurrentValue { get { return _currentValue; } }
 
-    private void Start()
+    private void Awake()
     {
         UpdateResourceUnits();
         SetValue(StartingValue);
