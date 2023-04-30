@@ -235,6 +235,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: UIComponents
       objectReference: {fileID: 0}
+    - target: {fileID: 783048779009895980, guid: af5299f0ed3df1945af95550ef261d08, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 783048779009895980, guid: af5299f0ed3df1945af95550ef261d08, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1280
+      objectReference: {fileID: 0}
+    - target: {fileID: 783048779009895980, guid: af5299f0ed3df1945af95550ef261d08, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 720
+      objectReference: {fileID: 0}
     - target: {fileID: 783048779009895982, guid: af5299f0ed3df1945af95550ef261d08, type: 3}
       propertyPath: m_Pivot.x
       value: 0
