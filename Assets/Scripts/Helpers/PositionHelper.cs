@@ -4,6 +4,7 @@ public static class PositionHelper
 {
     //public const float SpriteWidth = 128;
     //public const float SpriteHeight = 64;
+    private static float _laurensFactorB = (178f/100f);
 
     public static Vector3 GridToWorldPosition(Vector2Int gridPosition)
     {
@@ -12,8 +13,8 @@ public static class PositionHelper
 
     public static Vector3 GridToWorldPosition(Vector2 gridPosition)
     {
-        float isoX = (gridPosition.x - gridPosition.y);// - (spriteWidth * 0.5f);
-        float isoY = ((gridPosition.x + gridPosition.y) * 0.5f);// - (spriteHeight * 0.5f);
+        float isoX = (gridPosition.x - gridPosition.y) * (_laurensFactorB * 0.5f); // - (spriteWidth * 0.5f);
+        float isoY = ((gridPosition.x + gridPosition.y) * 0.5f) * (_laurensFactorB * 0.5f);// - (spriteHeight * 0.5f);
 
         return new Vector3(isoX, isoY, isoY);
     }

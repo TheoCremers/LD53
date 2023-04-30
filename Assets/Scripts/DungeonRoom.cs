@@ -25,9 +25,15 @@ public class DungeonRoom : MonoBehaviour
     private SpriteRenderer _doorBottomRight;
     private SpriteRenderer _doorBottomLeft;
 
-    public Sprite DoorOpenSprite;
+    public Sprite DoorOpenSpriteTopRight;
+    public Sprite DoorOpenSpriteTopLeft;
+    public Sprite DoorOpenSpriteBottomRight;
+    public Sprite DoorOpenSpriteBottomLeft;
 
-    public Sprite DoorClosedSprite;
+    public Sprite DoorClosedSpriteTopRight;
+    public Sprite DoorClosedSpriteTopLeft;
+    public Sprite DoorClosedSpriteBottomRight;
+    public Sprite DoorClosedSpriteBottomLeft;
 
     public IRoomOccupant Occupant;
 
@@ -52,11 +58,10 @@ public class DungeonRoom : MonoBehaviour
 
     public void UpdateDoorVisibility()
     {
-
-        _doorTopLeft.sprite = DoorTopLeft ? DoorOpenSprite : DoorClosedSprite;
-        _doorTopRight.sprite = DoorTopRight ? DoorOpenSprite : DoorClosedSprite;
-        _doorBottomRight.sprite = DoorBottomRight ? DoorOpenSprite : DoorClosedSprite;
-        _doorBottomLeft.sprite = DoorBottomLeft ? DoorOpenSprite : DoorClosedSprite;
+        _doorTopLeft.sprite = DoorTopLeft ? DoorOpenSpriteTopLeft : DoorClosedSpriteTopLeft;
+        _doorTopRight.sprite = DoorTopRight ? DoorOpenSpriteTopRight : DoorClosedSpriteTopRight;
+        _doorBottomRight.sprite = DoorBottomRight ? DoorOpenSpriteBottomRight : DoorClosedSpriteBottomRight;
+        _doorBottomLeft.sprite = DoorBottomLeft ? DoorOpenSpriteBottomLeft : DoorClosedSpriteBottomLeft;
         //_doorTopRight.gameObject.SetActive(DoorTopRight);
         //_doorBottomRight.gameObject.SetActive(DoorBottomRight);
         //_doorBottomLeft.gameObject.SetActive(DoorBottomLeft);

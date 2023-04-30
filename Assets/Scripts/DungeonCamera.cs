@@ -41,7 +41,7 @@ public class DungeonCamera : MonoBehaviour
         //InitiateMimicTurn();
 
         // Example zoom out at start
-        CameraRef.orthographicSize = 3;
+        CameraRef.orthographicSize = 2;
         InitiateIdleTurn();
     }
 
@@ -91,7 +91,7 @@ public class DungeonCamera : MonoBehaviour
         _freeCam = false;
         // Snap to Mimic
         // Zoom in
-        StartCoroutine(ZoomCoroutine(1.5f, 1));
+        StartCoroutine(ZoomCoroutine(1.5f, 0.75f));
 
         // Follow Mimic around
         _followTarget = true;
@@ -100,7 +100,7 @@ public class DungeonCamera : MonoBehaviour
     private void InitiateOverlordTurn()
     {
         // Zoom out
-        StartCoroutine(ZoomCoroutine(1.5f, 3));
+        StartCoroutine(ZoomCoroutine(1.5f, 2f));
 
         // Allow camera movement within bounds
         _freeCam = true;
