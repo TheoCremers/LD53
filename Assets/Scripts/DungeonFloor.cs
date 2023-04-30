@@ -177,6 +177,9 @@ public class DungeonFloor : MonoBehaviour
         
         var tilesStack = new Stack<DungeonRoom>(tiles);
 
+
+        //Debug.Log($"tilestack {tilesStack.Count}");
+
         // Assign them coords on the floor
         for (int xIndex = 0; xIndex < Size.x; xIndex++) 
         {

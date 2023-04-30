@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelSize: {x: 5, y: 4}
   FourWays: 2
-  ThreeWays: 12
+  ThreeWays: 10
   Hallways: 4
   Bends: 3
   DeadEnds: 1
