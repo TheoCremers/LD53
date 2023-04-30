@@ -42,6 +42,14 @@ public class DungeonRoom : MonoBehaviour
         UpdateDoorVisibility();
     }
 
+    public void SetDoors(bool topLeft, bool topRight, bool bottomRight, bool bottomLeft)
+    {
+        DoorTopLeft = topLeft;
+        DoorTopRight = topRight;
+        DoorBottomRight = bottomRight;
+        DoorBottomLeft = bottomLeft;
+    }
+
     public void UpdateDoorVisibility()
     {
 

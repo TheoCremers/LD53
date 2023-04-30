@@ -20,19 +20,21 @@ public class DungeonFloor : MonoBehaviour
     public DungeonRoom DungeonRoomPrefab;
     public RoomManipulation RoomManipulation;
 
+    public FoodItem PizzaPrefab;
+
     public Vector2Int Size = new Vector2Int(5, 5);
 
     private Vector3 _roomFadeOffset = new Vector3(0, 0.5f, 0.5f);
 
     [HideInInspector] public Dungeon Dungeon;
 
-    public void Generate(MimicGuy mimicGuy)
+    public void Generate(MimicGuy mimicGuy, DungeonLevelSO level)
     {
         Rooms = new DungeonRoom[Size.x, Size.y];
 
-        ConstructLayout();
+        ConstructLayout(level);
         GenerateShiftButtons();
-        PopulateDungeon(mimicGuy);
+        PopulateDungeon(mimicGuy, level);
 
         RoomShiftEventChannel.OnEventRaised += ShiftRooms;
         ShowShiftButtonsEvent.OnEventRaised += RoomManipulation.ActivateShiftButtons;
@@ -42,15 +44,137 @@ public class DungeonFloor : MonoBehaviour
     {
         RoomShiftEventChannel.OnEventRaised -= ShiftRooms;
         ShowShiftButtonsEvent.OnEventRaised -= RoomManipulation.ActivateShiftButtons;
+    }    
+
+    private DungeonRoom GenerateRoom(RoomType type)
+    {
+        var dungeonRoom = Instantiate(DungeonRoomPrefab, transform);
+        int rng;
+        switch (type)
+        {
+            case (RoomType.FourWay):
+                dungeonRoom.SetDoors(true, true, true, true);
+                break;
+            case (RoomType.ThreeWay):
+                rng = Random.Range(0, 4);
+                switch (rng)
+                {
+                    case (0):
+                        dungeonRoom.SetDoors(false, true, true, true);
+                        break;
+                    case (1):
+                        dungeonRoom.SetDoors(true, false, true, true);
+                        break;
+                    case (2):
+                        dungeonRoom.SetDoors(true, true, false, true);
+                        break;
+                    case (3):
+                        dungeonRoom.SetDoors(true, true, true, false);
+                        break;
+
+                }
+                break;
+            case (RoomType.Hallway):
+                rng = Random.Range(0, 2);
+                switch (rng)
+                {
+                    case (0):
+                        dungeonRoom.SetDoors(true, false, true, false);
+                        break;
+                    case (1):
+                        dungeonRoom.SetDoors(false, true, false, true);
+                        break;
+                }
+                break;
+            case (RoomType.Bend):
+                rng = Random.Range(0, 4);
+                switch (rng)
+                {
+                    case (0):
+                        dungeonRoom.SetDoors(true, true, false, false);
+                        break;
+                    case (1):
+                        dungeonRoom.SetDoors(false, true, true, false);
+                        break;
+                    case (2):
+                        dungeonRoom.SetDoors(false, false, true, true);
+                        break;
+                    case (3):
+                        dungeonRoom.SetDoors(true, false, false, true);
+                        break;
+                }
+                break;
+            case (RoomType.DeadEnd):
+                rng = Random.Range(0, 4);
+                switch (rng)
+                {
+                    case (0):
+                        dungeonRoom.SetDoors(true, false, false, false);
+                        break;
+                    case (1):
+                        dungeonRoom.SetDoors(false, true, false, false);
+                        break;
+                    case (2):
+                        dungeonRoom.SetDoors(false, false, true, false);
+                        break;
+                    case (3):
+                        dungeonRoom.SetDoors(false, false, false, true);
+                        break;
+                }
+                break;
+            default:
+                dungeonRoom.SetDoors(Random.value < 0.7f, Random.value < 0.7f, Random.value < 0.7f, Random.value < 0.7f);
+                break;
+
+        }
+
+        dungeonRoom.UpdateDoorVisibility();
+        return dungeonRoom;        
     }
 
-    private void ConstructLayout()
+    private void ConstructLayout(DungeonLevelSO level)
     {
+        Size = level.LevelSize;
+
+        // Create "tile" pool
+        var tiles = new List<DungeonRoom>();
+
+        // Generate rooms
+        for (int i = 0; i < level.FourWays; i++)
+        {
+            var dungeonRoom = GenerateRoom(RoomType.FourWay);
+            tiles.Add(dungeonRoom);
+        }
+        for (int i = 0; i < level.ThreeWays; i++)
+        {
+            var dungeonRoom = GenerateRoom(RoomType.ThreeWay);
+            tiles.Add(dungeonRoom);
+        }
+        for (int i = 0; i < level.Bends; i++)
+        {
+            var dungeonRoom = GenerateRoom(RoomType.Bend);
+            tiles.Add(dungeonRoom);
+        }
+        for (int i = 0; i < level.Hallways; i++)
+        {
+            var dungeonRoom = GenerateRoom(RoomType.Hallway);
+            tiles.Add(dungeonRoom);
+        }
+        for (int i = 0; i < level.DeadEnds; i++)
+        {
+            var dungeonRoom = GenerateRoom(RoomType.DeadEnd);
+            tiles.Add(dungeonRoom);
+        }
+        
+        var tilesStack = new Stack<DungeonRoom>(tiles);
+
+        // Assign them coords on the floor
         for (int xIndex = 0; xIndex < Size.x; xIndex++) 
         {
             for (int yIndex = 0; yIndex < Size.y; yIndex++)
             {
-                Rooms[xIndex, yIndex] = GenerateRoom(new Vector2Int(xIndex, yIndex));
+                Rooms[xIndex, yIndex] = tilesStack.Pop();
+                Rooms[xIndex, yIndex].transform.position = PositionHelper.GridToWorldPosition(new Vector2(xIndex, yIndex));
             } 
         }
 
@@ -99,7 +223,8 @@ public class DungeonFloor : MonoBehaviour
         RoomManipulation.DeactivateShiftButtonsNow();
     }
 
-    private DungeonRoom GenerateRoom(Vector2Int gridPosition)
+
+    private DungeonRoom GenerateRandomRoom(Vector2Int gridPosition)
     {
         var dungeonRoom = Instantiate(DungeonRoomPrefab, transform);
         dungeonRoom.transform.position = PositionHelper.GridToWorldPosition(gridPosition);
@@ -112,7 +237,7 @@ public class DungeonFloor : MonoBehaviour
         return dungeonRoom;
     }    
 
-    private void PopulateDungeon(MimicGuy mimicGuy)
+    private void PopulateDungeon(MimicGuy mimicGuy, DungeonLevelSO level)
     {
         var startingRoomPosition = PickRandomEdgeRoom();
         var startingRoom = Rooms[startingRoomPosition.x, startingRoomPosition.y];
@@ -120,6 +245,52 @@ public class DungeonFloor : MonoBehaviour
         mimicGuy.transform.SetParent(startingRoom.transform, false);
         mimicGuy.GridPosition = startingRoomPosition;
         startingRoom.Occupant = mimicGuy;
+
+        // Add objects
+        for (int i = 0; i < level.Pizzas; i++)
+        {
+            var vacantRoomCoords = GetRandomVacantRoom();
+            var pizza = Instantiate(PizzaPrefab, transform);
+            //pizza.transform.position = PositionHelper.GridToWorldPosition(vacantRoomCoords);
+            pizza.transform.SetParent(Rooms[vacantRoomCoords.x, vacantRoomCoords.y].transform, false);
+            Rooms[vacantRoomCoords.x, vacantRoomCoords.y].Occupant = pizza;
+        }
+    }
+
+    private Vector2Int GetRandomVacantRoom(int iterations = 0)
+    {
+        if (iterations > 100)
+        {
+            throw new UnityException("too many objects in room");
+        }
+        
+        // Pick a random room
+        var xPos = Random.Range(0, Size.x);
+        var yPos = Random.Range(0, Size.y);
+
+        // Check if it is free
+        if (Rooms[xPos, yPos].Occupant != null)
+        {
+            return GetRandomVacantRoom(iterations+1);
+        } 
+        // If we've tried too many times, just place it. Maybe there's too many objects in this floor.
+        else if (iterations > 10) 
+        {
+            return new Vector2Int(xPos, yPos);
+        }
+        // Check if adjacent rooms are free
+        else if ((xPos == 0 || Rooms[xPos-1, yPos] == null) &&
+                (xPos == Size.x-1 || Rooms[xPos+1, yPos] == null) &&
+                (yPos == 0 || Rooms[xPos, yPos-1] == null) &&
+                (yPos == Size.y-1 || Rooms[xPos, yPos+1] == null))
+        {
+            return new Vector2Int(xPos, yPos);
+        }
+        // Else try again
+        else
+        {
+            return GetRandomVacantRoom(iterations+1);
+        }        
     }
 
     private Vector2Int PickRandomEdgeRoom()
