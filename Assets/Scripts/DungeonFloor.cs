@@ -10,6 +10,8 @@ public class DungeonFloor : MonoBehaviour
     #region EventChannels
 
     public ShiftEventChannel RoomShiftEventChannel;
+    public VoidEventChannel ShowShiftButtonsEvent;
+    public VoidEventChannel StartOverlordTurnEvent;
 
     #endregion
 
@@ -31,11 +33,13 @@ public class DungeonFloor : MonoBehaviour
         PopulateDungeon(mimicGuy);
 
         RoomShiftEventChannel.OnEventRaised += ShiftRooms;
+        ShowShiftButtonsEvent.OnEventRaised += RoomManipulation.ActivateShiftButtons;
     }
 
     private void OnDestroy()
     {
         RoomShiftEventChannel.OnEventRaised -= ShiftRooms;
+        ShowShiftButtonsEvent.OnEventRaised -= RoomManipulation.ActivateShiftButtons;
     }
 
     private void ConstructLayout()
@@ -89,11 +93,13 @@ public class DungeonFloor : MonoBehaviour
             Vector3 bottomLeftFacingButtonPosition = PositionHelper.GridToWorldPosition(new Vector2Int(Size.x, i));
             RoomManipulation.CreateShiftButton(bottomLeftFacingButtonPosition, Orientation.DownLeft, i);
         }
+
+        RoomManipulation.DeactivateShiftButtons();
     }
 
     private DungeonRoom GenerateRoom(Vector2Int gridPosition)
     {
-        var dungeonRoom = Instantiate(DungeonRoomPrefab);
+        var dungeonRoom = Instantiate(DungeonRoomPrefab, transform);
         dungeonRoom.transform.position = PositionHelper.GridToWorldPosition(gridPosition);
         // All doors 70% chance for now
         dungeonRoom.DoorBottomLeft = (Random.value < 0.7f);
@@ -157,7 +163,9 @@ public class DungeonFloor : MonoBehaviour
 
         //UpdateDebugTextForRooms();
 
-        RoomManipulation.ActivateShiftButtons();
+        //RoomManipulation.ActivateShiftButtons();
+
+        StartOverlordTurnEvent.RaiseEvent();
     }
 
     public async Task ShiftRoomsAlongX(int lineIndex, bool backwards)

@@ -13,7 +13,7 @@ public class BaseOptionsMenu : MonoBehaviour
     public float FadeTime = 0.5f;
     public Vector2 FadeOffset = new Vector2(0, -128f);
 
-    protected virtual void Start()
+    protected virtual void Awake()
     {
         _canvasGroup = GetComponent<CanvasGroup>();
         _rectTransform = GetComponent<RectTransform>();
