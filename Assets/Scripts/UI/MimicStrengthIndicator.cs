@@ -6,6 +6,8 @@ public class MimicStrengthIndicator : MonoBehaviour
     public int StrengthValue = 1;
     public TextMeshProUGUI StrengthLabel;
 
+    public Sprite SmallerIcon;
+
     private void OnValidate()
     {
         SetStrength(StrengthValue);
@@ -18,5 +20,10 @@ public class MimicStrengthIndicator : MonoBehaviour
         {
             StrengthLabel.text = StrengthValue.ToString();
         }
+    }
+
+    public void ChangeStreng(int change)
+    {
+        SetStrength(StrengthValue + change);
     }
 }

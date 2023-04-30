@@ -44,3 +44,6 @@ TagManager:
   - name: Characters
     uniqueID: 3689719391
     locked: 0
+  - name: OverlayEffects
+    uniqueID: 4210022019
+    locked: 0

@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1655526893978103703}
   - component: {fileID: 7486225841088208747}
-  - component: {fileID: 1538036721402891559}
+  - component: {fileID: 2431459551338349622}
   m_Layer: 0
-  m_Name: PizzaSlice
+  m_Name: GemCluster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2967994723716573788}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.447, y: 0.148, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: e8dd6dc02c71b4c4793e293c756fc62c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8693f8ba0b6424544a6138e4e1009d5e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1538036721402891559
+--- !u!114 &2431459551338349622
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,9 +94,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2967994723716573788}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ee5d784fffe69a46841afa8b9def1ef, type: 3}
+  m_Script: {fileID: 11500000, guid: fbce57e19d8ab9542a4e669ee8c71033, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   SpriteRenderer: {fileID: 7486225841088208747}
-  FullnessGain: 5
+  ForsakenPowerGained: 3
   FadeTime: 0.4

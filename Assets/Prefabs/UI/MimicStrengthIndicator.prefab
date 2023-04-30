@@ -227,3 +227,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StrengthValue: 5
   StrengthLabel: {fileID: 2981381067774214329}
+  SmallerIcon: {fileID: 21300000, guid: f2b00ee7493069d46b543c1f8113edbf, type: 3}

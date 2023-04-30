@@ -53,6 +53,14 @@ public class ResourceManager : MonoBehaviour
         ChangeForsakenPower(change, changeLocation);
     }
 
+    public void ChangeMimicPower(int change, Vector3 changeLocation)
+    {
+        MimicStrengthIndicator.ChangeStreng(change);
+        var newChangeIndicator = Instantiate(ResourceChangePrefab, changeLocation, Quaternion.identity);
+        newChangeIndicator.SetChangeAmount(change);
+        newChangeIndicator.SetImageSprite(MimicStrengthIndicator.SmallerIcon);
+    }
+
     private void Start()
     {
         if (Instance == null)
