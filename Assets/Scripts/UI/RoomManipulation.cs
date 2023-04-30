@@ -24,6 +24,14 @@ public class RoomManipulation : MonoBehaviour
         _roomShiftButtons.Add(newButton);
     }
 
+    public void DeactivateShiftButtonsNow()
+    {
+        foreach (RoomShiftButton button in _roomShiftButtons)
+        {
+            button.DeactivateAndHide();
+        }
+    }
+
     public void DeactivateShiftButtons()
     {
         foreach(RoomShiftButton button in _roomShiftButtons)

@@ -51,6 +51,12 @@ public class RoomShiftButton : MonoBehaviour
         }
     }
 
+    public void DeactivateAndHide()
+    {
+        _shiftButton.interactable = false;
+        _arrowImage.color = new Color(1, 1, 1, 0);
+    }
+
     public async void DeactivateAndFadeOut()
     {
         _shiftButton.interactable = false;

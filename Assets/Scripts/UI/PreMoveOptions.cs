@@ -10,7 +10,7 @@ public class PreMoveOptions : BaseOptionsMenu
 
     #endregion
 
-    public Button ProceedButton;
+    public ButtonWithDoubleCost ProceedButton;
     public Button InterveneButton;
 
     protected override void Awake()

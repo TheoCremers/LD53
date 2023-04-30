@@ -117,7 +117,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6378344205150303161, guid: 6d399d9b189563f45a29694ca3060743, type: 3}
       propertyPath: m_text
-      value: -3
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 6474584018510929934, guid: 6d399d9b189563f45a29694ca3060743, type: 3}
       propertyPath: m_text
@@ -125,7 +125,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9125913351843361024, guid: 6d399d9b189563f45a29694ca3060743, type: 3}
       propertyPath: m_Name
-      value: ShitfRoomsButton Variant
+      value: ShiftRoomsButton Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d399d9b189563f45a29694ca3060743, type: 3}
