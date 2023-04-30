@@ -19,6 +19,10 @@ public class ResourceBar : MonoBehaviour
     public float TweenDuration = 0.5f;
     public float InactiveAlpha = 0.5f;
 
+    public Sprite SampleIcon {
+        get { return UnitPrefab.GetComponent<Image>().sprite; }
+    }
+
     private List<Image> _resourceUnits = new List<Image>();
     private int _currentValue;
     public int CurrentValue { get { return _currentValue; } }

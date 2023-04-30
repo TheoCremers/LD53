@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class MimicGuy : MonoBehaviour, IRoomOccupant
@@ -49,9 +50,11 @@ public class MimicGuy : MonoBehaviour, IRoomOccupant
 
     }
 
-    public void OnPlayerEnterRoom(MimicGuy guy)
+    public async Task<bool> OnPlayerEnterRoom(MimicGuy guy)
     {
         Debug.LogWarning("Player entered their own room???");
+        await Task.Delay(100);
+        return true;
     }
 
     public void OnRoomIdChange(int x, int y)

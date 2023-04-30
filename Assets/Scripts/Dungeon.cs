@@ -87,7 +87,10 @@ public class Dungeon : MonoBehaviour
         // handle room interaction
         if (nextRoom.Occupant != null && (MimicGuy)nextRoom.Occupant != MimicGuy)
         {
-            nextRoom.Occupant.OnPlayerEnterRoom(MimicGuy); // possibly get kicked out?
+            if (!await nextRoom.Occupant.OnPlayerEnterRoom(MimicGuy)) // if true, can enter room, otherwise turn around
+            {
+                // TODO
+            }
         }
 
         nextRoom.Occupant = MimicGuy;
