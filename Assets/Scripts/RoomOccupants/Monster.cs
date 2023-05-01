@@ -69,4 +69,9 @@ public class Monster : MonoBehaviour, IRoomOccupant
     {
         // do nothing
     }
+
+    public void OnRoomRotate(bool clockwise)
+    {
+        SpriteRenderer.flipX = !SpriteRenderer.flipX;
+    }
 }

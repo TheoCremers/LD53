@@ -139,6 +139,19 @@ public class Dungeon : MonoBehaviour
         await mimicGuy.DOMove(destination, tweenTime).AsyncWaitForCompletion();
     }
 
+    public bool IsCurrentFacingDirectionOpen()
+    {
+        var currentGridPosition = MimicGuy.GridPosition;
+
+        var possibleOptions = new List<Orientation>();
+        if (Floor.IsPassagePossible(currentGridPosition, Orientation.TopLeft)) { possibleOptions.Add(Orientation.TopLeft); }
+        if (Floor.IsPassagePossible(currentGridPosition, Orientation.TopRight)) { possibleOptions.Add(Orientation.TopRight); }
+        if (Floor.IsPassagePossible(currentGridPosition, Orientation.DownLeft)) { possibleOptions.Add(Orientation.DownLeft); }
+        if (Floor.IsPassagePossible(currentGridPosition, Orientation.DownRight)) { possibleOptions.Add(Orientation.DownRight); }
+
+        return possibleOptions.Contains(MimicGuy.FacingDirection);
+    }
+
     private Orientation DetermineNextRoomDirection(bool tryCurrentFacingDirectionFirst = false)
     {
         // Check which adjacent room the character will move to

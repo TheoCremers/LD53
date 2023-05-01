@@ -60,6 +60,26 @@ public class DungeonRoom : MonoBehaviour
         DoorBottomLeft = bottomLeft;
     }
 
+    public void RotateDoors(bool clockwise)
+    {
+        bool doorTopLeft = DoorTopLeft;
+        if (clockwise)
+        {
+            DoorTopLeft = DoorBottomLeft;
+            DoorBottomLeft = DoorBottomRight;
+            DoorBottomRight = DoorTopRight;
+            DoorTopRight = doorTopLeft;
+        }
+        else
+        {
+            DoorTopLeft = DoorTopRight;
+            DoorTopRight = DoorBottomRight;
+            DoorBottomRight = DoorBottomLeft;
+            DoorBottomLeft = doorTopLeft;
+        }
+        UpdateDoorVisibility();
+    }
+
     public void UpdateDoorVisibility()
     {
         _doorTopLeft.sprite = DoorTopLeft ? DoorOpenSpriteTopLeft : DoorClosedSpriteTopLeft;

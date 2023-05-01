@@ -22,7 +22,7 @@ public class MimicGuy : MonoBehaviour, IRoomOccupant
             case (Orientation.DownLeft):
                 SpriteRenderer.sprite = ForwardFacing;
                 SpriteRenderer.flipX = true;
-                return;
+                break;
             case (Orientation.DownRight):
                 SpriteRenderer.sprite = ForwardFacing;
                 SpriteRenderer.flipX = false;
@@ -36,7 +36,6 @@ public class MimicGuy : MonoBehaviour, IRoomOccupant
                 SpriteRenderer.flipX = false;
                 break;
         }
-
     }
 
     public async Task<bool> OnPlayerEnterRoom(MimicGuy guy)
@@ -49,5 +48,25 @@ public class MimicGuy : MonoBehaviour, IRoomOccupant
     public void OnRoomIdChange(int x, int y)
     {
         GridPosition = new Vector2Int(x, y);
+    }
+
+    public void OnRoomRotate(bool clockwise)
+    {
+        switch(FacingDirection)
+        {
+            case (Orientation.DownLeft):
+                FacingDirection = clockwise ? Orientation.TopLeft : Orientation.DownRight; 
+                break;
+            case (Orientation.DownRight):
+                FacingDirection = clockwise ? Orientation.DownLeft : Orientation.TopRight;
+                break;
+            case (Orientation.TopLeft):
+                FacingDirection = clockwise ? Orientation.TopRight : Orientation.DownLeft;
+                break;
+            case (Orientation.TopRight):
+                FacingDirection = clockwise ? Orientation.DownRight : Orientation.TopLeft;
+                break;
+        }
+        UpdateSprite();
     }
 }

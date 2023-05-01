@@ -674,6 +674,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: OverlordOptions
       objectReference: {fileID: 0}
+    - target: {fileID: 3736345061108179249, guid: cdf22afed5f5ed5429daa4d253454f15, type: 3}
+      propertyPath: AssociatedResource
+      value: 
+      objectReference: {fileID: 3059577369168648802}
     - target: {fileID: 4132202519633504334, guid: cdf22afed5f5ed5429daa4d253454f15, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
