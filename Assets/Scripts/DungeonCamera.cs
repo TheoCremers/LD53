@@ -42,7 +42,7 @@ public class DungeonCamera : MonoBehaviour
 
         // Example zoom out at start
         CameraRef.orthographicSize = 2;
-        InitiateIdleTurn();
+        //InitiateIdleTurn();
     }
 
     void Awake()
