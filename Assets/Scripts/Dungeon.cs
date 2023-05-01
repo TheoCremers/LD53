@@ -17,6 +17,9 @@ public class Dungeon : MonoBehaviour
 
     public DungeonFloor Floor;
 
+
+    public ConversationSO GameOverConvo;
+
     public MimicGuy MimicGuy;
 
     public TurnState TurnState;
@@ -74,12 +77,21 @@ public class Dungeon : MonoBehaviour
     }
 
 
-    private void StartNewTurn()
+    private async void StartNewTurn()
     {
         if (ResourceManager.Instance.MimicFullness <= 0)
         {
-            // TODO: play some dialog here?
-            RestartFromFloor1();
+            Debug.Log("check");
+            int result = 0;
+            result = await DialogHelper.ShowConversation(GameOverConvo);
+            if (result == 1) 
+            {
+                RestartFromFloor1();
+            } 
+            else 
+            {
+                RestartCurrentFloor();
+            }
             return;
         }
 
