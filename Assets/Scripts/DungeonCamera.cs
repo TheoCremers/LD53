@@ -89,7 +89,7 @@ public class DungeonCamera : MonoBehaviour
     {
         if (_followTarget == false) 
         {
-            StartCoroutine(ZoomAndMoveCoroutine(1.5f, 0.75f, new Vector3(MimicGuy.transform.position.x, MimicGuy.transform.position.y, transform.position.z)));
+            StartCoroutine(ZoomAndMoveCoroutine(1.2f, 1f, new Vector3(MimicGuy.transform.position.x, MimicGuy.transform.position.y, transform.position.z)));
         }
 
         // Lock camera movement
@@ -107,7 +107,7 @@ public class DungeonCamera : MonoBehaviour
     private void InitiateOverlordTurn()
     {
         // Zoom out
-        StartCoroutine(ZoomCoroutine(1.5f, 2f));
+        StartCoroutine(ZoomCoroutine(1.2f, 2f));
 
         // Allow camera movement within bounds
         _freeCam = true;
