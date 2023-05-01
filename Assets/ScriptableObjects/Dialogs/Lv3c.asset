@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09f076eca85ea7f4e9abcbf6674f73d7, type: 3}
   m_Name: Lv3c
   m_EditorClassIdentifier: 
-  CharacterPortrait: {fileID: 21300000, guid: 2573828aa34fdfe48a31b08372c28150, type: 3}
+  CharacterPortrait: {fileID: 21300000, guid: 4d7722a44022e4341ab029ba18cc54f0, type: 3}
   PortraitOnRightSide: 1
-  DialogText: Don't get cocky with me! Collect green gem clusters to restore my power,
-    and let me manipulate the rooms.
+  DialogText: Don't get cocky with me, insect! Collect green gem clusters to restore
+    my power, and let me manipulate the rooms.
   DialogButtonText: end

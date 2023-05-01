@@ -1125,6 +1125,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2981381067774214329, guid: 982fea0d0a7200d4b9517f7276d62da1, type: 3}
+      propertyPath: m_text
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3378170903524146657, guid: 982fea0d0a7200d4b9517f7276d62da1, type: 3}
       propertyPath: m_Name
       value: MimicStrengthIndicator
@@ -1660,10 +1664,18 @@ PrefabInstance:
       propertyPath: m_fontColor32.rgba
       value: 4293456383
       objectReference: {fileID: 0}
+    - target: {fileID: 1551370352661696711, guid: cdf22afed5f5ed5429daa4d253454f15, type: 3}
+      propertyPath: m_Name
+      value: ShiftRoomsButton
+      objectReference: {fileID: 0}
     - target: {fileID: 1557953255869773979, guid: cdf22afed5f5ed5429daa4d253454f15, type: 3}
       propertyPath: m_Name
       value: OverlordOptions
       objectReference: {fileID: 0}
+    - target: {fileID: 1700358102548324291, guid: cdf22afed5f5ed5429daa4d253454f15, type: 3}
+      propertyPath: FirstTimeOverlordStateDialog
+      value: 
+      objectReference: {fileID: 11400000, guid: 834a8f17eab64e141ace721039a03990, type: 2}
     - target: {fileID: 2083191728504980254, guid: cdf22afed5f5ed5429daa4d253454f15, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0.19999695
@@ -1926,7 +1938,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7386927914129105308, guid: cdf22afed5f5ed5429daa4d253454f15, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 80
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 7386927914129105308, guid: cdf22afed5f5ed5429daa4d253454f15, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
