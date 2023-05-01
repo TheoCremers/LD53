@@ -23,4 +23,9 @@ public class FightItem : MonoBehaviour, IRoomOccupant
     {
         // nothing
     }
+
+    public void OnRoomRotate(bool clockwise)
+    {
+        SpriteRenderer.flipX = !SpriteRenderer.flipX;
+    }
 }

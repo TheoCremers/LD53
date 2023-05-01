@@ -163,6 +163,7 @@ MonoBehaviour:
   RoomShiftEventChannel: {fileID: 11400000, guid: b37f6b385ad690346bcdce1e24ba1aee, type: 2}
   RoomRotateEventChannel: {fileID: 11400000, guid: 9da990f352dbd4d47b78841a51eba217, type: 2}
   ShowShiftButtonsEvent: {fileID: 11400000, guid: fd0c0c876622e2949baaa761f2e8a6ac, type: 2}
+  ShowRotateButtonsEvent: {fileID: 11400000, guid: 6921dd6075e45c54eaeae7d7d27296b3, type: 2}
   StartOverlordTurnEvent: {fileID: 11400000, guid: 35aba1eb81a19af47a42aa10dae9ba96, type: 2}
   DungeonRoomPrefab: {fileID: 3442427670383652863, guid: 33ddc69d62d8bcb4b88703eb1c8e92e2, type: 3}
   RoomManipulation: {fileID: 627539963205276882}

@@ -8,12 +8,14 @@ public class OverlordOptions : BaseOptionsMenu
     #region EventChannels
 
     public VoidEventChannel ShowShiftButtonsEvent;
+    public VoidEventChannel ShowRotateButtonsEvent;
     public VoidEventChannel StartOverlordTurnEvent;
     public VoidEventChannel StartIdleEvent;
 
     #endregion
 
     public ButtonWithCost ShowShiftButton;
+    public ButtonWithCost ShowRotateButton;
     public Button FinishInterventionButton;
 
     protected override void Awake()
@@ -21,9 +23,11 @@ public class OverlordOptions : BaseOptionsMenu
         base.Awake();
 
         ShowShiftButton.onClick.AddListener(ShowShiftButtonsEvent.RaiseEvent);
+        ShowRotateButton.onClick.AddListener(ShowRotateButtonsEvent.RaiseEvent);
         FinishInterventionButton.onClick.AddListener(StartIdleEvent.RaiseEvent);
 
         ShowShiftButtonsEvent.OnEventRaised += DisableAndFadeOut;
+        ShowRotateButtonsEvent.OnEventRaised += DisableAndFadeOut;
         StartOverlordTurnEvent.OnEventRaised += EnableAndFadeIn;
         StartIdleEvent.OnEventRaised += DisableAndFadeOut;
     }
@@ -31,9 +35,11 @@ public class OverlordOptions : BaseOptionsMenu
     private void OnDestroy()
     {
         ShowShiftButton.onClick.RemoveListener(ShowShiftButtonsEvent.RaiseEvent);
+        ShowRotateButton.onClick.RemoveListener(ShowRotateButtonsEvent.RaiseEvent);
         FinishInterventionButton.onClick.RemoveListener(StartOverlordTurnEvent.RaiseEvent);
 
         ShowShiftButtonsEvent.OnEventRaised -= DisableAndFadeOut;
+        ShowRotateButtonsEvent.OnEventRaised -= DisableAndFadeOut;
         StartOverlordTurnEvent.OnEventRaised -= EnableAndFadeIn;
         StartIdleEvent.OnEventRaised -= DisableAndFadeOut;
     }

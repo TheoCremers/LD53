@@ -12,6 +12,7 @@ public class DungeonFloor : MonoBehaviour
     public ShiftEventChannel RoomShiftEventChannel;
     public RotateEventChannel RoomRotateEventChannel;
     public VoidEventChannel ShowShiftButtonsEvent;
+    public VoidEventChannel ShowRotateButtonsEvent;
     public VoidEventChannel StartOverlordTurnEvent;
 
     #endregion
@@ -36,8 +37,9 @@ public class DungeonFloor : MonoBehaviour
     void Awake()
     {
         RoomShiftEventChannel.OnEventRaised += ShiftRooms;
-        //RoomRotateEventChannel.OnEventRaised +=
+        RoomRotateEventChannel.OnEventRaised += RotateRoom;
         ShowShiftButtonsEvent.OnEventRaised += RoomManipulation.ActivateShiftButtons;
+        ShowRotateButtonsEvent.OnEventRaised += RoomManipulation.ActivateRotateButtons;
     }
 
     public void Generate(MimicGuy mimicGuy, DungeonLevelSO level)
@@ -55,8 +57,9 @@ public class DungeonFloor : MonoBehaviour
     private void OnDestroy()
     {
         RoomShiftEventChannel.OnEventRaised -= ShiftRooms;
-        //RoomRotateEventChannel.OnEventRaised -=
+        RoomRotateEventChannel.OnEventRaised -= RotateRoom;
         ShowShiftButtonsEvent.OnEventRaised -= RoomManipulation.ActivateShiftButtons;
+        ShowRotateButtonsEvent.OnEventRaised -= RoomManipulation.ActivateRotateButtons;
     }    
 
     private DungeonRoom GenerateRoom(RoomType type)
@@ -418,18 +421,26 @@ public class DungeonFloor : MonoBehaviour
                 break;
         }
 
-        Dungeon?.UpdateMimicGuyFacingDirection(true);
-
-        //UpdateDebugTextForRooms();
-
-        //RoomManipulation.ActivateShiftButtons();
-
+        await RotatePlayerIfNowBlocked();
         StartOverlordTurnEvent.RaiseEvent();
     }
 
     public async void RotateRoom(Vector2Int roomIndices, bool clockwise)
     {
-        // TODO
+        var room = Rooms[roomIndices.x, roomIndices.y];
+        room.RotateDoors(clockwise);
+        room.Occupant?.OnRoomRotate(clockwise);
+        await RotatePlayerIfNowBlocked();
+        StartOverlordTurnEvent.RaiseEvent();
+    }
+
+    private async Task RotatePlayerIfNowBlocked()
+    {
+        if (Dungeon != null && !Dungeon.IsCurrentFacingDirectionOpen())
+        {
+            await TimeHelper.WaitForSeconds(0.5f);
+            Dungeon.UpdateMimicGuyFacingDirection(true);
+        }
     }
 
     public async Task ShiftRoomsAlongX(int lineIndex, bool backwards)
