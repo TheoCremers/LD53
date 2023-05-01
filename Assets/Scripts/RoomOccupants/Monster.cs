@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
+using TMPro;
 using DG.Tweening;
 
 public class Monster : MonoBehaviour, IRoomOccupant
 {
     public SpriteRenderer SpriteRenderer;
+    public SpriteRenderer PowerSprite;
+    public TextMeshPro PowerLabel;
     public int PowerLevel = 1;
     public int HungerGain = 1;
     public int AtkPowerGain = 1;
@@ -25,10 +28,25 @@ public class Monster : MonoBehaviour, IRoomOccupant
         HungerGain = monsterSO.HungerGain;
         AtkPowerGain = monsterSO.AtkPowerGain;
         SpriteRenderer.flipX = (Random.Range(0, 2) == 0);
+        PowerLabel.text = $"{PowerLevel}";
+    }
+
+    public void ShowPowerIndicator()
+    {
+        PowerSprite.DOFade(1f, 0.3f);
+        PowerLabel.DOFade(1f, 0.3f);
+    }
+
+    public void HidePowerIndicator()
+    {
+        PowerSprite.DOFade(0f, 0.3f);
+        PowerLabel.DOFade(0f, 0.3f);
     }
 
     public async Task<bool> OnPlayerEnterRoom(MimicGuy guy)
     {
+        HidePowerIndicator();
+
         var gridForwardDirection = PositionHelper.ToVector(guy.FacingDirection);
         var forwardDirection = PositionHelper.GridToWorldPosition(gridForwardDirection);
 
@@ -61,6 +79,7 @@ public class Monster : MonoBehaviour, IRoomOccupant
             guy.UpdateSprite();
             await guy.transform.DOMove(guy.transform.position - forwardDirection, ClashResolveTime).SetEase(Ease.OutQuint).AsyncWaitForCompletion();
             ResourceManager.Instance.TooWeak(guy.transform.position);
+            ShowPowerIndicator();
             return false;
         }
     }

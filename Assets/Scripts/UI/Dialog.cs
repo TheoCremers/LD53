@@ -19,7 +19,7 @@ public class Dialog : BaseOptionsMenu
 
     private bool _dialogInProgress = false;
 
-    public void Awake()
+    protected override void Awake()
     {
         base.Awake();
 
