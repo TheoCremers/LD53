@@ -56,7 +56,7 @@ public class ButtonWithDoubleCost : Button
         {
             AssociatedResource.ChangeValue(-ResourceCost);
             AssociatedResource2.ChangeValue(-ResourceCost2);
-            base.OnPointerClick(eventData);
+            base.OnPointerClick(eventData);            
         }
     }
 

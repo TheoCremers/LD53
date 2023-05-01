@@ -48,7 +48,7 @@ public class Dungeon : MonoBehaviour
 
     public async void StartGame()
     {
-        await TimeHelper.WaitForSeconds(2);
+        await TimeHelper.WaitForSeconds(1);
         await DialogHelper.ShowConversation(Levels[0].Intro);
         StartNewTurn(); // call this once to determine the start facing direction
     }

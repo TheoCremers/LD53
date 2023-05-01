@@ -14,10 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CharacterPortrait: {fileID: 0}
   PortraitOnRightSide: 0
-  DialogText: 'Game Over. TIP: Eat more monsters before advancing, as might carries
-    over.
-
-    Choose where to restart from.'
+  DialogText: "Game Over. \nTIP: Eat more monsters before advancing, as might carries
+    over.\nChoose where to restart from."
   DialogButtonText: Current Floor
   SecondButtonActive: 1
   SecondButtonText: First Floor
