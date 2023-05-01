@@ -36,6 +36,16 @@ public class ResourceManager : MonoBehaviour
         newChangeIndicator.SetImageSprite(MimicFullnessResource.SampleIcon);
     }
 
+    public void RestockResources(int mimicStrength = 0)
+    {
+        MimicFullness = MimicFullnessResource.StartingValue;
+        ForsakenPower = ForsakenPowerResource.StartingValue;
+        if (mimicStrength != 0)
+        {
+            MimicStrength = mimicStrength;
+        }        
+    }
+
     public void ChangeMimicFullness(int change)
     {
         Vector3 changeLocation = Vector3.zero;

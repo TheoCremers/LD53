@@ -25,6 +25,8 @@ public class Dungeon : MonoBehaviour
 
     public int CurrentLevel = 0;
 
+    public int StartFloorStrength = 1;
+
     private bool _playerIsStuck = false;
 
     void Start()
@@ -127,9 +129,29 @@ public class Dungeon : MonoBehaviour
     {
         //move room down for style points
         await Floor.MoveRoomDown(exitRoom, MimicGuy);
+        StartFloorStrength = ResourceManager.Instance.MimicStrength;
 
         CurrentLevel++;
         Floor.Generate(MimicGuy, Levels[Mathf.Clamp(CurrentLevel, 0, Levels.Count - 1)]);
+        ResourceManager.Instance.RestockResources();
+        await TimeHelper.WaitForSeconds(0.1f);
+        StartNewTurn();
+    }
+
+    private async void RestartFromFloor1()
+    {
+        CurrentLevel = 0;
+        StartFloorStrength = 1;
+        Floor.Generate(MimicGuy, Levels[Mathf.Clamp(CurrentLevel, 0, Levels.Count - 1)]);
+        ResourceManager.Instance.RestockResources(StartFloorStrength);
+        await TimeHelper.WaitForSeconds(0.1f);
+        StartNewTurn();
+    }
+
+    private async void RestartCurrentFloor()
+    {
+        Floor.Generate(MimicGuy, Levels[Mathf.Clamp(CurrentLevel, 0, Levels.Count - 1)]);
+        ResourceManager.Instance.RestockResources(StartFloorStrength);
         await TimeHelper.WaitForSeconds(0.1f);
         StartNewTurn();
     }

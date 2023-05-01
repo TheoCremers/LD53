@@ -102,13 +102,7 @@ public class DungeonCamera : MonoBehaviour
         _followTarget = true;
     }
 
-    private void EndOverLordTurn()
-    {
-        _freeCam = false;
 
-        StartCoroutine(ZoomAndMoveCoroutine(1.5f, 0.75f, new Vector3(MimicGuy.transform.position.x, MimicGuy.transform.position.y, transform.position.z)));
-        _followTarget = true;
-    }
 
     private void InitiateOverlordTurn()
     {
