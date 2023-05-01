@@ -36,13 +36,16 @@ public class Dungeon : MonoBehaviour
         StartMimicTurnChannel.OnEventRaised += SetTurnStateMimicGuy;
     }
 
-    void Start()
+    private async void Start()
     {
         Floor.Generate(MimicGuy, Levels[Mathf.Clamp(CurrentLevel, 0, Levels.Count - 1)]);
         Floor.Dungeon = this;
 
         //SetTurnStateMimicGuy();
         StartNewTurn(); // call this once to determine the start facing direction
+
+        await TimeHelper.WaitForSeconds(2);
+        await ShowConversation(Levels[0].Intro);
     }
 
     public void SetTurnStateIdle()
@@ -133,13 +136,29 @@ public class Dungeon : MonoBehaviour
         StartNewTurn();
     }
 
-    public async Task ShowDialog(DialogSO dialogSO)
+    public async Task ShowDialog(DialogSO dialogSO, bool startConvo, bool endConvo)
     {
         Dialog.SetDialogWithSO(dialogSO);
-        await Dialog.FadeIn();
-        Dialog.StartDialog();
+        if (startConvo)
+        {
+            await Dialog.FadeIn();
+        }
+
+        Dialog.StartDialog();    
         await Dialog.WaitForDialogToFinish();
-        await Dialog.FadeOut();
+
+        if (endConvo) 
+        {
+            await Dialog.FadeOut();
+        }
+    }
+
+    public async Task ShowConversation(ConversationSO conversationSO)
+    {
+        foreach (var dialogue in conversationSO.Dialogues)
+        {
+            await ShowDialog(dialogue, conversationSO.Dialogues.First() == dialogue, conversationSO.Dialogues.Last() == dialogue);
+        }
     }
 
     private async void FinishLevel(DungeonRoom exitRoom)
@@ -153,6 +172,8 @@ public class Dungeon : MonoBehaviour
         ResourceManager.Instance.RestockResources();
         await TimeHelper.WaitForSeconds(0.1f);
         StartNewTurn();
+
+        await ShowConversation(Levels[CurrentLevel].Intro);
     }
 
     private async void RestartFromFloor1()

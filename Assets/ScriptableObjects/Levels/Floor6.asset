@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Floor6
   m_EditorClassIdentifier: 
   LevelSize: {x: 7, y: 7}
+  Intro: {fileID: 11400000, guid: 28140eb23af18ab4395116e2d31cad41, type: 2}
   BGM: 1
   FourWays: 2
   ThreeWays: 10
