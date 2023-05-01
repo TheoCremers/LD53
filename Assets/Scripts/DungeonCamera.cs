@@ -56,7 +56,7 @@ public class DungeonCamera : MonoBehaviour
     {
         if (_followTarget) 
         {
-            CameraRef.transform.position = new Vector3(MimicGuy.transform.position.x, MimicGuy.transform.position.y, CameraRef.transform.position.z);
+            CameraRef.transform.position = new Vector3(MimicGuy.transform.position.x, MimicGuy.transform.position.y+0.13f, CameraRef.transform.position.z);
         }
         else if (_freeCam) 
         {
@@ -89,7 +89,7 @@ public class DungeonCamera : MonoBehaviour
     {
         if (_followTarget == false) 
         {
-            StartCoroutine(ZoomAndMoveCoroutine(1.2f, 1f, new Vector3(MimicGuy.transform.position.x, MimicGuy.transform.position.y, transform.position.z)));
+            StartCoroutine(ZoomAndMoveCoroutine(1.2f, 1f, new Vector3(MimicGuy.transform.position.x, MimicGuy.transform.position.y+0.13f, transform.position.z)));
         }
 
         // Lock camera movement
