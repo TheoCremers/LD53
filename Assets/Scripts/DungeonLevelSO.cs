@@ -8,6 +8,8 @@ public class DungeonLevelSO : ScriptableObject
 {
     public Vector2Int LevelSize;
 
+    public BGMType BGM;
+
     // 4 exits
     public int FourWays;
 

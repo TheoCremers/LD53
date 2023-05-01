@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Floor5
   m_EditorClassIdentifier: 
   LevelSize: {x: 6, y: 6}
+  BGM: 2
   FourWays: 6
   ThreeWays: 0
   Hallways: 15
