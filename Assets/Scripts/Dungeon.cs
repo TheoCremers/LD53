@@ -23,6 +23,8 @@ public class Dungeon : MonoBehaviour
 
     public List<DungeonLevelSO> Levels;
 
+    public ConversationSO GameOverConversation;
+
     public int CurrentLevel = 0;
 
     public int StartFloorStrength = 1;
@@ -74,12 +76,19 @@ public class Dungeon : MonoBehaviour
     }
 
 
-    private void StartNewTurn()
+    private async void StartNewTurn()
     {
         if (ResourceManager.Instance.MimicFullness <= 0)
         {
-            // TODO: play some dialog here?
-            RestartFromFloor1();
+            int result = await DialogHelper.ShowConversation(GameOverConversation);
+            if (result == 1)
+            {
+                RestartCurrentFloor();
+            }
+            else
+            {
+                RestartFromFloor1();
+            }
             return;
         }
 
@@ -140,6 +149,7 @@ public class Dungeon : MonoBehaviour
         await Floor.MoveRoomDown(exitRoom, MimicGuy);
         StartFloorStrength = ResourceManager.Instance.MimicStrength;
 
+        DOTween.KillAll();
         CurrentLevel++;
         Floor.Generate(MimicGuy, Levels[Mathf.Clamp(CurrentLevel, 0, Levels.Count - 1)]);
         ResourceManager.Instance.RestockResources();
@@ -151,6 +161,7 @@ public class Dungeon : MonoBehaviour
 
     private async void RestartFromFloor1()
     {
+        DOTween.KillAll();
         CurrentLevel = 0;
         StartFloorStrength = 1;
         Floor.Generate(MimicGuy, Levels[Mathf.Clamp(CurrentLevel, 0, Levels.Count - 1)]);
@@ -161,6 +172,7 @@ public class Dungeon : MonoBehaviour
 
     private async void RestartCurrentFloor()
     {
+        DOTween.KillAll();
         Floor.Generate(MimicGuy, Levels[Mathf.Clamp(CurrentLevel, 0, Levels.Count - 1)]);
         ResourceManager.Instance.RestockResources(StartFloorStrength);
         await TimeHelper.WaitForSeconds(0.1f);
@@ -196,7 +208,7 @@ public class Dungeon : MonoBehaviour
         if (Floor.IsPassagePossible(currentGridPosition, Orientation.DownLeft)) { possibleOptions.Add(Orientation.DownLeft); }
         if (Floor.IsPassagePossible(currentGridPosition, Orientation.DownRight)) { possibleOptions.Add(Orientation.DownRight); }
 
-        // If there are no options, do nothing (player has to intervene. if he can't, game over)
+        // check if player is stuck
         if (!possibleOptions.Any())
         {
             _playerIsStuck = true;
