@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 09f076eca85ea7f4e9abcbf6674f73d7, type: 3}
-  m_Name: Intro
+  m_Name: Lv3a
   m_EditorClassIdentifier: 
   CharacterPortrait: {fileID: 21300000, guid: 4d7722a44022e4341ab029ba18cc54f0, type: 3}
   PortraitOnRightSide: 1
-  DialogText: Welcome to the dungeon, we got fun and games!
-  DialogButtonText: Start
+  DialogText: 'What is taking you so long? Hurry on down my domain. '
+  DialogButtonText: next

@@ -20,8 +20,8 @@ MonoBehaviour:
   Bends: 3
   DeadEnds: 1
   Pizzas: 1
-  Gemstones: 1
-  Swords: 0
+  Gemstones: 0
+  Swords: 1
   Monsters:
   - {fileID: 11400000, guid: f0fe6959969dfad46a0ede415eac1f3c, type: 2}
   - {fileID: 11400000, guid: c757c68dfe61bcf4db1776e7caad94d8, type: 2}
