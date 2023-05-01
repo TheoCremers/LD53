@@ -83,7 +83,9 @@ public class Dungeon : MonoBehaviour
     {
         if (ResourceManager.Instance.MimicFullness <= 0)
         {
+            Debug.Log("check");
             int result = await DialogHelper.ShowConversation(GameOverConversation);
+            Debug.Log("doublecheck");
             if (result == 1)
             {
                 RestartCurrentFloor();
