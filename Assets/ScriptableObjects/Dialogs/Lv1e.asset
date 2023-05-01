@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CharacterPortrait: {fileID: 21300000, guid: 4d7722a44022e4341ab029ba18cc54f0, type: 3}
   PortraitOnRightSide: 1
-  DialogText: Fool! Look for the arrows pointing downward. If your path is blocked,
-    call upon my powers.
+  DialogText: 'DEMON KING: Fool! Look for the arrows pointing downward. If your path
+    is blocked, call upon my powers.'
   DialogButtonText: end
+  SecondButtonActive: 0
+  SecondButtonText: ...

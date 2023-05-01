@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CharacterPortrait: {fileID: 21300000, guid: 4d7722a44022e4341ab029ba18cc54f0, type: 3}
   PortraitOnRightSide: 1
-  DialogText: As for you.. One more snack for my dear Mimic, I would say.
+  DialogText: 'DEMON KING: As for you.. One more snack for my dear Mimic, I would
+    say.'
   DialogButtonText: next
   SecondButtonActive: 0
   SecondButtonText: ...

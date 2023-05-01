@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CharacterPortrait: {fileID: 21300000, guid: 4d7722a44022e4341ab029ba18cc54f0, type: 3}
   PortraitOnRightSide: 1
-  DialogText: Can't do it without my help, huh? Fine, I'll see what I can do.
+  DialogText: 'DEMON KING: Can''t do it without my help, huh? Fine, I''ll see what
+    I can do.'
   DialogButtonText: end
   SecondButtonActive: 0
   SecondButtonText: ...

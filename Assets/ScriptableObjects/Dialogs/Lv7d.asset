@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Lv7d
   m_EditorClassIdentifier: 
   CharacterPortrait: {fileID: 21300000, guid: 5e1578a97f019c146ac9343a58ce49f2, type: 3}
-  PortraitOnRightSide: 0
-  DialogText: 'Yummy! b-but.. w-well.. After all we''re gone through.. '
+  PortraitOnRightSide: 1
+  DialogText: 'MIMIC: Yummy! b-but.. w-well.. After all we''re gone through.. '
   DialogButtonText: next
   SecondButtonActive: 0
   SecondButtonText: ...
