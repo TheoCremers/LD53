@@ -12,6 +12,7 @@ public class FoodItem : MonoBehaviour, IRoomOccupant
     {
         ResourceManager.Instance.ChangeMimicFullness(FullnessGain, transform.position);
 
+        AudioManager.PlaySFX(SFXType.Eat);
         await SpriteRenderer.DOFade(0f, FadeTime).AsyncWaitForCompletion();
 
         Destroy(gameObject);
