@@ -26,6 +26,6 @@ public class ForsakenPowerItem : MonoBehaviour, IRoomOccupant
 
     public void OnRoomRotate(bool clockwise)
     {
-        SpriteRenderer.flipX = !SpriteRenderer.flipX;
+        SpriteRenderer.flipX = !clockwise;
     }
 }
