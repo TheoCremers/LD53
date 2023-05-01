@@ -50,7 +50,10 @@ public class Monster : MonoBehaviour, IRoomOccupant
         var gridForwardDirection = PositionHelper.ToVector(guy.FacingDirection);
         var forwardDirection = PositionHelper.GridToWorldPosition(gridForwardDirection);
 
-        // back up both sprites
+        // Turn enemy to face the player
+        SpriteRenderer.flipX = (guy.FacingDirection == Orientation.TopLeft || guy.FacingDirection == Orientation.DownLeft);
+
+        // back up both sprites        
         guy.transform.DOMove(guy.transform.position - forwardDirection * StandOffGridDistance, StandOffStepTime);
         await transform.DOMove(transform.position + forwardDirection * StandOffGridDistance, StandOffStepTime).AsyncWaitForCompletion();
 
