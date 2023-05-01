@@ -60,7 +60,7 @@ public class Dungeon : MonoBehaviour
         // Display buttons advance or intervene
     }
 
-    public void SetTurnStateMimicGuy()
+    public async void SetTurnStateMimicGuy()
     {
         TurnState = TurnState.MimicGuy;
         // Hide buttons
@@ -76,6 +76,7 @@ public class Dungeon : MonoBehaviour
         }
         else
         {
+            await TimeHelper.WaitForSeconds(0.3f);
             StartNewTurn();
         }
     }

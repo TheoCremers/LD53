@@ -78,7 +78,7 @@ public class Monster : MonoBehaviour, IRoomOccupant
             guy.FacingDirection = PositionHelper.ToOrientation(-gridForwardDirection);
             guy.UpdateSprite();
             await guy.transform.DOMove(guy.transform.position - forwardDirection, ClashResolveTime).SetEase(Ease.OutQuint).AsyncWaitForCompletion();
-            ResourceManager.Instance.TooWeak(guy.transform.position);
+            await ResourceManager.Instance.TooWeak(guy.transform.position);
             ShowPowerIndicator();
             return false;
         }
