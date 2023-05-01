@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3412594170964490097}
   - component: {fileID: 3412594170964490098}
   - component: {fileID: 3412594170964490099}
+  - component: {fileID: 8366022048140416079}
   m_Layer: 0
   m_Name: DungeonCamera
   m_TagString: Untagged
@@ -151,3 +152,11 @@ MonoBehaviour:
   StartMimicTurnChannel: {fileID: 11400000, guid: 4b49d1f1ac0c93c4a8a0d6cc0c61ba9e, type: 2}
   CameraRef: {fileID: 3412594170964490103}
   MimicGuy: {fileID: 0}
+--- !u!81 &8366022048140416079
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3412594170964490101}
+  m_Enabled: 1

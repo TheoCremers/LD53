@@ -173,6 +173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RoomRotateEventChannel: {fileID: 11400000, guid: 9da990f352dbd4d47b78841a51eba217, type: 2}
+  StartOverlordTurnEvent: {fileID: 11400000, guid: 35aba1eb81a19af47a42aa10dae9ba96, type: 2}
   RotateButtonClockwise: {fileID: 7737881421734355399}
   RotateButtonCounterClockwise: {fileID: 5273768936096603769}
   ClockwiseArrow: {fileID: 1593469447066151473}

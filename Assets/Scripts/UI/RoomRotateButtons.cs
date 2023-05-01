@@ -7,6 +7,7 @@ public class RoomRotateButtons : MonoBehaviour
     #region EventChannels
 
     public RotateEventChannel RoomRotateEventChannel;
+    public VoidEventChannel StartOverlordTurnEvent;
 
     #endregion
 
@@ -29,6 +30,7 @@ public class RoomRotateButtons : MonoBehaviour
         RotateButtonClockwise.onClick.AddListener(() => RoomRotateEventChannel.RaiseEvent(_tileIndices, true));
         RotateButtonCounterClockwise.onClick.AddListener(() => RoomRotateEventChannel.RaiseEvent(_tileIndices, false));
         RoomRotateEventChannel.OnEventRaised += (x, y) => DeactivateAndFadeOut();
+        StartOverlordTurnEvent.OnEventRaised += DeactivateAndFadeOut;
     }
 
     public void DeactivateAndHide()

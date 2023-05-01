@@ -136,6 +136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RoomShiftEventChannel: {fileID: 11400000, guid: b37f6b385ad690346bcdce1e24ba1aee, type: 2}
+  StartOverlordTurnEvent: {fileID: 11400000, guid: 35aba1eb81a19af47a42aa10dae9ba96, type: 2}
 --- !u!61 &8710676758774862480
 BoxCollider2D:
   m_ObjectHideFlags: 0

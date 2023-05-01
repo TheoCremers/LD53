@@ -7,6 +7,7 @@ public class RoomShiftButton : MonoBehaviour
     #region EventChannels
 
     public ShiftEventChannel RoomShiftEventChannel;
+    public VoidEventChannel StartOverlordTurnEvent;
 
     #endregion
 
@@ -33,6 +34,7 @@ public class RoomShiftButton : MonoBehaviour
 
         _shiftButton.onClick.AddListener(() => RoomShiftEventChannel.RaiseEvent(_facingDirection, _lineIndex));
         RoomShiftEventChannel.OnEventRaised += (x, y) => DeactivateAndFadeOut();
+        StartOverlordTurnEvent.OnEventRaised += DeactivateAndFadeOut;
 
         switch (facingDirection)
         {
