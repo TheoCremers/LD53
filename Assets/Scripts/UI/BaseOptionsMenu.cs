@@ -22,6 +22,8 @@ public class BaseOptionsMenu : MonoBehaviour
 
     public async Task FadeOut()
     {
+        DOTween.Kill(_rectTransform);
+        DOTween.Kill(_canvasGroup);
         _canvasGroup.DOFade(0f, FadeTime);
         _canvasGroup.blocksRaycasts = false;
         await _rectTransform.DOAnchorPos(_defaultPosition + FadeOffset, FadeTime).AsyncWaitForCompletion();
@@ -29,6 +31,8 @@ public class BaseOptionsMenu : MonoBehaviour
 
     public async Task FadeIn()
     {
+        DOTween.Kill(_rectTransform);
+        DOTween.Kill(_canvasGroup);
         _canvasGroup.DOFade(DefaultAlpha, FadeTime);
         _canvasGroup.blocksRaycasts = true;
         await _rectTransform.DOAnchorPos(_defaultPosition, FadeTime).AsyncWaitForCompletion();
