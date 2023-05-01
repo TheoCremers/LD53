@@ -51,6 +51,7 @@ MonoBehaviour:
   StartOverlordTurnChannel: {fileID: 11400000, guid: 35aba1eb81a19af47a42aa10dae9ba96, type: 2}
   StartIdleChannel: {fileID: 11400000, guid: 965d2ae4fc2a6b34abd468157ad5e658, type: 2}
   Floor: {fileID: 2997353890416233225}
+  GameOverConvo: {fileID: 11400000, guid: d2bbe6fcb6f6f45418c0b5daa6824e6e, type: 2}
   MimicGuy: {fileID: 2190194693573268779}
   TurnState: 0
   Levels:
@@ -61,6 +62,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2a7e20bbf256ef64285eff2e40640a07, type: 2}
   - {fileID: 11400000, guid: eef37a4e9030b364d9d80e5f6979d3e8, type: 2}
   CurrentLevel: 0
+  StartFloorStrength: 1
 --- !u!1001 &3412594170056237340
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -143,6 +145,14 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3412594170964490101, guid: 851116b5a4aa3dc4d9a7e2165a81d02a, type: 3}
   m_PrefabInstance: {fileID: 3412594170056237340}
   m_PrefabAsset: {fileID: 0}
+--- !u!81 &2116900465
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2116900457}
+  m_Enabled: 1
 --- !u!114 &2116900464
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,14 +170,6 @@ MonoBehaviour:
   zoomScaleStart: 2
   smoovZoom: 1
   smoovZoomDuration: 0.5
---- !u!81 &2116900465
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2116900457}
-  m_Enabled: 1
 --- !u!20 &2116900459 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 3412594170964490103, guid: 851116b5a4aa3dc4d9a7e2165a81d02a, type: 3}
