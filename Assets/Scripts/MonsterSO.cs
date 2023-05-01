@@ -10,5 +10,5 @@ public class MonsterSO : ScriptableObject
     public int HungerGain = 3;
     public int AtkPowerGain = 1;
 
-    public Sprite Sprite;    
+    public Sprite Sprite;
 }
