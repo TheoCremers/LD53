@@ -436,6 +436,19 @@ PrefabInstance:
       propertyPath: m_BlocksRaycasts
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5853935242527877108, guid: e7bdcef0b38555a459baf62d759639dd, type: 3}
+      propertyPath: m_text
+      value: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim '
+      objectReference: {fileID: 0}
+    - target: {fileID: 5853935242527877108, guid: e7bdcef0b38555a459baf62d759639dd, type: 3}
+      propertyPath: m_fontSize
+      value: 36
+      objectReference: {fileID: 0}
+    - target: {fileID: 5853935242527877108, guid: e7bdcef0b38555a459baf62d759639dd, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 36
+      objectReference: {fileID: 0}
     - target: {fileID: 7562621929169191597, guid: e7bdcef0b38555a459baf62d759639dd, type: 3}
       propertyPath: m_Name
       value: Dialog
