@@ -114,6 +114,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShiftButtonPrefab: {fileID: 1494851497389452237, guid: e764d090f43157e4db8cfcbd1a8656dd, type: 3}
+  RotateButtonsPrefab: {fileID: 5339090342414073355, guid: 6287a0ad96e533048a41c191624b44d9, type: 3}
 --- !u!1 &8891769938085704683
 GameObject:
   m_ObjectHideFlags: 0
@@ -160,13 +161,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RoomShiftEventChannel: {fileID: 11400000, guid: b37f6b385ad690346bcdce1e24ba1aee, type: 2}
+  RoomRotateEventChannel: {fileID: 11400000, guid: 9da990f352dbd4d47b78841a51eba217, type: 2}
   ShowShiftButtonsEvent: {fileID: 11400000, guid: fd0c0c876622e2949baaa761f2e8a6ac, type: 2}
   StartOverlordTurnEvent: {fileID: 11400000, guid: 35aba1eb81a19af47a42aa10dae9ba96, type: 2}
   DungeonRoomPrefab: {fileID: 3442427670383652863, guid: 33ddc69d62d8bcb4b88703eb1c8e92e2, type: 3}
   RoomManipulation: {fileID: 627539963205276882}
   PizzaPrefab: {fileID: 1538036721402891559, guid: 98dffb5dbfce49648be6b838a5ff4dec, type: 3}
-  SwordPrefab: {fileID: 0}
-  GemPrefab: {fileID: 0}
+  SwordPrefab: {fileID: 7139088486409385451, guid: b46ba4dd959600143929cffcebd2e69d, type: 3}
+  GemPrefab: {fileID: 2431459551338349622, guid: b6e9cd98efa5b3d42a667831f6eef2e0, type: 3}
   MonsterPrefab: {fileID: 437781928619152958, guid: 70ba8b4fb628bf14cb8f4daaff914d65, type: 3}
   Size: {x: 5, y: 5}
   Dungeon: {fileID: 0}

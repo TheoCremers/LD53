@@ -66,8 +66,7 @@ public class ButtonWithDoubleCost : Button
 
         //AmountLabel.DOColor(Color.red, _fadeTime);
         await IconImage.DOColor(Color.red, _fadeTime).AsyncWaitForCompletion();
-        //await Task.Delay(100);
-        System.Threading.Thread.Sleep(100);
+        await TimeHelper.WaitForSeconds(0.1f);
         //AmountLabel.DOColor(_defaultTextColor, _fadeTime);
         await IconImage.DOColor(Color.white, _fadeTime).AsyncWaitForCompletion();
     }
@@ -78,8 +77,7 @@ public class ButtonWithDoubleCost : Button
 
         //AmountLabel.DOColor(Color.red, _fadeTime);
         await IconImage2.DOColor(Color.red, _fadeTime).AsyncWaitForCompletion();
-        //await Task.Delay(100);
-        System.Threading.Thread.Sleep(100);
+        await TimeHelper.WaitForSeconds(0.1f);
         //AmountLabel.DOColor(_defaultTextColor, _fadeTime);
         await IconImage2.DOColor(Color.white, _fadeTime).AsyncWaitForCompletion();
     }

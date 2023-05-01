@@ -130,8 +130,7 @@ public class Dungeon : MonoBehaviour
 
         CurrentLevel++;
         Floor.Generate(MimicGuy, Levels[Mathf.Clamp(CurrentLevel, 0, Levels.Count - 1)]);
-        //await Task.Delay(100);
-        System.Threading.Thread.Sleep(100);
+        await TimeHelper.WaitForSeconds(0.1f);
         StartNewTurn();
     }
 

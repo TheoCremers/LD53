@@ -42,8 +42,7 @@ public class MimicGuy : MonoBehaviour, IRoomOccupant
     public async Task<bool> OnPlayerEnterRoom(MimicGuy guy)
     {
         Debug.LogWarning("Player entered their own room???");
-        //await Task.Delay(100);
-        System.Threading.Thread.Sleep(100);
+        await TimeHelper.WaitForSeconds(0.1f);
         return true;
     }
 

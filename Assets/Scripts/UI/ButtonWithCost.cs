@@ -49,9 +49,8 @@ public class ButtonWithCost : Button
         // play SFX?
 
         //AmountLabel.DOColor(Color.red, _fadeTime);
-        await IconImage.DOColor(Color.red, _fadeTime).AsyncWaitForCompletion();
-        //await Task.Delay(100);
-        System.Threading.Thread.Sleep(100);
+        await IconImage.DOColor(Color.red, _fadeTime).AsyncWaitForCompletion(); 
+        await TimeHelper.WaitForSeconds(0.1f);
         //AmountLabel.DOColor(_defaultTextColor, _fadeTime);
         await IconImage.DOColor(Color.white, _fadeTime).AsyncWaitForCompletion();
     }
