@@ -176,7 +176,12 @@ public class Dungeon : MonoBehaviour
         else
         {
             await TimeHelper.WaitForSeconds(3f);
-            await DialogHelper.ShowConversation(CreditsConvo);
+            int result = await DialogHelper.ShowConversation(CreditsConvo);
+            if (result == 2)
+            {
+                ResourceManager.Instance.ShiftCost *= 2;
+                ResourceManager.Instance.RotateCost *= 2;
+            }
             RestartFromFloor1();
         }
     }

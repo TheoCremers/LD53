@@ -19,5 +19,5 @@ MonoBehaviour:
 
     Press ''Restart'' to play again.'
   DialogButtonText: Restart
-  SecondButtonActive: 0
-  SecondButtonText: ...
+  SecondButtonActive: 1
+  SecondButtonText: Hardmode
