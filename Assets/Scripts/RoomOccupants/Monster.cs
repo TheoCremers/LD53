@@ -63,6 +63,8 @@ public class Monster : MonoBehaviour, IRoomOccupant
         // sprites clash
         guy.transform.DOMove(guy.transform.position + forwardDirection * StandOffGridDistance, ClashMoveTime).SetEase(Ease.InBack);
         await transform.DOMove(transform.position - forwardDirection * StandOffGridDistance, ClashMoveTime).SetEase(Ease.InBack).AsyncWaitForCompletion();
+        
+        AudioManager.PlaySFX(SFXType.Fight);
 
         if (ResourceManager.Instance.MimicStrength >= PowerLevel)
         {
@@ -70,8 +72,10 @@ public class Monster : MonoBehaviour, IRoomOccupant
             transform.DOMove(transform.position + forwardDirection * 0.4f, ClashResolveTime).SetEase(Ease.OutQuint);
             await SpriteRenderer.DOFade(0f, MonsterFadeTime).AsyncWaitForCompletion();
             ResourceManager.Instance.ChangeMimicFullness(HungerGain, guy.transform.position);
+            AudioManager.PlaySFX(SFXType.Eat);
             await TimeHelper.WaitForSeconds(0.3f);
             ResourceManager.Instance.ChangeMimicPower(AtkPowerGain, guy.transform.position);
+            AudioManager.PlaySFX(SFXType.Burp);
             Destroy(gameObject);
             return true;
         }

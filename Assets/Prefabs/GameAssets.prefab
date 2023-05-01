@@ -44,7 +44,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c93c62d031f8d644d8bec302099b25d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SFXMetadata: []
+  SFXMetadata:
+  - AudioClip: {fileID: 8300000, guid: e5cb3bf0d906a1b48b1894d3f79423af, type: 3}
+    BaseVolume: 1
+    SfxType: 1
+  - AudioClip: {fileID: 8300000, guid: 7b5192c75399fdb41a0b7b8c4a685d04, type: 3}
+    BaseVolume: 1
+    SfxType: 2
+  - AudioClip: {fileID: 8300000, guid: c5110330604898e47bb6030353630adc, type: 3}
+    BaseVolume: 1
+    SfxType: 3
+  - AudioClip: {fileID: 8300000, guid: 3c880ed4699cef645ad1224e2c42f8c6, type: 3}
+    BaseVolume: 1
+    SfxType: 4
+  - AudioClip: {fileID: 8300000, guid: 2f7fce00d88887645a5a888a193c913b, type: 3}
+    BaseVolume: 1
+    SfxType: 5
+  - AudioClip: {fileID: 8300000, guid: 6ceab54e9f448414b92afa1a8b3cfb7a, type: 3}
+    BaseVolume: 1
+    SfxType: 6
+  - AudioClip: {fileID: 8300000, guid: 9407336d5d0ab0149bf717a4664d0e40, type: 3}
+    BaseVolume: 1
+    SfxType: 7
+  - AudioClip: {fileID: 8300000, guid: 101fcbbd4a2087941b028e1566495c94, type: 3}
+    BaseVolume: 1
+    SfxType: 8
   BGMMetadata:
   - AudioClip: {fileID: 8300000, guid: 519a71c0f1feb0141a1b67267a839db9, type: 3}
     BaseVolume: 0.5

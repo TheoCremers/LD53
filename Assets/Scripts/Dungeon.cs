@@ -123,6 +123,8 @@ public class Dungeon : MonoBehaviour
         var nextRoomPos = DetermineNextRoom(MimicGuy.FacingDirection);
         var nextRoom = Floor.Rooms[nextRoomPos.x, nextRoomPos.y];
         MimicGuy.transform.SetParent(Floor.transform, true);
+
+        AudioManager.PlaySFX(SFXType.Walk);
         await TweenMimicGuy(MimicGuy.transform, PositionHelper.GridToWorldPosition(nextRoomPos));
 
         // handle room interaction

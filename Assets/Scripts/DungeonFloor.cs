@@ -407,6 +407,8 @@ public class DungeonFloor : MonoBehaviour
 
     public async void ShiftRooms(Orientation shiftDirection, int lineIndex)
     {
+        AudioManager.PlaySFX(SFXType.Shift);
+
         switch(shiftDirection)
         {
             case Orientation.TopLeft:
@@ -429,6 +431,8 @@ public class DungeonFloor : MonoBehaviour
 
     public async void RotateRoom(Vector2Int roomIndices, bool clockwise)
     {
+        AudioManager.PlaySFX(SFXType.Shift);
+
         var room = Rooms[roomIndices.x, roomIndices.y];
         room.RotateDoors(clockwise);
         room.Occupant?.OnRoomRotate(clockwise);
@@ -478,11 +482,13 @@ public class DungeonFloor : MonoBehaviour
 
     public async Task MoveRoomDown(DungeonRoom room, MimicGuy guy)
     {
+
         var roomOffset = PositionHelper.GridToWorldPosition(new Vector2(-1f, -1f));
         roomOffset.z = 0f;
         var roomTransform = room.transform;
         guy.SpriteRenderer.sortingLayerID = SortingLayer.layers.FirstOrDefault(x => x.name.Equals("Default")).id;
 
+        AudioManager.PlaySFX(SFXType.Shift);
         roomTransform.DOMove(roomTransform.position + roomOffset, 1f).SetEase(Ease.InCubic);
         await TimeHelper.WaitForSeconds(0.5f);
         foreach (var renderer in roomTransform.GetComponentsInChildren<SpriteRenderer>())

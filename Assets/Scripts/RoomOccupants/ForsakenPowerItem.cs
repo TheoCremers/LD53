@@ -12,6 +12,7 @@ public class ForsakenPowerItem : MonoBehaviour, IRoomOccupant
     {
         ResourceManager.Instance.ChangeForsakenPower(ForsakenPowerGained, transform.position);
 
+        AudioManager.PlaySFX(SFXType.Forsaken);
         await SpriteRenderer.DOFade(0f, FadeTime).AsyncWaitForCompletion();
 
         Destroy(gameObject);

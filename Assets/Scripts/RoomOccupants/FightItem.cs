@@ -12,6 +12,7 @@ public class FightItem : MonoBehaviour, IRoomOccupant
     {
         ResourceManager.Instance.ChangeMimicPower(FightPowerGain, transform.position);
 
+        AudioManager.PlaySFX(SFXType.Sparkle);
         await SpriteRenderer.DOFade(0f, FadeTime).AsyncWaitForCompletion();
 
         Destroy(gameObject);
