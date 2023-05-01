@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: FinalFloor
   m_EditorClassIdentifier: 
   LevelSize: {x: 1, y: 1}
-  Intro: {fileID: 0}
-  BGM: 1
+  Intro: {fileID: 11400000, guid: d21350d8a63479f4a8ecce8c353e303e, type: 2}
+  BGM: 3
   FourWays: 1
   ThreeWays: 0
   Hallways: 0

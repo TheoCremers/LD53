@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Lv1b
   m_EditorClassIdentifier: 
   CharacterPortrait: {fileID: 21300000, guid: 2573828aa34fdfe48a31b08372c28150, type: 3}
-  PortraitOnRightSide: 0
-  DialogText: I wish I had never found this thing. Why was I so greedy!
+  PortraitOnRightSide: 1
+  DialogText: 'DUDLEY: I wish I had never found this thing. Why was I so greedy!'
   DialogButtonText: next
+  SecondButtonActive: 0
+  SecondButtonText: ...

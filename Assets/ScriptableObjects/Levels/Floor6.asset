@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelSize: {x: 7, y: 7}
   Intro: {fileID: 11400000, guid: 28140eb23af18ab4395116e2d31cad41, type: 2}
-  BGM: 1
+  BGM: 3
   FourWays: 2
   ThreeWays: 17
   Hallways: 14
@@ -22,13 +22,13 @@ MonoBehaviour:
   DeadEnds: 2
   Pizzas: 3
   Gemstones: 3
-  Swords: 0
+  Swords: 2
   Monsters:
   - {fileID: 11400000, guid: 91d4e06ff285c2b4c9dc5614e86840d1, type: 2}
   - {fileID: 11400000, guid: 91d4e06ff285c2b4c9dc5614e86840d1, type: 2}
   - {fileID: 11400000, guid: 91d4e06ff285c2b4c9dc5614e86840d1, type: 2}
   - {fileID: 11400000, guid: 91d4e06ff285c2b4c9dc5614e86840d1, type: 2}
-  - {fileID: 11400000, guid: eec26cabc081d794db41af43872cb47c, type: 2}
+  - {fileID: 11400000, guid: f0fe6959969dfad46a0ede415eac1f3c, type: 2}
   - {fileID: 11400000, guid: eec26cabc081d794db41af43872cb47c, type: 2}
   - {fileID: 11400000, guid: eec26cabc081d794db41af43872cb47c, type: 2}
   - {fileID: 11400000, guid: eec26cabc081d794db41af43872cb47c, type: 2}

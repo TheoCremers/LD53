@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelSize: {x: 6, y: 6}
   Intro: {fileID: 11400000, guid: fccdc1bd3300faf4589b2f95b7a703c6, type: 2}
-  BGM: 2
+  BGM: 1
   FourWays: 6
   ThreeWays: 0
   Hallways: 15

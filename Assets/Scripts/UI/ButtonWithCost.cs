@@ -38,6 +38,7 @@ public class ButtonWithCost : Button
 
     public override void OnPointerClick(UnityEngine.EventSystems.PointerEventData eventData)
     {
+        if (!interactable) { return; }
         if (AssociatedResource.CurrentValue >= ResourceCost)
         {
             AssociatedResource.ChangeValue(-ResourceCost);

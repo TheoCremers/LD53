@@ -14,14 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CharacterPortrait: {fileID: 0}
   PortraitOnRightSide: 0
-  DialogText: '''Package Deal'' was made for Ludum Dare 50th edition by
+  DialogText: '''Package Deal'' was made for Ludum Dare 53th edition by
 
     Theo
     Cremers
 
     Ruud Cremers
 
-    Laurens de Vos'
+    Laurens de Vos
+
+'
   DialogButtonText: next
   SecondButtonActive: 0
   SecondButtonText: ...
