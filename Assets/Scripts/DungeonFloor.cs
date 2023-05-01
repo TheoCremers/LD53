@@ -469,12 +469,14 @@ public class DungeonFloor : MonoBehaviour
         guy.SpriteRenderer.sortingLayerID = SortingLayer.layers.FirstOrDefault(x => x.name.Equals("Default")).id;
 
         roomTransform.DOMove(roomTransform.position + roomOffset, 1f).SetEase(Ease.InCubic);
-        await Task.Delay(500);
+        //await Task.Delay(500);
+        System.Threading.Thread.Sleep(500);
         foreach (var renderer in roomTransform.GetComponentsInChildren<SpriteRenderer>())
         {
             renderer.DOFade(0f, 0.5f);
         }
-        await Task.Delay(1000);
+        //await Task.Delay(1000);
+        System.Threading.Thread.Sleep(1000);
 
         guy.SpriteRenderer.sortingLayerID = SortingLayer.layers.FirstOrDefault(x => x.name.Equals("Characters")).id;
     }
