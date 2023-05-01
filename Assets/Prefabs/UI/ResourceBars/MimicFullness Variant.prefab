@@ -200,7 +200,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5708917161144918892, guid: bcdc67ddbea742949bd807cd0ab0872c, type: 3}
       propertyPath: MaxValue
-      value: 7
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 5708917161144918892, guid: bcdc67ddbea742949bd807cd0ab0872c, type: 3}
       propertyPath: UnitPrefab

@@ -53,6 +53,7 @@ public class ResourceBar : MonoBehaviour
 
         for (int i = 0; i < _resourceUnits.Count; i++)
         {
+            DOTween.Kill(_resourceUnits[i]);
             if (i + 1 > _currentValue)
             {
                 _resourceUnits[i].DOFade(InactiveAlpha, TweenDuration);

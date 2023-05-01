@@ -20,6 +20,8 @@ public class Dungeon : MonoBehaviour
 
     public ConversationSO GameOverConvo;
 
+    public ConversationSO CreditsConvo;
+
     public MimicGuy MimicGuy;
 
     public TurnState TurnState;
@@ -156,17 +158,24 @@ public class Dungeon : MonoBehaviour
 
         DOTween.KillAll();
         CurrentLevel++;
-        if (CurrentLevel < Levels.Count)
+        
+        Floor.Generate(MimicGuy, Levels[Mathf.Clamp(CurrentLevel, 0, Levels.Count - 1)]);
+        ResourceManager.Instance.RestockResources();
+        await TimeHelper.WaitForSeconds(0.1f);
+        if (Levels[CurrentLevel].Intro != null)
         {
-            Floor.Generate(MimicGuy, Levels[Mathf.Clamp(CurrentLevel, 0, Levels.Count - 1)]);
-            ResourceManager.Instance.RestockResources();
-            await TimeHelper.WaitForSeconds(0.1f);
             await DialogHelper.ShowConversation(Levels[CurrentLevel].Intro);
+        }
+
+        if (CurrentLevel < Levels.Count - 1)
+        {
             StartNewTurn();
         }
         else
         {
-            // end game dialog?
+            await TimeHelper.WaitForSeconds(3f);
+            await DialogHelper.ShowConversation(CreditsConvo);
+            RestartFromFloor1();
         }
     }
 

@@ -10,11 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 09f076eca85ea7f4e9abcbf6674f73d7, type: 3}
-  m_Name: OverlordTurnFirstTime
+  m_Name: Credits 2
   m_EditorClassIdentifier: 
-  CharacterPortrait: {fileID: 21300000, guid: 4d7722a44022e4341ab029ba18cc54f0, type: 3}
-  PortraitOnRightSide: 1
-  DialogText: Can't do it without my help, huh? Fine, I'll see what I can do.
-  DialogButtonText: end
+  CharacterPortrait: {fileID: 0}
+  PortraitOnRightSide: 0
+  DialogText: '''Package Deal'' was made for Ludum Dare 50th edition by
+
+    Theo
+    Cremers
+
+    Ruud Cremers
+
+    Laurens de Vos'
+  DialogButtonText: next
   SecondButtonActive: 0
   SecondButtonText: ...
