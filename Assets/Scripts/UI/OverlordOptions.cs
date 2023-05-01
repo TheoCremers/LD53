@@ -50,8 +50,15 @@ public class OverlordOptions : BaseOptionsMenu
 
     public async void EnableAndFadeIn()
     {
+        SetButtonCosts();
         await FadeIn();
         ShowShiftButton.interactable = true;
         FinishInterventionButton.interactable = true;
+    }
+
+    public void SetButtonCosts()
+    {
+        ShowShiftButton.SetAmount(ResourceManager.Instance.ShiftCost);
+        ShowRotateButton.SetAmount(ResourceManager.Instance.RotateCost);
     }
 }

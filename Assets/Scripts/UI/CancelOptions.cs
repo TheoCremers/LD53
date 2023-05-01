@@ -23,8 +23,8 @@ public class CancelOptions : BaseOptionsMenu
 
         CancelButton.onClick.AddListener(StartOverlordTurnEvent.RaiseEvent);
 
-        ShowShiftButtonsEvent.OnEventRaised += EnableAndFadeIn;
-        ShowRotateButtonsEvent.OnEventRaised += EnableAndFadeIn;
+        ShowShiftButtonsEvent.OnEventRaised += () => EnableAndFadeInWithCorrectValue(ResourceManager.Instance.ShiftCost);
+        ShowRotateButtonsEvent.OnEventRaised += () => EnableAndFadeInWithCorrectValue(ResourceManager.Instance.RotateCost);
         StartOverlordTurnEvent.OnEventRaised += DisableAndFadeOut;
         RoomRotateEventChannel.OnEventRaised += (x, y) => DisableAndFadeOut();
         RoomShiftEventChannel.OnEventRaised += (x, y) => DisableAndFadeOut();
@@ -34,8 +34,8 @@ public class CancelOptions : BaseOptionsMenu
     {
         CancelButton.onClick.RemoveListener(StartOverlordTurnEvent.RaiseEvent);
 
-        ShowShiftButtonsEvent.OnEventRaised -= EnableAndFadeIn;
-        ShowRotateButtonsEvent.OnEventRaised -= EnableAndFadeIn;
+        ShowShiftButtonsEvent.OnEventRaised -= () => EnableAndFadeInWithCorrectValue(ResourceManager.Instance.ShiftCost);
+        ShowRotateButtonsEvent.OnEventRaised -= () => EnableAndFadeInWithCorrectValue(ResourceManager.Instance.RotateCost);
         StartOverlordTurnEvent.OnEventRaised -= DisableAndFadeOut;
         RoomRotateEventChannel.OnEventRaised -= (x, y) => DisableAndFadeOut();
         RoomShiftEventChannel.OnEventRaised -= (x, y) => DisableAndFadeOut();
@@ -45,6 +45,12 @@ public class CancelOptions : BaseOptionsMenu
     {
         CancelButton.interactable = false;
         await FadeOut();
+    }
+
+    public void EnableAndFadeInWithCorrectValue(int refundAmount)
+    {
+        CancelButton.SetAmount(-refundAmount);
+        EnableAndFadeIn();
     }
 
     public async void EnableAndFadeIn()

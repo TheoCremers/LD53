@@ -22,6 +22,12 @@ public class ButtonWithCost : Button
         UpdateAmountLabel();
     }
 
+    public void SetAmount(int amount)
+    {
+        ResourceCost = amount;
+        UpdateAmountLabel();
+    }
+
     public void UpdateAmountLabel()
     {
         var labelText = string.Empty;

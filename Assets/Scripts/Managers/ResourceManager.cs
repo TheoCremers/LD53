@@ -25,6 +25,9 @@ public class ResourceManager : MonoBehaviour
         set { MimicStrengthIndicator.SetStrength(value); }
     }
 
+    public int ShiftCost { get; set; } = 1;
+    public int RotateCost { get; set; } = 2;
+
     public void ChangeMimicFullness(int change, Vector3 changeLocation)
     {
         MimicFullnessResource.ChangeValue(change);
