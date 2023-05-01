@@ -7,6 +7,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1577158841509725104, guid: 6d399d9b189563f45a29694ca3060743, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1577158841509725104, guid: 6d399d9b189563f45a29694ca3060743, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3587175751356218295, guid: 6d399d9b189563f45a29694ca3060743, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -22,6 +30,10 @@ PrefabInstance:
     - target: {fileID: 3587175751356218295, guid: 6d399d9b189563f45a29694ca3060743, type: 3}
       propertyPath: m_Color.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3587175751356218295, guid: 6d399d9b189563f45a29694ca3060743, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4238415299675480479, guid: 6d399d9b189563f45a29694ca3060743, type: 3}
       propertyPath: ResourceCost
@@ -113,7 +125,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6378344205150303161, guid: 6d399d9b189563f45a29694ca3060743, type: 3}
       propertyPath: m_text
-      value: -1
+      value: +1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6378344205150303161, guid: 6d399d9b189563f45a29694ca3060743, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6474584018510929934, guid: 6d399d9b189563f45a29694ca3060743, type: 3}
       propertyPath: m_text

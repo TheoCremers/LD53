@@ -156,11 +156,18 @@ public class Dungeon : MonoBehaviour
 
         DOTween.KillAll();
         CurrentLevel++;
-        Floor.Generate(MimicGuy, Levels[Mathf.Clamp(CurrentLevel, 0, Levels.Count - 1)]);
-        ResourceManager.Instance.RestockResources();
-        await TimeHelper.WaitForSeconds(0.1f);
-        await DialogHelper.ShowConversation(Levels[CurrentLevel].Intro);
-        StartNewTurn();
+        if (CurrentLevel < Levels.Count)
+        {
+            Floor.Generate(MimicGuy, Levels[Mathf.Clamp(CurrentLevel, 0, Levels.Count - 1)]);
+            ResourceManager.Instance.RestockResources();
+            await TimeHelper.WaitForSeconds(0.1f);
+            await DialogHelper.ShowConversation(Levels[CurrentLevel].Intro);
+            StartNewTurn();
+        }
+        else
+        {
+            // end game dialog?
+        }
     }
 
     private async void RestartFromFloor1()
