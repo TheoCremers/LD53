@@ -183,6 +183,8 @@ public class DungeonFloor : MonoBehaviour
             var dungeonRoom = GenerateRoom(RoomType.DeadEnd);
             tiles.Add(dungeonRoom);
         }
+
+        tiles.Shuffle();
         
         var tilesStack = new Stack<DungeonRoom>(tiles);
 
@@ -364,10 +366,10 @@ public class DungeonFloor : MonoBehaviour
             return new Vector2Int(xPos, yPos);
         }
         // Check if adjacent rooms are free
-        else if ((xPos == 0 || Rooms[xPos-1, yPos] == null) &&
-                (xPos == Size.x-1 || Rooms[xPos+1, yPos] == null) &&
-                (yPos == 0 || Rooms[xPos, yPos-1] == null) &&
-                (yPos == Size.y-1 || Rooms[xPos, yPos+1] == null))
+        else if ((xPos == 0 || Rooms[xPos-1, yPos].Occupant == null) &&
+                (xPos == Size.x-1 || Rooms[xPos+1, yPos].Occupant == null) &&
+                (yPos == 0 || Rooms[xPos, yPos-1].Occupant == null) &&
+                (yPos == Size.y-1 || Rooms[xPos, yPos+1].Occupant == null))
         {
             return new Vector2Int(xPos, yPos);
         }
