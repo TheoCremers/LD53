@@ -54,8 +54,8 @@ public class Monster : MonoBehaviour, IRoomOccupant
         guy.transform.DOMove(guy.transform.position - forwardDirection * StandOffGridDistance, StandOffStepTime);
         await transform.DOMove(transform.position + forwardDirection * StandOffGridDistance, StandOffStepTime).AsyncWaitForCompletion();
 
-        // 1000 ms sleep
-        await TimeHelper.WaitForSeconds(1f);
+        // stand-off
+        await TimeHelper.WaitForSeconds(StandOffTime);
 
         // sprites clash
         guy.transform.DOMove(guy.transform.position + forwardDirection * StandOffGridDistance, ClashMoveTime).SetEase(Ease.InBack);
