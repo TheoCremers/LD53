@@ -65,7 +65,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 205565e6fae9874409deaff576bb1b81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DefaultAlpha: 0.8
+  DefaultAlpha: 1
   FadeTime: 0.5
   FadeOffset: {x: 0, y: -128}
   StartMimicTurnEvent: {fileID: 11400000, guid: 4b49d1f1ac0c93c4a8a0d6cc0c61ba9e, type: 2}
