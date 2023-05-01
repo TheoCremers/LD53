@@ -482,6 +482,7 @@ GameObject:
   - component: {fileID: 2522592421826555305}
   - component: {fileID: 981995058194750979}
   - component: {fileID: 2797485096725205086}
+  - component: {fileID: 5528900735786431278}
   m_Layer: 5
   m_Name: Dialog
   m_TagString: Untagged
@@ -563,6 +564,26 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &5528900735786431278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7562621929169191597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de0d628e3bf790445a8d34e1f46cd246, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DefaultAlpha: 1
+  FadeTime: 0.5
+  FadeOffset: {x: 0, y: -128}
+  DialogTextMesh: {fileID: 5853935242527877108}
+  ContinueButtonTextMesh: {fileID: 1269791848363785422}
+  ContinueButton: {fileID: 9198652947178863119}
+  LeftImage: {fileID: 3087331079085685486}
+  RightImage: {fileID: 8400613573339958051}
 --- !u!1 &8903570967990668777
 GameObject:
   m_ObjectHideFlags: 0

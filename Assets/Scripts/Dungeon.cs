@@ -23,6 +23,8 @@ public class Dungeon : MonoBehaviour
 
     public List<DungeonLevelSO> Levels;
 
+    public Dialog Dialog;
+
     public int CurrentLevel = 0;
 
     public int StartFloorStrength = 1;
@@ -123,6 +125,15 @@ public class Dungeon : MonoBehaviour
         }
 
         StartNewTurn();
+    }
+
+    public async Task ShowDialog(DialogSO dialogSO)
+    {
+        Dialog.SetDialogWithSO(dialogSO);
+        await Dialog.FadeIn();
+        Dialog.StartDialog();
+        await Dialog.WaitForDialogToFinish();
+        await Dialog.FadeOut();
     }
 
     private async void FinishLevel(DungeonRoom exitRoom)

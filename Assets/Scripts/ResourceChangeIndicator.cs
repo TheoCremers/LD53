@@ -8,7 +8,7 @@ public class ResourceChangeIndicator : MonoBehaviour
     public TextMeshPro DeltaLabel;
     public int ChangeAmount = 1;
     public float FadeOutTime = 1f;
-    public Vector3 FadeOutOffset = Vector3.up * 1f;
+    public Vector3 FadeOutOffset = Vector3.up;
 
     private void Start()
     {
