@@ -7,9 +7,7 @@ using System.Threading.Tasks;
 
 public class Dialog : BaseOptionsMenu
 {
-    #region EventChannels
-
-    #endregion
+    public static Dialog Instance;
 
     public TextMeshProUGUI DialogTextMesh;
     public TextMeshProUGUI ContinueButtonTextMesh;
@@ -24,6 +22,15 @@ public class Dialog : BaseOptionsMenu
         base.Awake();
 
         ContinueButton.onClick.AddListener(StopDialog);
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(Instance.gameObject);
+            Instance = this;
+        }
     }
 
     public void OnDestroy()

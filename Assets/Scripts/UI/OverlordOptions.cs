@@ -15,6 +15,10 @@ public class OverlordOptions : BaseOptionsMenu
     public ButtonWithCost ShowRotateButton;
     public Button FinishInterventionButton;
 
+    public DialogSO FirstTimeOverlordStateDialog;
+
+    private bool _overlordTutorialShown = false;
+
     protected override void Awake()
     {
         base.Awake();
@@ -25,7 +29,7 @@ public class OverlordOptions : BaseOptionsMenu
 
         ShowShiftButtonsEvent.OnEventRaised += DisableAndFadeOut;
         ShowRotateButtonsEvent.OnEventRaised += DisableAndFadeOut;
-        StartOverlordTurnEvent.OnEventRaised += EnableAndFadeIn;
+        StartOverlordTurnEvent.OnEventRaised += ShowOverlordTurnTutorial;
         StartIdleEvent.OnEventRaised += DisableAndFadeOut;
     }
 
@@ -37,8 +41,17 @@ public class OverlordOptions : BaseOptionsMenu
 
         ShowShiftButtonsEvent.OnEventRaised -= DisableAndFadeOut;
         ShowRotateButtonsEvent.OnEventRaised -= DisableAndFadeOut;
-        StartOverlordTurnEvent.OnEventRaised -= EnableAndFadeIn;
+        StartOverlordTurnEvent.OnEventRaised -= _overlordTutorialShown ? EnableAndFadeIn : ShowOverlordTurnTutorial;
         StartIdleEvent.OnEventRaised -= DisableAndFadeOut;
+    }
+
+    private async void ShowOverlordTurnTutorial()
+    {
+        await DialogHelper.ShowDialog(FirstTimeOverlordStateDialog);
+        StartOverlordTurnEvent.OnEventRaised -= ShowOverlordTurnTutorial;
+        StartOverlordTurnEvent.OnEventRaised += EnableAndFadeIn;
+        _overlordTutorialShown = true;
+        EnableAndFadeIn();
     }
 
     public async void DisableAndFadeOut()

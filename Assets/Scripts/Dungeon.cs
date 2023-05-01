@@ -31,9 +31,13 @@ public class Dungeon : MonoBehaviour
 
     private bool _playerIsStuck = false;
 
-    void Start()
+    private void Awake()
     {
         StartMimicTurnChannel.OnEventRaised += SetTurnStateMimicGuy;
+    }
+
+    void Start()
+    {
         Floor.Generate(MimicGuy, Levels[Mathf.Clamp(CurrentLevel, 0, Levels.Count - 1)]);
         Floor.Dungeon = this;
 
@@ -249,5 +253,10 @@ public class Dungeon : MonoBehaviour
 
         // Invoke event
         StartOverlordTurnChannel.RaiseEvent();
+    }
+
+    private void OverlordStateTutorial()
+    {
+
     }
 }

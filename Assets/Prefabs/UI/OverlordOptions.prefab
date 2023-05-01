@@ -76,6 +76,7 @@ MonoBehaviour:
   ShowShiftButton: {fileID: 5905259834292027480}
   ShowRotateButton: {fileID: 3736345061108179249}
   FinishInterventionButton: {fileID: 4275116290670970823}
+  FirstTimeOverlordStateDialog: {fileID: 11400000, guid: 2ce68ec45b17fd14182e3342b969293e, type: 2}
 --- !u!114 &7750735224282651343
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -367,6 +368,10 @@ PrefabInstance:
     - target: {fileID: 4995679514122695589, guid: 50968b9744f8b8949a709ad1b0c2509d, type: 3}
       propertyPath: m_Name
       value: RotateRoomsButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 7166801069077639452, guid: 50968b9744f8b8949a709ad1b0c2509d, type: 3}
+      propertyPath: m_text
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 7605211279581055788, guid: 50968b9744f8b8949a709ad1b0c2509d, type: 3}
       propertyPath: m_Pivot.x
