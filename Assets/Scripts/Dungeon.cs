@@ -76,7 +76,9 @@ public class Dungeon : MonoBehaviour
     {
         if (ResourceManager.Instance.MimicFullness <= 0)
         {
-            Debug.LogWarning("GAME OVER");
+            // TODO: play some dialog here?
+            RestartFromFloor1();
+            return;
         }
 
         UpdateMimicGuyFacingDirection();
