@@ -3,7 +3,7 @@ using System.Linq;
 
 public static class DialogHelper
 {
-    public static async Task ShowDialog(DialogSO dialogSO, bool startConvo, bool endConvo)
+    public static async Task ShowDialog(DialogSO dialogSO, bool startConvo = true, bool endConvo = true)
     {
         Dialog dialog = Dialog.Instance;
         dialog.SetDialogWithSO(dialogSO);
@@ -19,16 +19,6 @@ public static class DialogHelper
         {
             await dialog.FadeOut();
         }
-    }
-
-    public static async Task ShowDialog(DialogSO dialogSO)
-    {
-        Dialog dialog = Dialog.Instance;
-        dialog.SetDialogWithSO(dialogSO);
-        await dialog.FadeIn();
-        dialog.StartDialog();
-        await dialog.WaitForDialogToFinish();
-        await dialog.FadeOut();
     }
 
     public static async Task ShowConversation(ConversationSO conversationSO)
