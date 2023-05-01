@@ -839,9 +839,9 @@ MonoBehaviour:
   FadeOffset: {x: 0, y: -128}
   DialogTextMesh: {fileID: 5853935242527877108}
   ContinueButtonTextMesh: {fileID: 1269791848363785422}
-  SecondButtonTextMesh: {fileID: 0}
+  SecondButtonTextMesh: {fileID: 3284173519333173609}
   ContinueButton: {fileID: 9198652947178863119}
-  SecondButton: {fileID: 0}
+  SecondButton: {fileID: 17025695644111847}
   LeftImage: {fileID: 3087331079085685486}
   RightImage: {fileID: 8400613573339958051}
 --- !u!1 &8903570967990668777

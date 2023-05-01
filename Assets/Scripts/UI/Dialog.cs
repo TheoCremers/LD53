@@ -70,12 +70,12 @@ public class Dialog : BaseOptionsMenu
 
         if (dialogSO.SecondButtonActive)
         {
-            SecondButton.enabled = true;
+            SecondButton.gameObject.SetActive(true);
             SecondButtonTextMesh.text = dialogSO.SecondButtonText;
         }
         else
         {
-            SecondButton.enabled = false;
+            SecondButton.gameObject.SetActive(false);
         }
     }
 
