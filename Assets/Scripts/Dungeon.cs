@@ -23,8 +23,6 @@ public class Dungeon : MonoBehaviour
 
     public List<DungeonLevelSO> Levels;
 
-    public Dialog Dialog;
-
     public int CurrentLevel = 0;
 
     public int StartFloorStrength = 1;
