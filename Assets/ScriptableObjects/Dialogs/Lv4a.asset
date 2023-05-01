@@ -10,10 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 09f076eca85ea7f4e9abcbf6674f73d7, type: 3}
-  m_Name: Lv3c
+  m_Name: Lv4a
   m_EditorClassIdentifier: 
   CharacterPortrait: {fileID: 21300000, guid: 2573828aa34fdfe48a31b08372c28150, type: 3}
-  PortraitOnRightSide: 1
-  DialogText: Don't get cocky with me! Collect green gem clusters to restore my power,
-    and let me manipulate the rooms.
-  DialogButtonText: end
+  PortraitOnRightSide: 0
+  DialogText: How can you eat those poor cats? They have done nothing wrong!
+  DialogButtonText: next
