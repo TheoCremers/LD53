@@ -45,7 +45,7 @@ public class Dungeon : MonoBehaviour
         StartNewTurn(); // call this once to determine the start facing direction
 
         await TimeHelper.WaitForSeconds(2);
-        await ShowConversation(Levels[0].Intro);
+        await DialogHelper.ShowConversation(Levels[0].Intro);
     }
 
     public void SetTurnStateIdle()
@@ -136,31 +136,6 @@ public class Dungeon : MonoBehaviour
         StartNewTurn();
     }
 
-    public async Task ShowDialog(DialogSO dialogSO, bool startConvo, bool endConvo)
-    {
-        Dialog.SetDialogWithSO(dialogSO);
-        if (startConvo)
-        {
-            await Dialog.FadeIn();
-        }
-
-        Dialog.StartDialog();    
-        await Dialog.WaitForDialogToFinish();
-
-        if (endConvo) 
-        {
-            await Dialog.FadeOut();
-        }
-    }
-
-    public async Task ShowConversation(ConversationSO conversationSO)
-    {
-        foreach (var dialogue in conversationSO.Dialogues)
-        {
-            await ShowDialog(dialogue, conversationSO.Dialogues.First() == dialogue, conversationSO.Dialogues.Last() == dialogue);
-        }
-    }
-
     private async void FinishLevel(DungeonRoom exitRoom)
     {
         //move room down for style points
@@ -173,7 +148,7 @@ public class Dungeon : MonoBehaviour
         await TimeHelper.WaitForSeconds(0.1f);
         StartNewTurn();
 
-        await ShowConversation(Levels[CurrentLevel].Intro);
+        await DialogHelper.ShowConversation(Levels[CurrentLevel].Intro);
     }
 
     private async void RestartFromFloor1()
