@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Threading.Tasks;
 
 public class Dialog : BaseOptionsMenu
 {
     #region EventChannels
-
-    public VoidEventChannel ShowDialog;
 
     #endregion
 
@@ -17,6 +16,20 @@ public class Dialog : BaseOptionsMenu
     public Button ContinueButton;
     public Image LeftImage;
     public Image RightImage;
+
+    private bool _dialogInProgress = false;
+
+    public void Awake()
+    {
+        base.Awake();
+
+        ContinueButton.onClick.AddListener(StopDialog);
+    }
+
+    public void OnDestroy()
+    {
+        ContinueButton.onClick.RemoveListener(StopDialog);
+    }
 
     public void SetDialogWithSO(DialogSO dialogSO)
     {
@@ -42,6 +55,22 @@ public class Dialog : BaseOptionsMenu
                 LeftImage.sprite = dialogSO.CharacterPortrait;
             }
         }
-        
+    }
+
+    public void StartDialog()
+    {
+        _dialogInProgress = true;
+    }
+
+    public void StopDialog() {
+        _dialogInProgress = false;
+    }
+
+    public async Task WaitForDialogToFinish()
+    {
+        while (_dialogInProgress)
+        {
+            await Task.Yield();
+        }
     }
 }
