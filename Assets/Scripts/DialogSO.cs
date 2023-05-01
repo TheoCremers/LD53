@@ -8,4 +8,6 @@ public class DialogSO : ScriptableObject
     [TextArea(10, 20)]
     public string DialogText = "PlaceHolderText";
     public string DialogButtonText = "...";
+    public bool SecondButtonActive = false;
+    public string SecondButtonText = "...";
 }

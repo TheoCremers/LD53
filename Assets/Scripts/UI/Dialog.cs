@@ -11,17 +11,21 @@ public class Dialog : BaseOptionsMenu
 
     public TextMeshProUGUI DialogTextMesh;
     public TextMeshProUGUI ContinueButtonTextMesh;
+    public TextMeshProUGUI SecondButtonTextMesh;
     public Button ContinueButton;
+    public Button SecondButton;
     public Image LeftImage;
     public Image RightImage;
 
     private bool _dialogInProgress = false;
+    private int _buttonClickedIndex = 0;
 
     protected override void Awake()
     {
         base.Awake();
 
-        ContinueButton.onClick.AddListener(StopDialog);
+        ContinueButton.onClick.AddListener(() => StopDialog(1));
+        SecondButton.onClick.AddListener(() => StopDialog(2));
         if (Instance == null)
         {
             Instance = this;
@@ -35,7 +39,8 @@ public class Dialog : BaseOptionsMenu
 
     public void OnDestroy()
     {
-        ContinueButton.onClick.RemoveListener(StopDialog);
+        ContinueButton.onClick.RemoveListener(() => StopDialog(1));
+        SecondButton.onClick.AddListener(() => StopDialog(2));
     }
 
     public void SetDialogWithSO(DialogSO dialogSO)
@@ -62,6 +67,16 @@ public class Dialog : BaseOptionsMenu
                 LeftImage.sprite = dialogSO.CharacterPortrait;
             }
         }
+
+        if (dialogSO.SecondButtonActive)
+        {
+            SecondButton.enabled = true;
+            SecondButtonTextMesh.text = dialogSO.SecondButtonText;
+        }
+        else
+        {
+            SecondButton.enabled = false;
+        }
     }
 
     public void StartDialog()
@@ -69,15 +84,17 @@ public class Dialog : BaseOptionsMenu
         _dialogInProgress = true;
     }
 
-    public void StopDialog() {
+    public void StopDialog(int buttonClickedIndex) {
+        _buttonClickedIndex = buttonClickedIndex;
         _dialogInProgress = false;
     }
 
-    public async Task WaitForDialogToFinish()
+    public async Task<int> WaitForDialogToFinish()
     {
         while (_dialogInProgress)
         {
             await Task.Yield();
         }
+        return _buttonClickedIndex;
     }
 }
