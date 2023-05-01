@@ -37,6 +37,7 @@ public class Dungeon : MonoBehaviour
     private void Awake()
     {
         StartMimicTurnChannel.OnEventRaised += SetTurnStateMimicGuy;
+        StartIdleChannel.OnEventRaised += () => UpdateMimicGuyFacingDirection(true);
     }
 
     private void Start()

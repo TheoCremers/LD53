@@ -425,7 +425,7 @@ public class DungeonFloor : MonoBehaviour
                 break;
         }
 
-        await RotatePlayerIfNowBlocked();
+        //await RotatePlayerIfNowBlocked();
         StartOverlordTurnEvent.RaiseEvent();
     }
 
@@ -436,7 +436,7 @@ public class DungeonFloor : MonoBehaviour
         var room = Rooms[roomIndices.x, roomIndices.y];
         room.RotateDoors(clockwise);
         room.Occupant?.OnRoomRotate(clockwise);
-        await RotatePlayerIfNowBlocked();
+        //await RotatePlayerIfNowBlocked();
         StartOverlordTurnEvent.RaiseEvent();
     }
 
@@ -477,7 +477,7 @@ public class DungeonFloor : MonoBehaviour
             Rooms[i, lineIndex].Occupant?.OnRoomIdChange(i, lineIndex);
         }
 
-        Dungeon.DetermineNextRoomDirectionIfPlayerIsStuck();
+        //Dungeon.DetermineNextRoomDirectionIfPlayerIsStuck();
     }
 
     public async Task MoveRoomDown(DungeonRoom room, MimicGuy guy)
@@ -528,7 +528,7 @@ public class DungeonFloor : MonoBehaviour
             Rooms[lineIndex, i].Occupant?.OnRoomIdChange(lineIndex, i);
         }
 
-        Dungeon.DetermineNextRoomDirectionIfPlayerIsStuck();
+        //Dungeon.DetermineNextRoomDirectionIfPlayerIsStuck();
     }
 
     private async Task TweenRooms(List<Transform> roomsToMove, Vector3 finalOffset, float tweenTime = 1f)
