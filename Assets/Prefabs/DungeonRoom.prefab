@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0f43736e029dafe48b3f5b9bfbd434a5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d78b8e85bb902034a945742d3f4a0677, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -157,7 +157,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 282b2d2a2c3759149bd3b5b6d22aab1b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c2da5255af85ba7478e9b3b6d455847e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -274,18 +274,19 @@ MonoBehaviour:
   roomIndex: 
   DebugText: {fileID: 3771306708535848292}
   SpriteRenderer: {fileID: 8079324076063120885}
-  DoorTopLeft: 0
-  DoorTopRight: 0
-  DoorBottomRight: 0
-  DoorBottomLeft: 0
-  DoorOpenSpriteTopRight: {fileID: 21300000, guid: 582afde1a3fad7c4da4eb0c583689bca, type: 3}
-  DoorOpenSpriteTopLeft: {fileID: 21300000, guid: 0312a31a979cc0d499fa3b4f011491ee, type: 3}
-  DoorOpenSpriteBottomRight: {fileID: 21300000, guid: 9cde8fcb1ab20944dbb23e1369306264, type: 3}
-  DoorOpenSpriteBottomLeft: {fileID: 21300000, guid: 2e7ece8521684ff4a8d5ca44160532f9, type: 3}
+  DoorTopLeft: 1
+  DoorTopRight: 1
+  DoorBottomRight: 1
+  DoorBottomLeft: 1
+  DoorOpenSpriteTopRight: {fileID: 21300000, guid: d78b8e85bb902034a945742d3f4a0677, type: 3}
+  DoorOpenSpriteTopLeft: {fileID: 21300000, guid: 1f7a69304a28ea343b7fe332b817ca71, type: 3}
+  DoorOpenSpriteBottomRight: {fileID: 21300000, guid: d226d3f1ac98d294a83425f00bb5c6ba, type: 3}
+  DoorOpenSpriteBottomLeft: {fileID: 21300000, guid: c2da5255af85ba7478e9b3b6d455847e, type: 3}
   DoorClosedSpriteTopRight: {fileID: 21300000, guid: 0f43736e029dafe48b3f5b9bfbd434a5, type: 3}
   DoorClosedSpriteTopLeft: {fileID: 21300000, guid: 5e4e5dda3c395bd48a7271fedc89537f, type: 3}
   DoorClosedSpriteBottomRight: {fileID: 21300000, guid: 7f913b1fe8af5c240b55928c6d4537a5, type: 3}
   DoorClosedSpriteBottomLeft: {fileID: 21300000, guid: 282b2d2a2c3759149bd3b5b6d22aab1b, type: 3}
+  HasExit: 0
 --- !u!1 &2713090569560816747
 GameObject:
   m_ObjectHideFlags: 0
@@ -531,7 +532,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 5e4e5dda3c395bd48a7271fedc89537f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1f7a69304a28ea343b7fe332b817ca71, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -699,7 +700,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 7f913b1fe8af5c240b55928c6d4537a5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d226d3f1ac98d294a83425f00bb5c6ba, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
