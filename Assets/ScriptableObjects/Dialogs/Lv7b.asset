@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CharacterPortrait: {fileID: 21300000, guid: 4d7722a44022e4341ab029ba18cc54f0, type: 3}
   PortraitOnRightSide: 1
-  DialogText: My favorite Mimic! At last, you're back.
+  DialogText: 'DEMON KING: My favorite Mimic! At last, you''re back.'
   DialogButtonText: next
   SecondButtonActive: 0
   SecondButtonText: ...

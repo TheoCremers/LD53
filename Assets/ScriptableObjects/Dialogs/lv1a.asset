@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: lv1a
   m_EditorClassIdentifier: 
   CharacterPortrait: {fileID: 21300000, guid: 4d7722a44022e4341ab029ba18cc54f0, type: 3}
-  PortraitOnRightSide: 0
-  DialogText: 'DEMON LORD: Finally, you''ve arrived. Deliver my pet Mimic to me at
+  PortraitOnRightSide: 1
+  DialogText: 'DEMON KING: Finally, you''ve arrived. Deliver my pet Mimic to me at
     once.'
   DialogButtonText: next
   SecondButtonActive: 0

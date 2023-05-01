@@ -14,5 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CharacterPortrait: {fileID: 0}
   PortraitOnRightSide: 0
-  DialogText: '*you were devoured by the mimic*'
+  DialogText: '*dudley was devoured by the mimic*'
   DialogButtonText: next
+  SecondButtonActive: 0
+  SecondButtonText: ...
