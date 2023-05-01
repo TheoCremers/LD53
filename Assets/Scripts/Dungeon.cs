@@ -39,16 +39,20 @@ public class Dungeon : MonoBehaviour
         StartMimicTurnChannel.OnEventRaised += SetTurnStateMimicGuy;
     }
 
-    private async void Start()
+    private void Start()
     {
         Floor.Generate(MimicGuy, Levels[Mathf.Clamp(CurrentLevel, 0, Levels.Count - 1)]);
         Floor.Dungeon = this;
 
         //SetTurnStateMimicGuy();
-        StartNewTurn(); // call this once to determine the start facing direction
+        StartGame();
+    }
 
+    public async void StartGame()
+    {
         await TimeHelper.WaitForSeconds(2);
         await DialogHelper.ShowConversation(Levels[0].Intro);
+        StartNewTurn(); // call this once to determine the start facing direction
     }
 
     public void SetTurnStateIdle()
@@ -83,9 +87,7 @@ public class Dungeon : MonoBehaviour
     {
         if (ResourceManager.Instance.MimicFullness <= 0)
         {
-            Debug.Log("check");
             int result = await DialogHelper.ShowConversation(GameOverConversation);
-            Debug.Log("doublecheck");
             if (result == 1)
             {
                 RestartCurrentFloor();
@@ -159,9 +161,8 @@ public class Dungeon : MonoBehaviour
         Floor.Generate(MimicGuy, Levels[Mathf.Clamp(CurrentLevel, 0, Levels.Count - 1)]);
         ResourceManager.Instance.RestockResources();
         await TimeHelper.WaitForSeconds(0.1f);
-        StartNewTurn();
-
         await DialogHelper.ShowConversation(Levels[CurrentLevel].Intro);
+        StartNewTurn();
     }
 
     private async void RestartFromFloor1()
