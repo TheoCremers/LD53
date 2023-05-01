@@ -76,7 +76,7 @@ MonoBehaviour:
   ShowShiftButton: {fileID: 5905259834292027480}
   ShowRotateButton: {fileID: 3736345061108179249}
   FinishInterventionButton: {fileID: 4275116290670970823}
-  FirstTimeOverlordStateDialog: {fileID: 11400000, guid: 2ce68ec45b17fd14182e3342b969293e, type: 2}
+  FirstTimeOverlordStateConvo: {fileID: 11400000, guid: aec01efdb23ce2a4582b7e364f3b681c, type: 2}
 --- !u!114 &7750735224282651343
 MonoBehaviour:
   m_ObjectHideFlags: 0

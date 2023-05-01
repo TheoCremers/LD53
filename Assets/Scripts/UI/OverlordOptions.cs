@@ -15,7 +15,7 @@ public class OverlordOptions : BaseOptionsMenu
     public ButtonWithCost ShowRotateButton;
     public Button FinishInterventionButton;
 
-    public DialogSO FirstTimeOverlordStateDialog;
+    public ConversationSO FirstTimeOverlordStateConvo;
 
     private bool _overlordTutorialShown = false;
 
@@ -47,7 +47,7 @@ public class OverlordOptions : BaseOptionsMenu
 
     private async void ShowOverlordTurnTutorial()
     {
-        await DialogHelper.ShowDialog(FirstTimeOverlordStateDialog);
+        await DialogHelper.ShowConversation(FirstTimeOverlordStateConvo);
         StartOverlordTurnEvent.OnEventRaised -= ShowOverlordTurnTutorial;
         StartOverlordTurnEvent.OnEventRaised += EnableAndFadeIn;
         _overlordTutorialShown = true;

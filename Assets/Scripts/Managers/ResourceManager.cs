@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class ResourceManager : MonoBehaviour
@@ -9,6 +10,7 @@ public class ResourceManager : MonoBehaviour
     public MimicStrengthIndicator MimicStrengthIndicator;
 
     public ResourceChangeIndicator ResourceChangePrefab;
+    public ConversationSO TooWeakConvo;
 
     public int ForsakenPower {
         get { return ForsakenPowerResource.CurrentValue; }
@@ -74,11 +76,12 @@ public class ResourceManager : MonoBehaviour
         newChangeIndicator.SetImageSprite(MimicStrengthIndicator.SmallerIcon);
     }
 
-    public void TooWeak(Vector3 location)
+    public async Task TooWeak(Vector3 location)
     {
-        var newChangeIndicator = Instantiate(ResourceChangePrefab, location, Quaternion.identity);
-        newChangeIndicator.SetLabelText("Too weak!", Color.red, 2f);
-        newChangeIndicator.SetImageSprite(MimicStrengthIndicator.SmallerIcon);
+        //var newChangeIndicator = Instantiate(ResourceChangePrefab, location, Quaternion.identity);
+        //newChangeIndicator.SetLabelText("Too weak!", Color.red, 1f);
+        //newChangeIndicator.SetImageSprite(MimicStrengthIndicator.SmallerIcon);
+        await DialogHelper.ShowConversation(TooWeakConvo);
     }
 
     private void Awake()

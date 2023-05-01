@@ -122,6 +122,7 @@ MonoBehaviour:
   MimicFullnessResource: {fileID: 6692051035690843577}
   MimicStrengthIndicator: {fileID: 1233944602456688150}
   ResourceChangePrefab: {fileID: 7910601561940206416, guid: cf44ffa7b5e8c97479d9560e7d6ce584, type: 3}
+  TooWeakConvo: {fileID: 11400000, guid: 12aaef44d47085448bd36d3365293db0, type: 2}
 --- !u!1 &2909692701345474912
 GameObject:
   m_ObjectHideFlags: 0
