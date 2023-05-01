@@ -10,6 +10,7 @@ public class DungeonFloor : MonoBehaviour
     #region EventChannels
 
     public ShiftEventChannel RoomShiftEventChannel;
+    public RotateEventChannel RoomRotateEventChannel;
     public VoidEventChannel ShowShiftButtonsEvent;
     public VoidEventChannel StartOverlordTurnEvent;
 
@@ -35,6 +36,7 @@ public class DungeonFloor : MonoBehaviour
     void Awake()
     {
         RoomShiftEventChannel.OnEventRaised += ShiftRooms;
+        //RoomRotateEventChannel.OnEventRaised +=
         ShowShiftButtonsEvent.OnEventRaised += RoomManipulation.ActivateShiftButtons;
     }
 
@@ -44,12 +46,14 @@ public class DungeonFloor : MonoBehaviour
         mimicGuy.SpriteRenderer.DOFade(1f, 0.5f);
         ConstructLayout(level);
         GenerateShiftButtons();
+        GenerateRotateButtons();
         PopulateDungeon(mimicGuy, level);
     }
 
     private void OnDestroy()
     {
         RoomShiftEventChannel.OnEventRaised -= ShiftRooms;
+        //RoomRotateEventChannel.OnEventRaised -=
         ShowShiftButtonsEvent.OnEventRaised -= RoomManipulation.ActivateShiftButtons;
     }    
 
@@ -250,6 +254,21 @@ public class DungeonFloor : MonoBehaviour
         RoomManipulation.DeactivateShiftButtonsNow();
     }
 
+    private void GenerateRotateButtons()
+    {
+        RoomManipulation.DestroyAllRotateButtons();
+
+        for (int i = 0; i < Size.x; i++)
+        {
+            for (int j = 0; j < Size.y; j++)
+            {
+                var tileIndices = new Vector2Int(i, j);
+                RoomManipulation.CreateRotateButton(PositionHelper.GridToWorldPosition(tileIndices), tileIndices);
+            }
+        }
+
+        RoomManipulation.DeactivateRotateButtonsNow();
+    }
 
     private DungeonRoom GenerateRandomRoom(Vector2Int gridPosition)
     {
@@ -404,6 +423,11 @@ public class DungeonFloor : MonoBehaviour
         //RoomManipulation.ActivateShiftButtons();
 
         StartOverlordTurnEvent.RaiseEvent();
+    }
+
+    public async void RotateRoom(Vector2Int roomIndices, bool clockwise)
+    {
+        // TODO
     }
 
     public async Task ShiftRoomsAlongX(int lineIndex, bool backwards)

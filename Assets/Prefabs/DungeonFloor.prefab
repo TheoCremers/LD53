@@ -57,7 +57,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -165,6 +165,8 @@ MonoBehaviour:
   DungeonRoomPrefab: {fileID: 3442427670383652863, guid: 33ddc69d62d8bcb4b88703eb1c8e92e2, type: 3}
   RoomManipulation: {fileID: 627539963205276882}
   PizzaPrefab: {fileID: 1538036721402891559, guid: 98dffb5dbfce49648be6b838a5ff4dec, type: 3}
+  SwordPrefab: {fileID: 0}
+  GemPrefab: {fileID: 0}
   MonsterPrefab: {fileID: 437781928619152958, guid: 70ba8b4fb628bf14cb8f4daaff914d65, type: 3}
   Size: {x: 5, y: 5}
   Dungeon: {fileID: 0}
