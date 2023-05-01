@@ -48,6 +48,8 @@ public class DungeonFloor : MonoBehaviour
         GenerateShiftButtons();
         GenerateRotateButtons();
         PopulateDungeon(mimicGuy, level);
+        
+        AudioManager.PlayBGM(level.BGM);
     }
 
     private void OnDestroy()
