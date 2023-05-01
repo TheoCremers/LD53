@@ -87,14 +87,26 @@ public class DungeonCamera : MonoBehaviour
 
     private void InitiateIdleTurn()
     {
+        if (_followTarget == false) 
+        {
+            StartCoroutine(ZoomAndMoveCoroutine(1.5f, 0.75f, new Vector3(MimicGuy.transform.position.x, MimicGuy.transform.position.y, transform.position.z)));
+        }
+
         // Lock camera movement
         _freeCam = false;
         // Snap to Mimic
         // Zoom in
-        StartCoroutine(ZoomCoroutine(1.5f, 0.75f));
-        //StartCoroutine(MoveCoroutine(1.5f, new Vector3(MimicGuy.transform.position.x, MimicGuy.transform.position.y, transform.position.z)));
+        //StartCoroutine(ZoomCoroutine(1.5f, 0.75f));
 
         // Follow Mimic around
+        _followTarget = true;
+    }
+
+    private void EndOverLordTurn()
+    {
+        _freeCam = false;
+
+        StartCoroutine(ZoomAndMoveCoroutine(1.5f, 0.75f, new Vector3(MimicGuy.transform.position.x, MimicGuy.transform.position.y, transform.position.z)));
         _followTarget = true;
     }
 
@@ -120,6 +132,20 @@ public class DungeonCamera : MonoBehaviour
         }
     }
 
+    private IEnumerator ZoomAndMoveCoroutine(float duration, float targetSize, Vector3 targetPos)
+    {
+        float initialSize = CameraRef.orthographicSize;
+        Vector3 startingPos = CameraRef.transform.position;
+        float timer = 0;
+        while (timer < duration)
+        {
+            timer += Time.deltaTime;
+            CameraRef.orthographicSize = Mathf.Lerp(initialSize, targetSize, Mathf.SmoothStep(0, 1.0f, timer / duration));
+            CameraRef.transform.position = Vector3.Lerp(startingPos, targetPos, Mathf.SmoothStep(0, 1.0f, timer / duration));
+            yield return null;
+        }
+    }
+
     private IEnumerator MoveCoroutine(float duration, Vector3 target)
     {
         Vector3 startingPos = CameraRef.transform.position;
@@ -127,7 +153,7 @@ public class DungeonCamera : MonoBehaviour
         while (timer < duration)
         {
             timer += Time.deltaTime;
-            CameraRef.transform.position = Vector3.Lerp(startingPos, target, Mathf.SmoothStep(0, 1.0f, timer / duration));
+            CameraRef.transform.position = Vector3.Lerp(startingPos, target, Mathf.SmoothStep(0, 1.0f, timer / duration));            
             yield return null;
         }
     }
