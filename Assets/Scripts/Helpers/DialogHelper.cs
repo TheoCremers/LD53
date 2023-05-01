@@ -25,7 +25,7 @@ public static class DialogHelper
 
     public static async Task<int> ShowConversation(ConversationSO conversationSO)
     {
-        int result = 0;
+        int result = 0;        
         foreach (var dialogue in conversationSO.Dialogues)
         {
             result = await ShowDialog(dialogue, conversationSO.Dialogues.First() == dialogue, conversationSO.Dialogues.Last() == dialogue);

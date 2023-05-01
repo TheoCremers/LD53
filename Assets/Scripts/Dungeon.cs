@@ -26,8 +26,6 @@ public class Dungeon : MonoBehaviour
 
     public List<DungeonLevelSO> Levels;
 
-    public ConversationSO GameOverConversation;
-
     public int CurrentLevel = 0;
 
     public int StartFloorStrength = 1;
@@ -83,9 +81,7 @@ public class Dungeon : MonoBehaviour
     {
         if (ResourceManager.Instance.MimicFullness <= 0)
         {
-            Debug.Log("check");
-            int result = await DialogHelper.ShowConversation(GameOverConversation);
-            Debug.Log("doublecheck");
+            int result = await DialogHelper.ShowConversation(GameOverConvo);
             if (result == 1)
             {
                 RestartCurrentFloor();
@@ -119,7 +115,6 @@ public class Dungeon : MonoBehaviour
 
         var nextRoomPos = DetermineNextRoom(MimicGuy.FacingDirection);
         var nextRoom = Floor.Rooms[nextRoomPos.x, nextRoomPos.y];
-        Debug.Log($"Moving to {nextRoomPos}");
         MimicGuy.transform.SetParent(Floor.transform, true);
         await TweenMimicGuy(MimicGuy.transform, PositionHelper.GridToWorldPosition(nextRoomPos));
 
