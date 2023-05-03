@@ -437,6 +437,7 @@ public class DungeonFloor : MonoBehaviour
         room.RotateDoors(clockwise);
         room.Occupant?.OnRoomRotate(clockwise);
         //await RotatePlayerIfNowBlocked();
+        await TimeHelper.WaitForSeconds(0.3f);
         StartOverlordTurnEvent.RaiseEvent();
     }
 

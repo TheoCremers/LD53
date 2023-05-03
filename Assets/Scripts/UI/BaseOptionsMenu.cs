@@ -9,8 +9,8 @@ public class BaseOptionsMenu : MonoBehaviour
     private RectTransform _rectTransform;
     private Vector2 _defaultPosition;
 
-    public float DefaultAlpha = 0.8f;
-    public float FadeTime = 0.5f;
+    public float DefaultAlpha = 1.0f;
+    public float FadeTime = 0.3f;
     public Vector2 FadeOffset = new Vector2(0, -128f);
 
     protected virtual void Awake()

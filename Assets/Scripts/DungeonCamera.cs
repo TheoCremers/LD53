@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class DungeonCamera : MonoBehaviour
 {
@@ -26,6 +27,7 @@ public class DungeonCamera : MonoBehaviour
     private InputManager _input;
 
     private bool _followTarget;
+    private bool _lockedOnTarget = false;
 
     public MimicGuy MimicGuy;
 
@@ -56,7 +58,21 @@ public class DungeonCamera : MonoBehaviour
     {
         if (_followTarget) 
         {
-            CameraRef.transform.position = new Vector3(MimicGuy.transform.position.x, MimicGuy.transform.position.y+0.13f, CameraRef.transform.position.z);
+            var targetPosition = new Vector3(MimicGuy.transform.position.x, MimicGuy.transform.position.y + 0.13f, transform.position.z);
+            //CameraRef.transform.position = targetPosition;
+            if (_lockedOnTarget)
+            {
+                transform.position = targetPosition;
+            }
+            else
+            {
+                Vector3 smoothPosition = Vector3.Lerp(transform.position, targetPosition, 5f * Time.deltaTime);
+                transform.position = smoothPosition;
+                if ((smoothPosition - targetPosition).magnitude < 0.005f)
+                {
+                    _lockedOnTarget = true;
+                }
+            }
         }
         else if (_freeCam) 
         {
@@ -71,10 +87,10 @@ public class DungeonCamera : MonoBehaviour
                 if (_lastPos != mousePos)
                 {
                     var diff = _dragPos - CameraRef.ScreenToWorldPoint(mousePos);
-                    var newPos = CameraRef.transform.position + diff;        
+                    var newPos = transform.position + diff;        
                     newPos.x = Mathf.Clamp(newPos.x, _camWorldBounds.min.x, _camWorldBounds.max.x);
                     newPos.y = Mathf.Clamp(newPos.y, _camWorldBounds.min.y, _camWorldBounds.max.y);
-                    CameraRef.transform.position = newPos;        
+                    transform.position = newPos;        
                     _lastPos = mousePos;
                 }
             } 
@@ -89,7 +105,9 @@ public class DungeonCamera : MonoBehaviour
     {
         if (_followTarget == false) 
         {
-            StartCoroutine(ZoomAndMoveCoroutine(1.2f, 1f, new Vector3(MimicGuy.transform.position.x, MimicGuy.transform.position.y+0.13f, transform.position.z)));
+            //StartCoroutine(ZoomAndMoveCoroutine(1.2f, 1f, new Vector3(MimicGuy.transform.position.x, MimicGuy.transform.position.y+0.13f, transform.position.z)));
+            DOTween.Kill(CameraRef);
+            CameraRef.DOOrthoSize(1f, 1.2f);
         }
 
         // Lock camera movement
@@ -100,6 +118,7 @@ public class DungeonCamera : MonoBehaviour
 
         // Follow Mimic around
         _followTarget = true;
+        _lockedOnTarget = false;
     }
 
 
@@ -107,11 +126,14 @@ public class DungeonCamera : MonoBehaviour
     private void InitiateOverlordTurn()
     {
         // Zoom out
-        StartCoroutine(ZoomCoroutine(1.2f, 2f));
+        //StartCoroutine(ZoomCoroutine(1.2f, 2f));
+        DOTween.Kill(CameraRef);
+        CameraRef.DOOrthoSize(2f, 1.2f);
 
         // Allow camera movement within bounds
         _freeCam = true;
         _followTarget = false;
+        _lockedOnTarget = false;
     }
 
     private IEnumerator ZoomCoroutine(float duration, float targetSize)

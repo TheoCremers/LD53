@@ -52,7 +52,7 @@ public class RoomManipulation : MonoBehaviour
 
     public void CreateRotateButton(Vector3 position, Vector2Int tileIndexes)
     {
-        position.z = -10f;
+        position.z = -5f;
         var newButton = Instantiate(RotateButtonsPrefab, position, Quaternion.identity, transform);
         newButton.Configure(tileIndexes);
         _roomRotateButtons.Add(newButton);

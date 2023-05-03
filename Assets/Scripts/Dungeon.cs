@@ -101,7 +101,7 @@ public class Dungeon : MonoBehaviour
             return;
         }
 
-        UpdateMimicGuyFacingDirection();
+        //UpdateMimicGuyFacingDirection();
         SetTurnStateIdle();
     }
 
@@ -176,7 +176,7 @@ public class Dungeon : MonoBehaviour
         }
         else
         {
-            await TimeHelper.WaitForSeconds(3f);
+            await TimeHelper.WaitForSeconds(0.5f);
             int result = await DialogHelper.ShowConversation(CreditsConvo);
             if (result == 2)
             {

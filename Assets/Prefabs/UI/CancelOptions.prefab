@@ -90,8 +90,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d420a0249a3b38843afcece86611d436, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DefaultAlpha: 0.8
-  FadeTime: 0.5
+  DefaultAlpha: 1
+  FadeTime: 0.3
   FadeOffset: {x: 0, y: -128}
   ShowShiftButtonsEvent: {fileID: 11400000, guid: fd0c0c876622e2949baaa761f2e8a6ac, type: 2}
   ShowRotateButtonsEvent: {fileID: 11400000, guid: 6921dd6075e45c54eaeae7d7d27296b3, type: 2}

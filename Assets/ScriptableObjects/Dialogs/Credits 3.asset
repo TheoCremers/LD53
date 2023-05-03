@@ -17,7 +17,8 @@ MonoBehaviour:
   DialogText: 'Thanks for playing!
 
 
-    Press ''Restart'' to play again.'
+    Press ''Restart'' to play again or ''Hardmode''
+    for an extra challenge.'
   DialogButtonText: Restart
   SecondButtonActive: 1
   SecondButtonText: Hardmode

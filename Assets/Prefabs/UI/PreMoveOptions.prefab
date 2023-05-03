@@ -66,7 +66,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DefaultAlpha: 1
-  FadeTime: 0.5
+  FadeTime: 0.3
   FadeOffset: {x: 0, y: -128}
   StartMimicTurnEvent: {fileID: 11400000, guid: 4b49d1f1ac0c93c4a8a0d6cc0c61ba9e, type: 2}
   StartOverlordTurnEvent: {fileID: 11400000, guid: 35aba1eb81a19af47a42aa10dae9ba96, type: 2}

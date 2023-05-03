@@ -835,7 +835,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DefaultAlpha: 1
-  FadeTime: 0.5
+  FadeTime: 0.3
   FadeOffset: {x: 0, y: -128}
   DialogTextMesh: {fileID: 5853935242527877108}
   ContinueButtonTextMesh: {fileID: 1269791848363785422}
